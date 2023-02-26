@@ -1,0 +1,11 @@
+F:\learn\iti\3)backend\visual c#\C# project\ServerSide\ClientSide\bin\Debug\ClientSide.exe.config
+F:\learn\iti\3)backend\visual c#\C# project\ServerSide\ClientSide\bin\Debug\ClientSide.exe
+F:\learn\iti\3)backend\visual c#\C# project\ServerSide\ClientSide\bin\Debug\ClientSide.pdb
+F:\learn\iti\3)backend\visual c#\C# project\ServerSide\ClientSide\obj\Debug\ClientSide.csproj.AssemblyReference.cache
+F:\learn\iti\3)backend\visual c#\C# project\ServerSide\ClientSide\obj\Debug\ClientSide.csproj.SuggestedBindingRedirects.cache
+F:\learn\iti\3)backend\visual c#\C# project\ServerSide\ClientSide\obj\Debug\ClientSide.Properties.Resources.resources
+F:\learn\iti\3)backend\visual c#\C# project\ServerSide\ClientSide\obj\Debug\ClientSide.csproj.GenerateResource.cache
+F:\learn\iti\3)backend\visual c#\C# project\ServerSide\ClientSide\obj\Debug\ClientSide.csproj.CoreCompileInputs.cache
+F:\learn\iti\3)backend\visual c#\C# project\ServerSide\ClientSide\obj\Debug\ClientSide.exe
+F:\learn\iti\3)backend\visual c#\C# project\ServerSide\ClientSide\obj\Debug\ClientSide.pdb
+F:\learn\iti\3)backend\visual c#\C# project\ServerSide\ClientSide\obj\Debug\ClientSide.SignForm.resources
