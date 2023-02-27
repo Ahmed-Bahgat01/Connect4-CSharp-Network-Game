@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace ServerSide
 {
@@ -19,8 +20,8 @@ namespace ServerSide
         private TcpListener _tcpListener;
         private string _gameHistoryPath;
         private string _userDataPath;
-        private Thread _playerThread;
 
+        public event Action<object, string> _playerConnectedEvent;
         public Server()
         {
             _tcpListener = new TcpListener(_IP, _PORT);
@@ -33,46 +34,67 @@ namespace ServerSide
             
         }
 
-        public  void Start()
+        public async void Start()       //Starts listening for incoming connections
         {
-            _playerThread = new Thread(() =>
-            {
+            _tcpListener.Start();
+            
                 while (true)
                 {
-                    TcpClient tcpClient = _tcpListener.AcceptTcpClient();
+                    try { 
+                        TcpClient tcpClient = await _tcpListener.AcceptTcpClientAsync();
+                        Player newPlayer = new Player(tcpClient);                               //create new player from the connected tcpClient
+                        
+                        newPlayer._recievedMessageEvent += ClientRecievedMessageHandler;        //subscribe into client recieved message event
+                        newPlayer._PlayerDisconnectedEvent += PlayerDisconnectedMessageHandler; //subscribe into client disconnect event
+                        _players.Add(newPlayer);                                                //add the connected player to the list
 
-                    Player newPlayer = new Player(tcpClient);
-                    // subscribe into client recieved message event
-                    newPlayer._recievedMessageEvent += ClientRecievedMessageHandler;
-                    _players.Add(newPlayer);
+                        
+                        if (_playerConnectedEvent != null)                                      //fires event when player is Connect
+                    {
+                        _playerConnectedEvent(this, newPlayer._userName);
+                        }
                 }
-            });
-            _tcpListener.Start();
-            _playerThread.Start();
+                    catch (ObjectDisposedException e)                                           //on server stop
+                    {
+                        break;
+                    }
+                }
         }
-        public void Stop()                              //work in progress
+        public void Stop()                               
         {
             foreach (Player player in _players)
             {
-                player._session._streamWriter.WriteLine("!DIS");       //send disconnect Formatted msg to player
-                player.EndClient();
+                player._session._streamWriter.WriteLine("!DIS");        //send disconnect Formatted msg to all player
+                player.EndClient();                                     //close the players sessions
             }
-            _playerThread.Abort();
             _tcpListener.Stop();
+            _players.Clear();                                           //clear
         }
-        public void ClientRecievedMessageHandler(object sender, RecievedMessageEventData eventData)
-        {
-            
-            //Broadcast(eventData._msg);
-
-        }
-        public void Broadcast(string msg)
+        public void Broadcast(string msg)                               //This method sends a message to all connected clients
         {
             foreach (Player player in _players)
             {
                 player._session._streamWriter.WriteLine(msg);
             }
         }
+        //-------------------------------------------------------
+        private void PlayerDisconnectedMessageHandler(Player sender)                //on player disconnect
+        {
+            _players.Remove(sender);
+        }
+        public void ClientRecievedMessageHandler(object sender, string message)     //on reciving message form player
+        {
+            MessageBox.Show(message);       //to be removed
+
+            //parse message
+            /*
+             switch(format)
+                case 1: action1
+                case 2: action2
+                default: action3
+             */
+        }
+        
 
 
     }

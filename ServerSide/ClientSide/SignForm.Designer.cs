@@ -54,6 +54,7 @@
             this.SignUpBtn.TabIndex = 1;
             this.SignUpBtn.Text = "Sign Up";
             this.SignUpBtn.UseVisualStyleBackColor = true;
+            this.SignUpBtn.Click += new System.EventHandler(this.SignUpBtn_Click);
             // 
             // UserNameTextBox
             // 
@@ -87,7 +88,7 @@
             this.PasswordLabel.TabIndex = 5;
             this.PasswordLabel.Text = "Password";
             // 
-            // Form1
+            // SignForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -98,7 +99,7 @@
             this.Controls.Add(this.UserNameTextBox);
             this.Controls.Add(this.SignUpBtn);
             this.Controls.Add(this.SignInBtn);
-            this.Name = "Form1";
+            this.Name = "SignForm";
             this.Text = "Connect 4";
             this.ResumeLayout(false);
             this.PerformLayout();
