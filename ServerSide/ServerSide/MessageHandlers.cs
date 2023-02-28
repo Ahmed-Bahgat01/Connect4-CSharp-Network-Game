@@ -11,10 +11,10 @@ namespace ServerSide
 {
     internal class MessageHandlers
     {
-        public static void SignInHandler(object sender, RecievedMessageEventData recievedMessage)
+        public static void SignInHandler(object sender, string recievedMessage)
         {
             SignInMessageContainer SignInObj;
-            SignInObj = JsonConvert.DeserializeObject<SignInMessageContainer>(recievedMessage._msg);
+            SignInObj = JsonConvert.DeserializeObject<SignInMessageContainer>(recievedMessage);
             MessageBox.Show($"from sign in handler: username={SignInObj.UserName} ,password={SignInObj.Password}");
         }
     }

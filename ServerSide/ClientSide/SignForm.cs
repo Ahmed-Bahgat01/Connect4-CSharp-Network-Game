@@ -77,6 +77,10 @@ namespace ClientSide
                     {
                         break;
                     }
+                    catch(ObjectDisposedException ex)
+                    {
+                        break;
+                    }
                 }
             });
 
@@ -103,9 +107,31 @@ namespace ClientSide
 
         private void SignInBtn_Click(object sender, EventArgs e)
         {
-            Connect();
-            ListenMessage();
-            SignIn();
+            try
+            {
+                Connect();
+                ListenMessage();
+                SignIn();
+            }
+            catch (SocketException ex)
+            {
+                MessageBox.Show("server is not available!!");
+            }
+            
+        }
+        private void SignUpBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Connect();
+                ListenMessage();
+                SignIn();
+            }
+            catch (SocketException ex)
+            {
+                MessageBox.Show("server is not available!!");
+            }
+
         }
     }
 }

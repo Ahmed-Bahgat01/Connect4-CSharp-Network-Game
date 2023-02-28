@@ -86,7 +86,14 @@ namespace ServerSide
         {
             foreach (Player player in _players)
             {
-                player._session._streamWriter.WriteLine("!DIS");        //send disconnect Formatted msg to all player
+                try
+                {
+                    player._session._streamWriter.WriteLine("!DIS");        //send disconnect Formatted msg to all player
+                }
+                catch
+                {
+
+                }
                 player.EndClient();                                     //close the players sessions
             }
             _tcpListener.Stop();
@@ -95,8 +102,15 @@ namespace ServerSide
         //<<<<<<< HEAD
         public void RecievedPlayerMessageHandler(object sender, string eventData)
         {
-            MessageContainer msg = JsonConvert.DeserializeObject<MessageContainer>(eventData);
-            MessageHandlerDic[msg.Tag](sender, eventData);
+            try
+            {
+                MessageContainer msg = JsonConvert.DeserializeObject<MessageContainer>(eventData);
+                MessageHandlerDic[msg.Tag](sender, eventData);
+            }
+            catch (ArgumentNullException)
+            {
+
+            }
         }
         //public void Broadcast(string msg)
         //=======
