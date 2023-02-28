@@ -49,8 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\MessageLib\MessageCS.cs">
-      <Link>MessageCS.cs</Link>
+    <Compile Include="..\MessageLib\MessageContainer.cs">
+      <Link>MessageContainer.cs</Link>
     </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

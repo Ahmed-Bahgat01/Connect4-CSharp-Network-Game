@@ -78,7 +78,7 @@ namespace ClientSide
             {
                 //var MessageContent = new {UserName = userName,Password =  password};
                 //MessageCS msg;
-                SignInMessageContainer msg = new SignInMessageContainer(MessageTag.SignIn,userName,password);
+                SignInMessageContainer msg = new SignInMessageContainer(userName,password);
                 _streamWriter.WriteLine(msg.ToJSON());
             }
             else

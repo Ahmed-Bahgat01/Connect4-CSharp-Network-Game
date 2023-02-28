@@ -15,11 +15,11 @@ namespace MessageLib
         //PlayGame,
     }
 
-    public abstract class MessageContainer
+    public class MessageContainer
     {
         public MessageTag Tag { get; set; }
 
-        private MessageContainer() { }
+        protected MessageContainer() { }
         public MessageContainer(MessageTag tag)
         {
             Tag = tag;
@@ -32,23 +32,32 @@ namespace MessageLib
         }
 
 
-        public static MessageContainer? GetObject(string jsonMessage)
-        {
-            MessageContainer? ReturnMsg = JsonConvert.DeserializeObject<MessageContainer>(jsonMessage);
-            return ReturnMsg;
-        }
-       
+        //public static MessageContainer? GetObject(string jsonMessage)
+        //{
+        //    MessageContainer? ReturnMsg = JsonConvert.DeserializeObject<MessageContainer>(jsonMessage);
+        //    return ReturnMsg;
+        //}
+
+
+        //public static T? GetObject<T>(string jsonMessage, T? retObject)
+        //{
+        //    retObject = JsonConvert.DeserializeObject<T>(jsonMessage);
+        //    return retObject;
+        //}
+
     }
 
     public class SignInMessageContainer : MessageContainer
     {
         public string UserName { get; set; }
         public string Password { get; set; }
+        //public string JsonMessage { get; set; }
 
-        public SignInMessageContainer(MessageTag tag,string userName, string password):base(tag)
+        public SignInMessageContainer(string userName, string password):base(MessageTag.SignIn)
         {
             UserName = userName;
             Password = password;
         }
+
     }
 }
