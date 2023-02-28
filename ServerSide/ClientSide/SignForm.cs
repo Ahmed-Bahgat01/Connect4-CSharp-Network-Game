@@ -13,6 +13,9 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices.ComTypes;
 using System.Runtime.InteropServices;
 using System.Threading;
+//using MessagingLib;
+using MessageLib;
+//using Newtonsoft.Json;
 
 namespace ClientSide
 {
@@ -74,26 +77,61 @@ namespace ClientSide
                     {
                         break;
                     }
+                    catch(ObjectDisposedException ex)
+                    {
+                        break;
+                    }
                 }
             });
 
             ListeningThread.Start();
         }
+        private void SignIn()
+        {
+
+            string userName = UserNameTextBox.Text;
+            string password = PasswordTextBox.Text;
+            if(userName != string.Empty&& password != string.Empty)
+            {
+                //var MessageContent = new {UserName = userName,Password =  password};
+                //MessageCS msg;
+                SignInMessageContainer msg = new SignInMessageContainer(userName,password);
+                _streamWriter.WriteLine(msg.ToJSON());
+            }
+            else
+            {
+                MessageBox.Show("please enter username and password");
+            }
+            
+        }
 
         private void SignInBtn_Click(object sender, EventArgs e)
         {
-            Connect();                                                      //
-            SendMsg("UserName:" +UserNameTextBox.Text);                     //used in testing
-            SendMsg("Password:" + PasswordTextBox.Text);                    //to be removed
-            ListenMessage();                                                //
+            try
+            {
+                Connect();
+                ListenMessage();
+                SignIn();
+            }
+            catch (SocketException ex)
+            {
+                MessageBox.Show("server is not available!!");
+            }
+            
         }
-
-        
-
         private void SignUpBtn_Click(object sender, EventArgs e)
         {
-            SendDisconnect();                                               //used in testing
-                                                                            //to be removed
+            try
+            {
+                Connect();
+                ListenMessage();
+                SignIn();
+            }
+            catch (SocketException ex)
+            {
+                MessageBox.Show("server is not available!!");
+            }
+
         }
     }
 }

@@ -9,3 +9,17 @@ F:\learn\iti\3)backend\visual c#\C# project\ServerSide\ClientSide\obj\Debug\Clie
 F:\learn\iti\3)backend\visual c#\C# project\ServerSide\ClientSide\obj\Debug\ClientSide.exe
 F:\learn\iti\3)backend\visual c#\C# project\ServerSide\ClientSide\obj\Debug\ClientSide.pdb
 F:\learn\iti\3)backend\visual c#\C# project\ServerSide\ClientSide\obj\Debug\ClientSide.SignForm.resources
+C:\Users\ahbah\Source\Repos\Connect4-CSharp-Network-Game\ServerSide\ClientSide\bin\Debug\ClientSide.exe.config
+C:\Users\ahbah\Source\Repos\Connect4-CSharp-Network-Game\ServerSide\ClientSide\bin\Debug\ClientSide.exe
+C:\Users\ahbah\Source\Repos\Connect4-CSharp-Network-Game\ServerSide\ClientSide\bin\Debug\ClientSide.pdb
+C:\Users\ahbah\Source\Repos\Connect4-CSharp-Network-Game\ServerSide\ClientSide\obj\Debug\ClientSide.csproj.AssemblyReference.cache
+C:\Users\ahbah\Source\Repos\Connect4-CSharp-Network-Game\ServerSide\ClientSide\obj\Debug\ClientSide.csproj.SuggestedBindingRedirects.cache
+C:\Users\ahbah\Source\Repos\Connect4-CSharp-Network-Game\ServerSide\ClientSide\obj\Debug\ClientSide.SignForm.resources
+C:\Users\ahbah\Source\Repos\Connect4-CSharp-Network-Game\ServerSide\ClientSide\obj\Debug\ClientSide.Properties.Resources.resources
+C:\Users\ahbah\Source\Repos\Connect4-CSharp-Network-Game\ServerSide\ClientSide\obj\Debug\ClientSide.csproj.GenerateResource.cache
+C:\Users\ahbah\Source\Repos\Connect4-CSharp-Network-Game\ServerSide\ClientSide\obj\Debug\ClientSide.csproj.CoreCompileInputs.cache
+C:\Users\ahbah\Source\Repos\Connect4-CSharp-Network-Game\ServerSide\ClientSide\obj\Debug\ClientSide.exe
+C:\Users\ahbah\Source\Repos\Connect4-CSharp-Network-Game\ServerSide\ClientSide\obj\Debug\ClientSide.pdb
+C:\Users\ahbah\source\repos\Connect4-CSharp-Network-Game\ServerSide\ClientSide\bin\Debug\Newtonsoft.Json.dll
+C:\Users\ahbah\source\repos\Connect4-CSharp-Network-Game\ServerSide\ClientSide\bin\Debug\Newtonsoft.Json.xml
+C:\Users\ahbah\source\repos\Connect4-CSharp-Network-Game\ServerSide\ClientSide\obj\Debug\ClientSide.csproj.CopyComplete

@@ -9,3 +9,17 @@ F:\learn\iti\3)backend\visual c#\C# project\ServerSide\ServerSide\bin\Debug\Serv
 F:\learn\iti\3)backend\visual c#\C# project\ServerSide\ServerSide\bin\Debug\ServerSide.pdb
 F:\learn\iti\3)backend\visual c#\C# project\ServerSide\ServerSide\obj\Debug\ServerSide.exe
 F:\learn\iti\3)backend\visual c#\C# project\ServerSide\ServerSide\obj\Debug\ServerSide.pdb
+C:\Users\ahbah\Source\Repos\Connect4-CSharp-Network-Game\ServerSide\ServerSide\bin\Debug\ServerSide.exe.config
+C:\Users\ahbah\Source\Repos\Connect4-CSharp-Network-Game\ServerSide\ServerSide\bin\Debug\ServerSide.exe
+C:\Users\ahbah\Source\Repos\Connect4-CSharp-Network-Game\ServerSide\ServerSide\bin\Debug\ServerSide.pdb
+C:\Users\ahbah\Source\Repos\Connect4-CSharp-Network-Game\ServerSide\ServerSide\obj\Debug\ServerSide.csproj.AssemblyReference.cache
+C:\Users\ahbah\Source\Repos\Connect4-CSharp-Network-Game\ServerSide\ServerSide\obj\Debug\ServerSide.csproj.SuggestedBindingRedirects.cache
+C:\Users\ahbah\Source\Repos\Connect4-CSharp-Network-Game\ServerSide\ServerSide\obj\Debug\ServerSide.Form1.resources
+C:\Users\ahbah\Source\Repos\Connect4-CSharp-Network-Game\ServerSide\ServerSide\obj\Debug\ServerSide.Properties.Resources.resources
+C:\Users\ahbah\Source\Repos\Connect4-CSharp-Network-Game\ServerSide\ServerSide\obj\Debug\ServerSide.csproj.GenerateResource.cache
+C:\Users\ahbah\Source\Repos\Connect4-CSharp-Network-Game\ServerSide\ServerSide\obj\Debug\ServerSide.csproj.CoreCompileInputs.cache
+C:\Users\ahbah\Source\Repos\Connect4-CSharp-Network-Game\ServerSide\ServerSide\obj\Debug\ServerSide.exe
+C:\Users\ahbah\Source\Repos\Connect4-CSharp-Network-Game\ServerSide\ServerSide\obj\Debug\ServerSide.pdb
+C:\Users\ahbah\source\repos\Connect4-CSharp-Network-Game\ServerSide\ServerSide\bin\Debug\Newtonsoft.Json.dll
+C:\Users\ahbah\source\repos\Connect4-CSharp-Network-Game\ServerSide\ServerSide\bin\Debug\Newtonsoft.Json.xml
+C:\Users\ahbah\source\repos\Connect4-CSharp-Network-Game\ServerSide\ServerSide\obj\Debug\ServerSide.csproj.CopyComplete
