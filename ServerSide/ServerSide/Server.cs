@@ -7,6 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Threading;
+using System.Windows.Forms;
+using MessageLib;
+using Newtonsoft.Json;
+using ServerSide.Handlers;
 
 namespace ServerSide
 {
@@ -20,6 +24,12 @@ namespace ServerSide
         private string _gameHistoryPath;
         private string _userDataPath;
         private Thread _playerThread;
+
+        // message mapping
+        //private Dictionary<MessageTag, Action<Object, EventArgs>> MessageToHandlerDic = new Dictionary<MessageTag, Action<Object, EventArgs>>()
+        //{
+        //    { MessageTag.SignIn, },
+        //};
 
         public Server()
         {
@@ -62,8 +72,15 @@ namespace ServerSide
         }
         public void ClientRecievedMessageHandler(object sender, RecievedMessageEventData eventData)
         {
-            
+
             //Broadcast(eventData._msg);
+            MessageContainer msg = JsonConvert.DeserializeObject<MessageContainer>(eventData._msg);
+            if(msg.Tag == MessageTag.SignIn)
+            {
+                SignInHandler handler = new SignInHandler(msg.Content);
+                handler.Handle(msg);
+            }
+            MessageBox.Show($"from server got a message: {eventData._msg}");
 
         }
         public void Broadcast(string msg)

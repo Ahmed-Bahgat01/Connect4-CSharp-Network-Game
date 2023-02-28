@@ -1,0 +1,12 @@
+C:\Users\ahbah\source\repos\Connect4-CSharp-Network-Game\ServerSide\MessageLib\bin\Debug\net6.0\MessageLib.deps.json
+C:\Users\ahbah\source\repos\Connect4-CSharp-Network-Game\ServerSide\MessageLib\bin\Debug\net6.0\MessageLib.dll
+C:\Users\ahbah\source\repos\Connect4-CSharp-Network-Game\ServerSide\MessageLib\bin\Debug\net6.0\MessageLib.pdb
+C:\Users\ahbah\source\repos\Connect4-CSharp-Network-Game\ServerSide\MessageLib\obj\Debug\net6.0\MessageLib.csproj.AssemblyReference.cache
+C:\Users\ahbah\source\repos\Connect4-CSharp-Network-Game\ServerSide\MessageLib\obj\Debug\net6.0\MessageLib.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ahbah\source\repos\Connect4-CSharp-Network-Game\ServerSide\MessageLib\obj\Debug\net6.0\MessageLib.AssemblyInfoInputs.cache
+C:\Users\ahbah\source\repos\Connect4-CSharp-Network-Game\ServerSide\MessageLib\obj\Debug\net6.0\MessageLib.AssemblyInfo.cs
+C:\Users\ahbah\source\repos\Connect4-CSharp-Network-Game\ServerSide\MessageLib\obj\Debug\net6.0\MessageLib.csproj.CoreCompileInputs.cache
+C:\Users\ahbah\source\repos\Connect4-CSharp-Network-Game\ServerSide\MessageLib\obj\Debug\net6.0\MessageLib.dll
+C:\Users\ahbah\source\repos\Connect4-CSharp-Network-Game\ServerSide\MessageLib\obj\Debug\net6.0\refint\MessageLib.dll
+C:\Users\ahbah\source\repos\Connect4-CSharp-Network-Game\ServerSide\MessageLib\obj\Debug\net6.0\MessageLib.pdb
+C:\Users\ahbah\source\repos\Connect4-CSharp-Network-Game\ServerSide\MessageLib\obj\Debug\net6.0\ref\MessageLib.dll

@@ -13,6 +13,9 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices.ComTypes;
 using System.Runtime.InteropServices;
 using System.Threading;
+//using MessagingLib;
+using MessageLib;
+//using Newtonsoft.Json;
 
 namespace ClientSide
 {
@@ -37,7 +40,7 @@ namespace ClientSide
             _streamReader = new StreamReader(_networkStream);
             _streamWriter = new StreamWriter(_networkStream);
             _streamWriter.AutoFlush = true;
-            _streamWriter.WriteLine("connected from client");
+            //_streamWriter.WriteLine("connected from client");
         }
 
         private void Disconnect()
@@ -66,11 +69,30 @@ namespace ClientSide
 
             ListeningThread.Start();
         }
+        private void SignIn()
+        {
+
+            string userName = UserNameTextBox.Text;
+            string password = PasswordTextBox.Text;
+            if(userName != string.Empty&& password != string.Empty)
+            {
+                //var MessageContent = new {UserName = userName,Password =  password};
+                //MessageCS msg;
+                SignInMessageContainer msg = new SignInMessageContainer(MessageTag.SignIn,userName,password);
+                _streamWriter.WriteLine(msg.ToJSON());
+            }
+            else
+            {
+                MessageBox.Show("please enter username and password");
+            }
+            
+        }
 
         private void SignInBtn_Click(object sender, EventArgs e)
         {
             Connect();
             ListenMessage();
+            SignIn();
         }
     }
 }

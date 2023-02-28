@@ -43,7 +43,7 @@ namespace ServerSide
                 while (true)
                 {
                     string msg = _session._streamReader.ReadLine();
-                    MessageBox.Show(msg);
+                    MessageBox.Show($"from player msg: {msg}");
                     //firing event when message recieved
                     if (_recievedMessageEvent != null)
                     {
