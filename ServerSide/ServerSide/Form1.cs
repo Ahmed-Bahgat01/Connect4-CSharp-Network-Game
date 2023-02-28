@@ -18,6 +18,7 @@ namespace ServerSide
             InitializeComponent();
             StopBtn.Enabled = false;
             _server = new Server();
+            _server._playerConnectedEvent += playerConnectedHandler;    //subscribe into player Connection event
         }
 
         private void StartBtn_Click(object sender, EventArgs e)
@@ -37,6 +38,10 @@ namespace ServerSide
         private void button1_Click(object sender, EventArgs e)
         {
             _server.Broadcast("test from server");
+        }
+        private void playerConnectedHandler(object sender, string userName)
+        {
+            PlayersListBox.Items.Add(userName);
         }
     }
 }

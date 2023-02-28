@@ -32,6 +32,10 @@ namespace ClientSide
         {
             InitializeComponent();
         }
+        private void SendMsg(string msg)
+        {
+            _streamWriter.WriteLine(msg);
+        }
         private void Connect()
         {
             _tcpClient = new TcpClient();
@@ -43,9 +47,13 @@ namespace ClientSide
             //_streamWriter.WriteLine("connected from client");
         }
 
-        private void Disconnect()
+        private void SendDisconnect()
         {
-            _streamWriter.WriteLine("!DISCONNECT");
+            _streamWriter.WriteLine("!DISCONNECT");                         //change format
+            CloseClient();
+        }
+        private void CloseClient()
+        {
             _streamReader.Close();
             _streamWriter.Close();
             _tcpClient.Close();
@@ -56,14 +64,19 @@ namespace ClientSide
             ListeningThread = new Thread(() => {
                 while (true)
                 {
-                    
-                    string msg = _streamReader.ReadLine();
-                    if (msg == "!DIS") { 
-                        ListeningThread.Abort();
-                        Disconnect();
+                    try { 
+                        string msg = _streamReader.ReadLine();
+                        if (msg == "!DIS") {
+                            CloseClient();
+                            ListeningThread.Abort();
+                        }
+                        else
+                            MessageBox.Show(msg);
                     }
-                    else
-                        MessageBox.Show(msg);
+                    catch(IOException ex)
+                    {
+                        break;
+                    }
                 }
             });
 
