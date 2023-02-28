@@ -29,6 +29,10 @@ namespace ClientSide
         {
             InitializeComponent();
         }
+        private void SendMsg(string msg)
+        {
+            _streamWriter.WriteLine(msg);
+        }
         private void Connect()
         {
             _tcpClient = new TcpClient();
@@ -37,12 +41,16 @@ namespace ClientSide
             _streamReader = new StreamReader(_networkStream);
             _streamWriter = new StreamWriter(_networkStream);
             _streamWriter.AutoFlush = true;
-            _streamWriter.WriteLine("connected from client");
+            //_streamWriter.WriteLine("connected from client");
         }
 
-        private void Disconnect()
+        private void SendDisconnect()
         {
-            _streamWriter.WriteLine("!DISCONNECT");
+            _streamWriter.WriteLine("!DISCONNECT");                         //change format
+            CloseClient();
+        }
+        private void CloseClient()
+        {
             _streamReader.Close();
             _streamWriter.Close();
             _tcpClient.Close();
@@ -53,14 +61,19 @@ namespace ClientSide
             ListeningThread = new Thread(() => {
                 while (true)
                 {
-                    
-                    string msg = _streamReader.ReadLine();
-                    if (msg == "!DIS") { 
-                        ListeningThread.Abort();
-                        Disconnect();
+                    try { 
+                        string msg = _streamReader.ReadLine();
+                        if (msg == "!DIS") {
+                            CloseClient();
+                            ListeningThread.Abort();
+                        }
+                        else
+                            MessageBox.Show(msg);
                     }
-                    else
-                        MessageBox.Show(msg);
+                    catch(IOException ex)
+                    {
+                        break;
+                    }
                 }
             });
 
@@ -69,8 +82,18 @@ namespace ClientSide
 
         private void SignInBtn_Click(object sender, EventArgs e)
         {
-            Connect();
-            ListenMessage();
+            Connect();                                                      //
+            SendMsg("UserName:" +UserNameTextBox.Text);                     //used in testing
+            SendMsg("Password:" + PasswordTextBox.Text);                    //to be removed
+            ListenMessage();                                                //
+        }
+
+        
+
+        private void SignUpBtn_Click(object sender, EventArgs e)
+        {
+            SendDisconnect();                                               //used in testing
+                                                                            //to be removed
         }
     }
 }

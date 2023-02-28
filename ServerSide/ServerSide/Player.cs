@@ -11,16 +11,15 @@ using System.Windows.Forms;
 
 namespace ServerSide
 {
-    enum Status {Waiting,Playing,Spectating}
+    enum Status {Waiting,Playing,Spectating,Disconnected}
     internal class Player
     {
-        public event Action<object, RecievedMessageEventData> _recievedMessageEvent;
+        public event Action<object, string> _recievedMessageEvent;
+        public event Action<Player> _PlayerDisconnectedEvent;
         public int _id { get; set; }
-        public string _userName { get; set; }
-        public Status _status { get; set; }
-        public Session _session { get; set; }
-
-        private Thread ListeningThread;
+        public string _userName { get; set; } = "player";   //"player" to be removed
+        public Status _status { get; set; }                 //Waiting,Playing,Spectating,Disconnected
+        public Session _session { get; set; }               //socket data
 
         public Player(TcpClient tcpClient)
         {
@@ -29,30 +28,44 @@ namespace ServerSide
             _status = Status.Waiting;
         }
 
-        public void EndClient()
+        public void EndClient()                             //close player streams
         {
-            ListeningThread.Abort();
             _session.Stop();
         }
 
-        private void ListenMessage()
+        private async void ListenMessage()
         {
-            ListeningThread = new Thread(() => 
+            while (true)
             {
-                MessageBox.Show("thread started");
-                while (true)
-                {
-                    string msg = _session._streamReader.ReadLine();
-                    MessageBox.Show(msg);
-                    //firing event when message recieved
-                    if (_recievedMessageEvent != null)
+                try                                         //listen to the incomming messages from player
+                 {   
+                    string msg = await _session._streamReader.ReadLineAsync();
+
+                    if (msg == "!DISCONNECT")                       //Disconnect from player format
                     {
-                        _recievedMessageEvent(this, new RecievedMessageEventData(msg));
+                        if (_PlayerDisconnectedEvent != null)      //firing event when player disconnected
+                        {
+                            _PlayerDisconnectedEvent(this);
+                        }
+                        EndClient();
+                        _status=Status.Disconnected;
+                    }
+                    else
+                    {
+                        if (_recievedMessageEvent != null)      //firing event when message recieved
+                        {
+                            _recievedMessageEvent(this, msg);
+                        }
                     }
                 }
-            });
+                catch (ObjectDisposedException e)           //catch the exception when a player is disconnected
+                {
+                    break;
+                }
 
-            ListeningThread.Start();
+            }
+
+            
         }
     }
 }
