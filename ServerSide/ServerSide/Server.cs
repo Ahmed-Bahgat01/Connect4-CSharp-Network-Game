@@ -10,7 +10,7 @@ using System.Threading;
 using System.Windows.Forms;
 using MessageLib;
 using Newtonsoft.Json;
-using ServerSide.Handlers;
+//using ServerSide.Handlers;
 
 namespace ServerSide
 {
@@ -24,13 +24,22 @@ namespace ServerSide
         private string _gameHistoryPath;
         private string _userDataPath;
         private Thread _playerThread;
-
+        private Dictionary<MessageTag, Action<object, RecievedMessageEventData>> MessageHandlerDic;
 
 
         public Server()
         {
             _tcpListener = new TcpListener(_IP, _PORT);
             _players = new List<Player>();
+
+            // register MessageTag with it's Handler function
+
+            MessageHandlerDic = new Dictionary<MessageTag, Action<object, RecievedMessageEventData>>
+            {
+                { MessageTag.SignIn, MessageHandlers.SignInHandler },
+
+                // register here
+            };
         }
         public Server(string ip, int port)
         {
@@ -49,7 +58,7 @@ namespace ServerSide
 
                     Player newPlayer = new Player(tcpClient);
                     // subscribe into client recieved message event
-                    newPlayer._recievedMessageEvent += ClientRecievedMessageHandler;
+                    newPlayer._recievedMessageEvent += RecievedPlayerMessageHandler;
                     _players.Add(newPlayer);
                 }
             });
@@ -66,17 +75,10 @@ namespace ServerSide
             _playerThread.Abort();
             _tcpListener.Stop();
         }
-        public void ClientRecievedMessageHandler(object sender, RecievedMessageEventData eventData)
+        public void RecievedPlayerMessageHandler(object sender, RecievedMessageEventData eventData)
         {
-
             MessageContainer msg = JsonConvert.DeserializeObject<MessageContainer>(eventData._msg);
-            if(msg.Tag == MessageTag.SignIn)
-            {
-                SignInHandler handler = new SignInHandler(sender, eventData);
-                handler.Handle(msg);
-            }
-            MessageBox.Show($"from server got a message: {eventData._msg}");
-
+            MessageHandlerDic[msg.Tag](sender, eventData);
         }
         public void Broadcast(string msg)
         {

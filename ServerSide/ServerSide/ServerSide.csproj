@@ -58,8 +58,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Handlers\IMessageHandler.cs" />
-    <Compile Include="Handlers\SignInHandler.cs" />
+    <Compile Include="MessageHandlers.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
