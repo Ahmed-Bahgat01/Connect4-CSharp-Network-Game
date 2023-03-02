@@ -14,6 +14,7 @@ using System.Runtime.InteropServices.ComTypes;
 using System.Runtime.InteropServices;
 using System.Threading;
 using MessageLib;
+using Newtonsoft.Json;
 
 namespace ClientSide
 {
@@ -26,9 +27,17 @@ namespace ClientSide
         private StreamReader _streamReader;
         private StreamWriter _streamWriter;
         private Thread ListeningThread;
+        private Dictionary<MessageTag, Action<string>> MessageHandlerDic;
+
         public SignForm()
         {
             InitializeComponent();
+
+            MessageHandlerDic = new Dictionary<MessageTag, Action<string>>
+            {
+                { MessageTag.SignUpResponse, MessageHandlers.SignUpResponseHandler },
+                // >>>>>>> REGISTER messageTag with messageHandler here <<<<<<<
+            };
         }
 
 
@@ -83,20 +92,28 @@ namespace ClientSide
             ListeningThread = new Thread(() => {
                 while (true)
                 {
-                    try { 
+                    try
+                    {
                         string msg = _streamReader.ReadLine();
-                        if (msg == "!DIS") {
+                        if (msg == "!DIS")
+                        {
                             CloseClient();
                             ListeningThread.Abort();
                         }
                         else
-                            MessageBox.Show(msg);
+                        {
+                            // decerializing message
+                            SignUpResponseMessageContainer resObj;
+                            resObj = JsonConvert.DeserializeObject<SignUpResponseMessageContainer>(msg);
+                            // mapping message to it's handler
+                            MessageHandlerDic[resObj.Tag](msg);
+                        }
                     }
-                    catch(IOException ex)
+                    catch (IOException ex)
                     {
                         break;
                     }
-                    catch(ObjectDisposedException ex)
+                    catch (ObjectDisposedException ex)
                     {
                         break;
                     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MessageLib;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -30,6 +31,15 @@ namespace ServerSide
             _streamReader.Close();
             _networkStream.Close();
             _tcpClient.Close();
+        }
+
+        /// <summary>
+        ///     function to send object of type MessageContainer that you defined to the player
+        /// </summary>
+        /// <param name="msg"></param>
+        public void SendMessage(MessageContainer msg)
+        {
+            this._streamWriter.WriteLine(msg.ToJSON());
         }
     }
 }
