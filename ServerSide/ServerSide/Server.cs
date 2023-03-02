@@ -37,6 +37,7 @@ namespace ServerSide
             {
                 { MessageTag.SignIn, MessageHandlers.SignInHandler },
                 { MessageTag.SignUp, MessageHandlers.SignUpHandler },
+
                 // >>>>>>> REGISTER messageTag with messageHandler here <<<<<<<
             };
         }
@@ -118,7 +119,9 @@ namespace ServerSide
         ///     This method sends a message to all connected clients
         ///     used for TESTING PURPOSES ONLY
         /// </summary>
-        /// <param name="msg"></param>
+        /// <param name="msg">
+        ///     NOTE: message here is not serialized from object
+        /// </param>
         public void Broadcast(string msg)     
         {
             foreach (Player player in _players)

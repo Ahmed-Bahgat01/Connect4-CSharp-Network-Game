@@ -14,9 +14,14 @@ namespace MessageLib
         None = 0,
         SignIn,
         SignUp,
-        Error,
-
+        SignUpResponse,
+        SignInResponse,
         // define your new message tag here
+    }
+    public enum ResponseCode
+    {
+        Success = 200,
+        Failed = 500,
     }
 
     /// <summary>
@@ -72,4 +77,40 @@ namespace MessageLib
             Password = password;
         }
     }
+
+    public class SignUpResponseMessageContainer : MessageContainer
+    {
+        public ResponseCode SignUpResponseCode { get; set; }
+        public string ToPlayerResponseMessage { get; set; }
+        public string ToPlayerMsgBoxTitle { get; set; }
+
+        public SignUpResponseMessageContainer
+            (ResponseCode signUpResponseCode, 
+            string toPlayerResponseMessage, 
+            string toPlayerMsgBoxTitle
+            ): base(MessageTag.SignUpResponse)
+        {
+            SignUpResponseCode = signUpResponseCode;
+            ToPlayerResponseMessage = toPlayerResponseMessage;
+            ToPlayerMsgBoxTitle = toPlayerMsgBoxTitle;
+        }
+    }
+    
+    public class SignInResponseMessageContainer : MessageContainer
+    {
+        public ResponseCode SignInResponseCode { get; set; }
+        public string ToPlayerResponseMessage { get; set; }
+        public string ToPlayerMsgBoxTitle { get; set; }
+
+        public SignInResponseMessageContainer
+            (ResponseCode signInResponseCode, 
+            string toPlayerResponseMessage, 
+            string toPlayerMsgBoxTitle) : base(MessageTag.SignInResponse)
+        {
+            SignInResponseCode = signInResponseCode;
+            ToPlayerResponseMessage = toPlayerResponseMessage;
+            ToPlayerMsgBoxTitle = toPlayerMsgBoxTitle;
+        }
+    }
+    
 }
