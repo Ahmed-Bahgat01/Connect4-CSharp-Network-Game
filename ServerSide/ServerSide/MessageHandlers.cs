@@ -9,6 +9,10 @@ using System.Windows.Forms;
 
 namespace ServerSide
 {
+
+    /// <summary>
+    ///     this class has contains all message handlers
+    /// </summary>
     internal class MessageHandlers
     {
         public static void SignInHandler(object sender, string recievedMessage)

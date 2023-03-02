@@ -13,9 +13,7 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices.ComTypes;
 using System.Runtime.InteropServices;
 using System.Threading;
-//using MessagingLib;
 using MessageLib;
-//using Newtonsoft.Json;
 
 namespace ClientSide
 {
@@ -32,14 +30,27 @@ namespace ClientSide
         {
             InitializeComponent();
         }
-        private void SendMsg(string msg)
+
+
+        // METHODS
+
+        /// <summary>
+        ///     function to send object of type MessageContainer that you defined to server
+        /// </summary>
+        /// <param name="msg"></param>
+        private void SendMsg(MessageContainer msg)
         {
-            _streamWriter.WriteLine(msg);
+            _streamWriter.WriteLine(msg.ToJSON());
         }
+
+
+        /// <summary>
+        ///     handles streams and starts connnection with server
+        /// </summary>
         private void Connect()
         {
             _tcpClient = new TcpClient();
-            _tcpClient.Connect(_IP, 5500);
+            _tcpClient.Connect(_IP, _PORT);
             _networkStream = _tcpClient.GetStream();
             _streamReader = new StreamReader(_networkStream);
             _streamWriter = new StreamWriter(_networkStream);
@@ -47,9 +58,13 @@ namespace ClientSide
             //_streamWriter.WriteLine("connected from client");
         }
 
+
+        /// <summary>
+        ///     DEPRECATED function needs to be removed
+        /// </summary>
         private void SendDisconnect()
         {
-            _streamWriter.WriteLine("!DISCONNECT");                         //change format
+            _streamWriter.WriteLine("!DISCONNECT");   //change format
             CloseClient();
         }
         private void CloseClient()
@@ -59,6 +74,10 @@ namespace ClientSide
             _tcpClient.Close();
         }
 
+
+        /// <summary>
+        ///     asynchronous function that listens for incomming messages 
+        /// </summary>
         private void ListenMessage()
         {
             ListeningThread = new Thread(() => {
@@ -86,6 +105,34 @@ namespace ClientSide
 
             ListeningThread.Start();
         }
+
+
+        /// <summary>
+        ///     function that abstracts(masks) starting connection and listening 
+        ///     for incomming messages from server
+        /// </summary>
+        /// <returns> 
+        ///     bool: indicates if connection success or failed
+        /// </returns>
+        private bool StartConnection()
+        {
+            bool success = true;
+            try
+            {
+                Connect();
+                ListenMessage();
+            }
+            catch (SocketException ex)
+            {
+                MessageBox.Show("server is not available!!");
+                success = false;
+            }
+            return success;
+        }
+
+        /// <summary>
+        /// sends signin message to server (called in signIn UI event)
+        /// </summary>
         private void SignIn()
         {
 
@@ -96,7 +143,7 @@ namespace ClientSide
                 //var MessageContent = new {UserName = userName,Password =  password};
                 //MessageCS msg;
                 SignInMessageContainer msg = new SignInMessageContainer(userName,password);
-                _streamWriter.WriteLine(msg.ToJSON());
+                SendMsg(msg);
             }
             else
             {
@@ -105,31 +152,23 @@ namespace ClientSide
             
         }
 
+
+
+        // EVENT HANDLERS
         private void SignInBtn_Click(object sender, EventArgs e)
         {
-            try
+            if (StartConnection())
             {
-                Connect();
-                ListenMessage();
                 SignIn();
             }
-            catch (SocketException ex)
-            {
-                MessageBox.Show("server is not available!!");
-            }
-            
         }
         private void SignUpBtn_Click(object sender, EventArgs e)
         {
-            try
+            if(StartConnection())
             {
-                Connect();
-                ListenMessage();
+                // just for now calling the same function of sign in as it doesn't send any other function
+                // this should be changed after sign up logic implemented
                 SignIn();
-            }
-            catch (SocketException ex)
-            {
-                MessageBox.Show("server is not available!!");
             }
 
         }
