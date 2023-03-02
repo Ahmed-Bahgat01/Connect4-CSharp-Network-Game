@@ -130,26 +130,41 @@ namespace ClientSide
             return success;
         }
 
+        private bool IsValidSignFormInput()
+        {
+            // rules flags
+            bool IsEmptyUserName = UserNameTextBox.Text == string.Empty ? true: false;
+            bool IsEmptyPassword = UserNameTextBox.Text == string.Empty ? true: false;
+
+            // checking flags to validate
+            if(IsEmptyUserName || IsEmptyPassword ) 
+                return false;
+            else return true;
+        }
+
         /// <summary>
         /// sends signin message to server (called in signIn UI event)
         /// </summary>
         private void SignIn()
         {
-
-            string userName = UserNameTextBox.Text;
-            string password = PasswordTextBox.Text;
-            if(userName != string.Empty&& password != string.Empty)
+            if(IsValidSignFormInput())
             {
-                //var MessageContent = new {UserName = userName,Password =  password};
-                //MessageCS msg;
-                SignInMessageContainer msg = new SignInMessageContainer(userName,password);
+                SignInMessageContainer msg = new SignInMessageContainer(UserNameTextBox.Text,PasswordTextBox.Text);
                 SendMsg(msg);
             }
             else
-            {
-                MessageBox.Show("please enter username and password");
-            }
+                MessageBox.Show("Not Valid Inputs");
             
+        }
+        private void SignUp()
+        {
+            if (IsValidSignFormInput())
+            {
+                SignUpMessageContainer msg = new SignUpMessageContainer(UserNameTextBox.Text, PasswordTextBox.Text);
+                SendMsg(msg);
+            }
+            else
+                MessageBox.Show("Not Valid Inputs");
         }
 
 
@@ -158,19 +173,12 @@ namespace ClientSide
         private void SignInBtn_Click(object sender, EventArgs e)
         {
             if (StartConnection())
-            {
                 SignIn();
-            }
         }
         private void SignUpBtn_Click(object sender, EventArgs e)
         {
             if(StartConnection())
-            {
-                // just for now calling the same function of sign in as it doesn't send any other function
-                // this should be changed after sign up logic implemented
-                SignIn();
-            }
-
+                SignUp();
         }
     }
 }

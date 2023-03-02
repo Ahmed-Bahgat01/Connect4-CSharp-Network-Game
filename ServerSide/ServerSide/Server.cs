@@ -36,7 +36,7 @@ namespace ServerSide
             MessageHandlerDic = new Dictionary<MessageTag, Action<object, string>>
             {
                 { MessageTag.SignIn, MessageHandlers.SignInHandler },
-
+                { MessageTag.SignUp, MessageHandlers.SignUpHandler },
                 // >>>>>>> REGISTER messageTag with messageHandler here <<<<<<<
             };
         }
@@ -102,15 +102,15 @@ namespace ServerSide
         }
         public void RecievedPlayerMessageHandler(object sender, string eventData)
         {
-            try
-            {
-                MessageContainer msg = JsonConvert.DeserializeObject<MessageContainer>(eventData);
-                MessageHandlerDic[msg.Tag](sender, eventData);
-            }
-            catch (ArgumentNullException)
-            {
+            //try
+            //{
+                MessageContainer msgObj = JsonConvert.DeserializeObject<MessageContainer>(eventData);
+                MessageHandlerDic[msgObj.Tag](sender, eventData);
+            //}
+            //catch (ArgumentNullException)
+            //{
 
-            }
+            //}
         }
 
 
