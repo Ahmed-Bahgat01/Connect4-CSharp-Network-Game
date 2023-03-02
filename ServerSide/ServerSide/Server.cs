@@ -32,13 +32,12 @@ namespace ServerSide
             _tcpListener = new TcpListener(_IP, _PORT);
             _players = new List<Player>();
 
-            // register MessageTag with it's Handler function
 
             MessageHandlerDic = new Dictionary<MessageTag, Action<object, string>>
             {
                 { MessageTag.SignIn, MessageHandlers.SignInHandler },
-
-                // register here
+                { MessageTag.SignUp, MessageHandlers.SignUpHandler },
+                // >>>>>>> REGISTER messageTag with messageHandler here <<<<<<<
             };
         }
         public Server(string ip, int port)
@@ -48,7 +47,11 @@ namespace ServerSide
 
         }
 
-        public async void Start()       //Starts listening for incoming connections
+
+        /// <summary>
+        ///     Starts listening for incoming players connections
+        /// </summary>
+        public async void Start()       
         {
             _tcpListener.Start();
 
@@ -59,16 +62,11 @@ namespace ServerSide
                     TcpClient tcpClient = await _tcpListener.AcceptTcpClientAsync();
                     Player newPlayer = new Player(tcpClient);                               //create new player from the connected tcpClient
 
-                    //newPlayer._recievedMessageEvent += ClientRecievedMessageHandler;        //subscribe into client recieved message event
                     newPlayer._PlayerDisconnectedEvent += PlayerDisconnectedMessageHandler; //subscribe into client disconnect event
                     _players.Add(newPlayer);                                                //add the connected player to the list
 
-                    //<<<<<<< HEAD
-                    //Player newPlayer = new Player(tcpClient);
-                    // subscribe into client recieved message event
                     newPlayer._recievedMessageEvent += RecievedPlayerMessageHandler;
                     _players.Add(newPlayer);
-                    //=======
 
                     if (_playerConnectedEvent != null)                                      //fires event when player is Connect
                     {
@@ -79,9 +77,12 @@ namespace ServerSide
                 {
                     break;
                 }
-                //>>>>>>> 6dc7f8e1d0b6ba1b421fc305da4d957b7c6eac74
             }
         }
+
+        /// <summary>
+        ///     sends stop message to all clients and stops server
+        /// </summary>
         public void Stop()
         {
             foreach (Player player in _players)
@@ -99,48 +100,49 @@ namespace ServerSide
             _tcpListener.Stop();
             _players.Clear();                                           //clear
         }
-        //<<<<<<< HEAD
         public void RecievedPlayerMessageHandler(object sender, string eventData)
         {
-            try
-            {
-                MessageContainer msg = JsonConvert.DeserializeObject<MessageContainer>(eventData);
-                MessageHandlerDic[msg.Tag](sender, eventData);
-            }
-            catch (ArgumentNullException)
-            {
+            //try
+            //{
+                MessageContainer msgObj = JsonConvert.DeserializeObject<MessageContainer>(eventData);
+                MessageHandlerDic[msgObj.Tag](sender, eventData);
+            //}
+            //catch (ArgumentNullException)
+            //{
 
-            }
+            //}
         }
-        //public void Broadcast(string msg)
-        //=======
-        public void Broadcast(string msg)                               //This method sends a message to all connected clients
-                                                                        //>>>>>>> 6dc7f8e1d0b6ba1b421fc305da4d957b7c6eac74
+
+
+        /// <summary>
+        ///     This method sends a message to all connected clients
+        ///     used for TESTING PURPOSES ONLY
+        /// </summary>
+        /// <param name="msg"></param>
+        public void Broadcast(string msg)     
         {
             foreach (Player player in _players)
             {
                 player._session._streamWriter.WriteLine(msg);
             }
         }
-        //-------------------------------------------------------
+
+
         private void PlayerDisconnectedMessageHandler(Player sender)                //on player disconnect
         {
             _players.Remove(sender);
         }
+
+
+        /// <summary>
+        ///     DEPRECATED: replaced by RecievedPlayerMessageHandler() 
+        ///     needs to be REMOVED
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="message"></param>
         public void ClientRecievedMessageHandler(object sender, string message)     //on reciving message form player
         {
             MessageBox.Show(message);       //to be removed
-
-            //parse message
-            /*
-             switch(format)
-                case 1: action1
-                case 2: action2
-                default: action3
-             */
         }
-
-
-
     }
 }

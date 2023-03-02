@@ -4,54 +4,54 @@ using System.Collections.Generic;
 
 namespace MessageLib
 {
+
+    /// <summary>
+    ///     this enum defines all message types
+    ///     if you want to construct a new message you need to define its tag in this enum
+    /// </summary>
     public enum MessageTag
     {
         None = 0,
         SignIn,
         SignUp,
         Error,
-        //EnterRoom,
-        //LeaveRoom,
-        //PlayGame,
+
+        // define your new message tag here
     }
 
+    /// <summary>
+    ///     this class is the parent class of all message containers 
+    /// </summary>
     public class MessageContainer
     {
         public MessageTag Tag { get; set; }
 
-        protected MessageContainer() { }
         public MessageContainer(MessageTag tag)
         {
             Tag = tag;
         }
 
+        /// <summary>
+        ///     this method serializes the object of MessageContainer type (converts object to json string)
+        ///     json string needs to be deserialized in the target to construct the object again
+        /// </summary>
+        /// <returns>
+        ///     json string of the object
+        /// </returns>
         public string ToJSON()
         {
             string jsonString = JsonConvert.SerializeObject(this);
             return jsonString;
         }
 
-
-        //public static MessageContainer? GetObject(string jsonMessage)
-        //{
-        //    MessageContainer? ReturnMsg = JsonConvert.DeserializeObject<MessageContainer>(jsonMessage);
-        //    return ReturnMsg;
-        //}
-
-
-        //public static T? GetObject<T>(string jsonMessage, T? retObject)
-        //{
-        //    retObject = JsonConvert.DeserializeObject<T>(jsonMessage);
-        //    return retObject;
-        //}
-
     }
 
+
+    // CHILDEREN
     public class SignInMessageContainer : MessageContainer
     {
         public string UserName { get; set; }
         public string Password { get; set; }
-        //public string JsonMessage { get; set; }
 
         public SignInMessageContainer(string userName, string password):base(MessageTag.SignIn)
         {
@@ -59,5 +59,17 @@ namespace MessageLib
             Password = password;
         }
 
+    }
+
+    public class SignUpMessageContainer : MessageContainer
+    {
+        public string UserName { get; set; }
+        public string Password { get; set; }
+
+        public SignUpMessageContainer(string userName, string password):base(MessageTag.SignUp)
+        {
+            UserName = userName;
+            Password = password;
+        }
     }
 }
