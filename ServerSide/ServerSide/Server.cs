@@ -37,6 +37,7 @@ namespace ServerSide
             {
                 { MessageTag.SignIn, MessageHandlers.SignInHandler },
                 { MessageTag.SignUp, MessageHandlers.SignUpHandler },
+
                 // >>>>>>> REGISTER messageTag with messageHandler here <<<<<<<
             };
         }

@@ -36,6 +36,8 @@ namespace ClientSide
             MessageHandlerDic = new Dictionary<MessageTag, Action<string>>
             {
                 { MessageTag.SignUpResponse, MessageHandlers.SignUpResponseHandler },
+                { MessageTag.SignInResponse, MessageHandlers.SignInResponseHandler },
+
                 // >>>>>>> REGISTER messageTag with messageHandler here <<<<<<<
             };
         }
@@ -170,7 +172,7 @@ namespace ClientSide
                 SendMsg(msg);
             }
             else
-                MessageBox.Show("Not Valid Inputs");
+                MessageBox.Show("make sure to input your correct credentials", "Invalid Inputs", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             
         }
         private void SignUp()

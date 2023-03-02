@@ -15,6 +15,7 @@ namespace MessageLib
         SignIn,
         SignUp,
         SignUpResponse,
+        SignInResponse,
         // define your new message tag here
     }
     public enum ResponseCode
@@ -90,6 +91,23 @@ namespace MessageLib
             ): base(MessageTag.SignUpResponse)
         {
             SignUpResponseCode = signUpResponseCode;
+            ToPlayerResponseMessage = toPlayerResponseMessage;
+            ToPlayerMsgBoxTitle = toPlayerMsgBoxTitle;
+        }
+    }
+    
+    public class SignInResponseMessageContainer : MessageContainer
+    {
+        public ResponseCode SignInResponseCode { get; set; }
+        public string ToPlayerResponseMessage { get; set; }
+        public string ToPlayerMsgBoxTitle { get; set; }
+
+        public SignInResponseMessageContainer
+            (ResponseCode signInResponseCode, 
+            string toPlayerResponseMessage, 
+            string toPlayerMsgBoxTitle) : base(MessageTag.SignInResponse)
+        {
+            SignInResponseCode = signInResponseCode;
             ToPlayerResponseMessage = toPlayerResponseMessage;
             ToPlayerMsgBoxTitle = toPlayerMsgBoxTitle;
         }

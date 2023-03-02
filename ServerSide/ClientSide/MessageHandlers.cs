@@ -21,16 +21,24 @@ namespace ClientSide
             SignUpResponseMessageContainer ResponseObj;
             ResponseObj = JsonConvert.DeserializeObject<SignUpResponseMessageContainer>(recievedMessage);
 
+            string msg = ResponseObj.ToPlayerResponseMessage;
+            string title = ResponseObj.ToPlayerMsgBoxTitle;
             if (ResponseObj.SignUpResponseCode == ResponseCode.Success)
-            {
-                // TODO: SHOW FORM OF AVAILABLE PLAYERS AND ROOMS HERE
-            }
-            else if(ResponseObj.SignUpResponseCode == ResponseCode.Failed)
-            {
-                string msg = ResponseObj.ToPlayerResponseMessage;
-                string title = ResponseObj.ToPlayerMsgBoxTitle;
                 MessageBox.Show(msg, title,MessageBoxButtons.OK,MessageBoxIcon.Information);
-            }
+            else if(ResponseObj.SignUpResponseCode == ResponseCode.Failed)
+                MessageBox.Show(msg, title,MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+        }
+
+        public static void SignInResponseHandler(string recievedMessage)
+        {
+            SignInResponseMessageContainer ResponseObj;
+            ResponseObj = JsonConvert.DeserializeObject<SignInResponseMessageContainer>(recievedMessage);
+            string msg = ResponseObj.ToPlayerResponseMessage;
+            string title = ResponseObj.ToPlayerMsgBoxTitle;
+            if (ResponseObj.SignInResponseCode == ResponseCode.Success)
+                MessageBox.Show(msg, title, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else if (ResponseObj.SignInResponseCode == ResponseCode.Failed)
+                MessageBox.Show(msg, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
     }
 }
