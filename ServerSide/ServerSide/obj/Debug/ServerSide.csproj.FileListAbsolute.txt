@@ -23,17 +23,16 @@ C:\Users\ahbah\Source\Repos\Connect4-CSharp-Network-Game\ServerSide\ServerSide\o
 C:\Users\ahbah\source\repos\Connect4-CSharp-Network-Game\ServerSide\ServerSide\bin\Debug\Newtonsoft.Json.dll
 C:\Users\ahbah\source\repos\Connect4-CSharp-Network-Game\ServerSide\ServerSide\bin\Debug\Newtonsoft.Json.xml
 C:\Users\ahbah\source\repos\Connect4-CSharp-Network-Game\ServerSide\ServerSide\obj\Debug\ServerSide.csproj.CopyComplete
-F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ServerSide\bin\Debug\ServerSide.exe.config
-F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ServerSide\bin\Debug\ServerSide.exe
-F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ServerSide\bin\Debug\ServerSide.pdb
-F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ServerSide\bin\Debug\Newtonsoft.Json.dll
-F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ServerSide\bin\Debug\Newtonsoft.Json.xml
-F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ServerSide\obj\Debug\ServerSide.csproj.AssemblyReference.cache
-F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ServerSide\obj\Debug\ServerSide.csproj.SuggestedBindingRedirects.cache
-F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ServerSide\obj\Debug\ServerSide.Form1.resources
-F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ServerSide\obj\Debug\ServerSide.Properties.Resources.resources
-F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ServerSide\obj\Debug\ServerSide.csproj.GenerateResource.cache
-F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ServerSide\obj\Debug\ServerSide.csproj.CoreCompileInputs.cache
-F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ServerSide\obj\Debug\ServerSide.csproj.CopyComplete
-F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ServerSide\obj\Debug\ServerSide.exe
-F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ServerSide\obj\Debug\ServerSide.pdb
+E:\ITI\Visual C#\Project\Connect4\ServerSide\ServerSide\bin\Debug\ServerSide.exe.config
+E:\ITI\Visual C#\Project\Connect4\ServerSide\ServerSide\bin\Debug\ServerSide.exe
+E:\ITI\Visual C#\Project\Connect4\ServerSide\ServerSide\bin\Debug\ServerSide.pdb
+E:\ITI\Visual C#\Project\Connect4\ServerSide\ServerSide\bin\Debug\Newtonsoft.Json.dll
+E:\ITI\Visual C#\Project\Connect4\ServerSide\ServerSide\bin\Debug\Newtonsoft.Json.xml
+E:\ITI\Visual C#\Project\Connect4\ServerSide\ServerSide\obj\Debug\ServerSide.csproj.AssemblyReference.cache
+E:\ITI\Visual C#\Project\Connect4\ServerSide\ServerSide\obj\Debug\ServerSide.Form1.resources
+E:\ITI\Visual C#\Project\Connect4\ServerSide\ServerSide\obj\Debug\ServerSide.Properties.Resources.resources
+E:\ITI\Visual C#\Project\Connect4\ServerSide\ServerSide\obj\Debug\ServerSide.csproj.GenerateResource.cache
+E:\ITI\Visual C#\Project\Connect4\ServerSide\ServerSide\obj\Debug\ServerSide.csproj.CoreCompileInputs.cache
+E:\ITI\Visual C#\Project\Connect4\ServerSide\ServerSide\obj\Debug\ServerSide.csproj.CopyComplete
+E:\ITI\Visual C#\Project\Connect4\ServerSide\ServerSide\obj\Debug\ServerSide.exe
+E:\ITI\Visual C#\Project\Connect4\ServerSide\ServerSide\obj\Debug\ServerSide.pdb
