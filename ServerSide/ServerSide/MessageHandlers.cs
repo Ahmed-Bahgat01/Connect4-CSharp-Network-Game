@@ -14,16 +14,23 @@ namespace ServerSide
     /// <summary>
     ///     this class has contains all message handlers
     /// </summary>
-    internal class MessageHandlers
+    internal partial class Server 
     {
         public static readonly string AccountsFilePath = "Accounts.json";
 
         // HANDLERS
-        public static void SignInHandler(object sender, string recievedMessage)
+        public void SignInHandler(object sender, string recievedMessage)
         {
             SignInMessageContainer SignInObj;
             SignInObj = JsonConvert.DeserializeObject<SignInMessageContainer>(recievedMessage);
-            MessageBox.Show($"from sign in handler: username={SignInObj.UserName} ,password={SignInObj.Password}");
+            //MessageBox.Show($"from sign in handler: username={SignInObj.UserName} ,password={SignInObj.Password}");
+            _players.Last()._userName= SignInObj.UserName;
+
+            if (_playerConnectedEvent != null)                                      //fires event when player is Connect
+            {
+                _playerConnectedEvent(this, _players.Last()._userName);
+            }
+
         }
 
         public static void SignUpHandler(object sender, string recievedMessage)
