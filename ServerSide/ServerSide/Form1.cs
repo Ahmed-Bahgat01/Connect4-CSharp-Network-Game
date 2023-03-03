@@ -43,5 +43,13 @@ namespace ServerSide
         {
             PlayersListBox.Items.Add(userName);
         }
+
+        private void button2_Click(object sender, EventArgs e)      //for test only         //to be deleted
+        {
+           foreach(var p in _server._players)
+            {
+                p.displayPlayer();
+            }
+        }
     }
 }
