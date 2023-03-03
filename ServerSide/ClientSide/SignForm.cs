@@ -193,15 +193,11 @@ namespace ClientSide
         {
             if (StartConnection())
                 SignIn();
-            HomePage home = new HomePage();
-            home.Show();
         }
         private void SignUpBtn_Click(object sender, EventArgs e)
         {
             if(StartConnection())
                 SignUp();
-            HomePage home = new HomePage();
-            home.Show();
         }
     }
 }
