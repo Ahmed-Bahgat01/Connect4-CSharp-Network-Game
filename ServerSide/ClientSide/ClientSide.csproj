@@ -52,7 +52,25 @@
     <Compile Include="..\MessageLib\MessageContainer.cs">
       <Link>MessageContainer.cs</Link>
     </Compile>
+    <Compile Include="Game.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Game.Designer.cs">
+      <DependentUpon>Game.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HomePage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HomePage.Designer.cs">
+      <DependentUpon>HomePage.cs</DependentUpon>
+    </Compile>
     <Compile Include="MessageHandlers.cs" />
+    <Compile Include="RoomConfiguration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RoomConfiguration.Designer.cs">
+      <DependentUpon>RoomConfiguration.cs</DependentUpon>
+    </Compile>
     <Compile Include="SignForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -61,6 +79,15 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Game.resx">
+      <DependentUpon>Game.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HomePage.resx">
+      <DependentUpon>HomePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RoomConfiguration.resx">
+      <DependentUpon>RoomConfiguration.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SignForm.resx">
       <DependentUpon>SignForm.cs</DependentUpon>
     </EmbeddedResource>
