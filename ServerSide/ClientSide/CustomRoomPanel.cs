@@ -23,9 +23,9 @@ namespace ClientSide
         public CustomRoomPanel(int height,
             int roomId,
             string roomName,
-            int player1Id,
+            //int player1Id,
             string player1Name,
-            int? player2Id,
+            //int? player2Id,
             string player2Name)
         {
             Panel panel1 = new Panel();
