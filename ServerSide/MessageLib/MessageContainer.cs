@@ -117,7 +117,7 @@ namespace MessageLib
             ToPlayerMsgBoxTitle = toPlayerMsgBoxTitle;
         }
     }
-    public class CreateRoomMessageContainer : MessageContainer
+    internal class CreateRoomMessageContainer : MessageContainer
     {
         public string UserName { get; set; }
         public string RoomName { get; set; }

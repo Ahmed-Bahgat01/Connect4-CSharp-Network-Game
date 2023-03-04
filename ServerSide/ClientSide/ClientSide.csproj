@@ -55,6 +55,7 @@
     <Compile Include="..\ServerSide\GameConfiguration.cs">
       <Link>GameConfiguration.cs</Link>
     </Compile>
+    <Compile Include="Client.cs" />
     <Compile Include="Game.cs">
       <SubType>Form</SubType>
     </Compile>
