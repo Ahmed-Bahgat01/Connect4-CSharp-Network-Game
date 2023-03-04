@@ -10,7 +10,7 @@ using System.Windows.Forms;
 namespace ClientSide
 {
     /// <summary>
-    ///     this class has contains all message handlers
+    ///     this class contains all message handlers
     /// </summary>
     internal class MessageHandlers
     {
@@ -40,5 +40,7 @@ namespace ClientSide
             else if (ResponseObj.SignInResponseCode == ResponseCode.Failed)
                 MessageBox.Show(msg, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
+
+        
     }
 }
