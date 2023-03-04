@@ -24,6 +24,7 @@ namespace ServerSide
 
             _server._RoomCreatedEvent += RoomCreatedEventHandler;
             _server._RoomUpdateEvent += RoomUpdateEventHandler;
+            _server._RoomDeleteEvent += _RoomDeleteEventHandler;
         }
 
         private void StartBtn_Click(object sender, EventArgs e)
@@ -84,6 +85,20 @@ namespace ServerSide
                     RoomsListBox.Items.Remove(strRoom);
                     RoomsListBox.Items.Insert(index, room.ToString());
                 }
+            }
+        }
+
+        private void _RoomDeleteEventHandler(Room room)
+        {
+            foreach (var Room in RoomsListBox.Items) 
+            {
+                string strRoom = Room.ToString();
+                if (strRoom.Split(',')[0] == room._ID.ToString())
+                {
+                    RoomsListBox.Items.Remove(strRoom);
+                    break;
+                }
+                    
             }
         }
     }

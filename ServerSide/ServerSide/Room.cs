@@ -59,6 +59,7 @@ namespace ServerSide
             _gameConfig= gameConfig;
             _name= RoomName;
             _ID= id;
+            p._PlayerDisconnectedEvent += PlayerDisconnectedEvent;
             if (_RoomCreatedEvent != null)
             {
                 _RoomCreatedEvent(this);
@@ -67,9 +68,10 @@ namespace ServerSide
 
         public void AddPlayer(Player p)
         {
-           if (_players.Count()<2)
+            if (_players.Count() < 2)
             {
                 _players.Add(p);
+                p._PlayerDisconnectedEvent += PlayerDisconnectedEvent;
             }
             //else
             //{
@@ -81,6 +83,7 @@ namespace ServerSide
                 _RoomUpdateEvent(this);
             }
         }
+
         public void RemovePlayer(Player p)
         {
             if(_players.Contains(p))
@@ -112,7 +115,7 @@ namespace ServerSide
         public void AddSpectator(Player p)
         {
             _spectators.Add(p);
-
+            p._PlayerDisconnectedEvent += PlayerDisconnectedEvent;
             if (_RoomUpdateEvent != null)
             {
                 _RoomUpdateEvent(this);
@@ -141,5 +144,23 @@ namespace ServerSide
         { 
             MessageBox.Show(ToString()); 
         }
+        private void PlayerDisconnectedEvent(Player obj)
+        {
+            if (_players.Contains(obj))
+            {
+                _players.Remove(obj);
+                if(_players.Count == 0 )
+                {
+                    if (_roomIsEmptyEvent != null)
+                    {
+                        _roomIsEmptyEvent(this);
+                    }
+                }
+            }else if (_spectators.Contains(obj))
+            {
+                _spectators.Remove(obj);
+            }
+        }
     }
+
 }

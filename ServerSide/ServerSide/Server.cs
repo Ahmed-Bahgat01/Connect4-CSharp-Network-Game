@@ -166,14 +166,14 @@ namespace ServerSide
             {
                 _RoomDeleteEvent(sender);
             }
-            //send rooms to user
+            // TODO:send rooms to user
         }
 
         public void RoomCreatedEventHandler(Room sender)
         {
 
-            
-            
+
+            //TODO:send rooms to user
         }
 
         public void RoomUpdateEventHandler(Room sender)
