@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,10 +13,12 @@ namespace ServerSide
     internal class Room
     {
         public event Action<Room> _roomIsEmptyEvent;
+        public event Action<Room> _RoomDataChangedEvent;        //an event that is fired when any change is occured in the room to be broadcasted
         public GameConfiguration _gameConfig 
         { 
             get; 
             set; 
+
         }
         public int _ID
         {
@@ -55,6 +58,10 @@ namespace ServerSide
             _gameConfig= gameConfig;
             _name= RoomName;
             _ID= id;
+            if (_RoomDataChangedEvent != null)
+            {
+                _RoomDataChangedEvent(this);
+            }
         }
 
         public void AddPlayer(Player p)
@@ -68,6 +75,10 @@ namespace ServerSide
             //    //handle
             //    MessageBox.Show("only 2 players can join the room")
             //}
+            if (_RoomDataChangedEvent != null)
+            {
+                _RoomDataChangedEvent(this);
+            }
         }
         public void RemovePlayer(Player p)
         {
@@ -91,6 +102,17 @@ namespace ServerSide
         public void AddSpectator(Player p)
         {
             _spectators.Add(p);
+
+            if (_RoomDataChangedEvent != null)
+            {
+                _RoomDataChangedEvent(this);
+            }
+        }
+
+        public void displayRoom()     //for test only         //to be deleted
+        {
+            MessageBox.Show(_gameConfig.ToString() + "\n" + _ID.ToString() + "\n" + _name.ToString() + "\n" +
+                _roomStatus.ToString() + "\n" + _players.ToString() + "\n"+ _spectators.ToString()); 
         }
     }
 }

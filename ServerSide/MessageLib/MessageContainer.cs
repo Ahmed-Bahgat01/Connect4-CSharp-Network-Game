@@ -18,7 +18,9 @@ namespace MessageLib
         SignUpResponse,
         SignInResponse,
         CreateRoom,
-        JoinRoom
+        JoinRoom,
+        SpectateRoom,
+        DisFromRoom
         // define your new message tag here
     }
     public enum ResponseCode
@@ -134,6 +136,30 @@ namespace MessageLib
         public int RoomID { get; set; }
 
         public JoinRoomMessageContainer(string userName, int roomID) : base(MessageTag.JoinRoom)
+        {
+            UserName = userName;
+            RoomID = roomID;
+        }
+    }
+
+    public class SpectateRoomMessageContainer : MessageContainer
+    {
+        public string UserName { get; set; }
+        public int RoomID { get; set; }
+
+        public SpectateRoomMessageContainer(string userName, int roomID) : base(MessageTag.SpectateRoom)
+        {
+            UserName = userName;
+            RoomID = roomID;
+        }
+    }
+
+    public class DisFromRoomMessageContainer : MessageContainer
+    {
+        public string UserName { get; set; }
+        public int RoomID { get; set; }
+
+        public DisFromRoomMessageContainer(string userName, int roomID) : base(MessageTag.SpectateRoom)
         {
             UserName = userName;
             RoomID = roomID;

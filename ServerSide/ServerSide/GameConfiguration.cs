@@ -18,5 +18,10 @@ namespace ServerSide
             _boardSize= boardSize;
         }
 
+        public override string ToString()
+        {
+            return (_boardSize.ToString()+"::"+ _boardColor.ToString());
+        }
+
     }
 }

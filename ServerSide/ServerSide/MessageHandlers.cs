@@ -131,7 +131,63 @@ namespace ServerSide
                 {
                     Player p = player;
                     
+                    foreach(var room in _rooms)
+                    {
+                        if(room._ID == JoinRoomObj.RoomID)
+                        {
+                            room.AddPlayer(p);
+                            break;
+                        }
+                    }
                     
+                    break;
+                }
+            }
+        }
+
+        public void SpectateRoomHandler(object sender, string recievedMessage)
+        {
+            SpectateRoomMessageContainer SpecRoomObj;
+            SpecRoomObj = JsonConvert.DeserializeObject<SpectateRoomMessageContainer>(recievedMessage);
+
+            foreach (var player in _players)
+            {
+                if (player._userName == SpecRoomObj.UserName)
+                {
+                    Player p = player;
+                    foreach (var room in _rooms)
+                    {
+                        if (room._ID == SpecRoomObj.RoomID)
+                        {
+                            room.AddSpectator(p);
+                            break;
+                        }
+                    }
+
+                    break;
+                }
+            }
+        }
+
+        public void DisFromRoomHandler(object sender, string recievedMessage)
+        {
+            SpectateRoomMessageContainer SpecRoomObj;
+            SpecRoomObj = JsonConvert.DeserializeObject<SpectateRoomMessageContainer>(recievedMessage);
+
+            foreach (var player in _players)
+            {
+                if (player._userName == SpecRoomObj.UserName)
+                {
+                    Player p = player;
+                    foreach (var room in _rooms)
+                    {
+                        if (room._ID == SpecRoomObj.RoomID)
+                        {
+                            room.RemovePlayer(p);
+                            break;
+                        }
+                    }
+
                     break;
                 }
             }

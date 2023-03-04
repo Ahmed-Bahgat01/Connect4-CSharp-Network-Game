@@ -17,7 +17,7 @@ namespace ServerSide
     internal partial class Server
     {
         public List<Player> _players;
-        private List<Room> _rooms;
+        public List<Room> _rooms;
         private IPAddress _IP = IPAddress.Parse("127.0.0.1");
         private int _PORT = 5500;
         private TcpListener _tcpListener;
@@ -39,6 +39,8 @@ namespace ServerSide
                 { MessageTag.SignUp, SignUpHandler },
                 { MessageTag.CreateRoom, CreateRoomHandler },
                 { MessageTag.JoinRoom, JoinRoomHandler },
+                { MessageTag.SpectateRoom, SpectateRoomHandler },
+                { MessageTag.DisFromRoom, DisFromRoomHandler }
                 // >>>>>>> REGISTER messageTag with messageHandler here <<<<<<<
             };
         }
@@ -69,6 +71,7 @@ namespace ServerSide
 
                     newPlayer._recievedMessageEvent += RecievedPlayerMessageHandler;
                     //_players.Add(newPlayer);
+
 
                     
                 }
