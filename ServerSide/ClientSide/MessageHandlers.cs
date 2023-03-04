@@ -33,11 +33,26 @@ namespace ClientSide
         {
             SignInResponseMessageContainer ResponseObj;
             ResponseObj = JsonConvert.DeserializeObject<SignInResponseMessageContainer>(recievedMessage);
+
             string msg = ResponseObj.ToPlayerResponseMessage;
             string title = ResponseObj.ToPlayerMsgBoxTitle;
             if (ResponseObj.SignInResponseCode == ResponseCode.Success)
                 MessageBox.Show(msg, title, MessageBoxButtons.OK, MessageBoxIcon.Information);
             else if (ResponseObj.SignInResponseCode == ResponseCode.Failed)
+                MessageBox.Show(msg, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+
+        public static void JoinRoomResponseHandler(string recievedMessage)
+        {
+            JoinRoomMessageContainer ResponseObj;
+            ResponseObj = JsonConvert.DeserializeObject<JoinRoomMessageContainer>(recievedMessage);
+
+            string msg = ResponseObj.ToPlayerResponseMessage;
+            string title = ResponseObj.ToPlayerMsgBoxTitle;
+            string response = ResponseObj.RequestJoinMessage;
+            if (ResponseObj.JoinResponseCode == ResponseCode.Success)
+                MessageBox.Show(msg, title, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else if (ResponseObj.JoinResponseCode == ResponseCode.Failed)
                 MessageBox.Show(msg, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
     }

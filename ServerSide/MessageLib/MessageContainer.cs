@@ -16,6 +16,7 @@ namespace MessageLib
         SignUp,
         SignUpResponse,
         SignInResponse,
+        JoinRoom,
         // define your new message tag here
     }
     public enum ResponseCode
@@ -112,5 +113,22 @@ namespace MessageLib
             ToPlayerMsgBoxTitle = toPlayerMsgBoxTitle;
         }
     }
-    
+
+    public class JoinRoomMessageContainer : MessageContainer
+    {
+        public ResponseCode JoinResponseCode { get; set; }
+        //public string ToPlayerResponseMessage { get; set; }
+        //public string ToPlayerMsgBoxTitle { get; set; }
+        public string RequestJoinMessage { get; set; }
+
+        public JoinRoomMessageContainer
+            (ResponseCode joinResponseCode, string requestJoinMessage) : base(MessageTag.JoinRoom)
+        {
+            JoinResponseCode = joinResponseCode;
+            //ToPlayerResponseMessage = toPlayerResponseMessage;
+            //ToPlayerMsgBoxTitle = toPlayerMsgBoxTitle;
+            RequestJoinMessage = requestJoinMessage;
+        }
+    }
+
 }
