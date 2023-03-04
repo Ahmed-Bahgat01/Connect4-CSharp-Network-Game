@@ -50,3 +50,9 @@ F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ClientSide\obj\Debug\Client
 F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ClientSide\obj\Debug\ClientSide.csproj.CoreCompileInputs.cache
 F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ClientSide\obj\Debug\ClientSide.exe
 F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ClientSide\obj\Debug\ClientSide.pdb
+F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ClientSide\bin\Debug\ClientSide.exe.config
+F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ClientSide\bin\Debug\ClientSide.exe
+F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ClientSide\bin\Debug\ClientSide.pdb
+F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ClientSide\bin\Debug\Newtonsoft.Json.dll
+F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ClientSide\bin\Debug\Newtonsoft.Json.xml
+F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ClientSide\obj\Debug\ClientSide.csproj.CopyComplete

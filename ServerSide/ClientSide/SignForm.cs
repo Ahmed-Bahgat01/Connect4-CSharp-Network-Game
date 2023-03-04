@@ -49,7 +49,7 @@ namespace ClientSide
         ///     function to send object of type MessageContainer that you defined to server
         /// </summary>
         /// <param name="msg"></param>
-        private void SendMsg(MessageContainer msg)
+        protected void SendMsg(MessageContainer msg)
         {
             _streamWriter.WriteLine(msg.ToJSON());
         }
