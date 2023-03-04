@@ -39,3 +39,23 @@ E:\ITI\Visual C#\Project\Connect4\ServerSide\ClientSide\obj\Debug\ClientSide.exe
 E:\ITI\Visual C#\Project\Connect4\ServerSide\ClientSide\obj\Debug\ClientSide.pdb
 E:\ITI\Visual C#\Project\Connect4\ServerSide\ClientSide\obj\Debug\ClientSide.Game.resources
 E:\ITI\Visual C#\Project\Connect4\ServerSide\ClientSide\obj\Debug\ClientSide.RoomConfiguration.resources
+C:\Users\ahbah\source\repos\Connect4-CSharp-Network-Game\ServerSide\ClientSide\obj\Debug\ClientSide.Game.resources
+C:\Users\ahbah\source\repos\Connect4-CSharp-Network-Game\ServerSide\ClientSide\obj\Debug\ClientSide.HomePage.resources
+C:\Users\ahbah\source\repos\Connect4-CSharp-Network-Game\ServerSide\ClientSide\obj\Debug\ClientSide.RoomConfiguration.resources
+F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ClientSide\obj\Debug\ClientSide.csproj.AssemblyReference.cache
+F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ClientSide\obj\Debug\ClientSide.csproj.SuggestedBindingRedirects.cache
+F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ClientSide\obj\Debug\ClientSide.Game.resources
+F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ClientSide\obj\Debug\ClientSide.HomePage.resources
+F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ClientSide\obj\Debug\ClientSide.RoomConfiguration.resources
+F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ClientSide\obj\Debug\ClientSide.SignForm.resources
+F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ClientSide\obj\Debug\ClientSide.Properties.Resources.resources
+F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ClientSide\obj\Debug\ClientSide.csproj.GenerateResource.cache
+F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ClientSide\obj\Debug\ClientSide.csproj.CoreCompileInputs.cache
+F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ClientSide\obj\Debug\ClientSide.exe
+F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ClientSide\obj\Debug\ClientSide.pdb
+F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ClientSide\bin\Debug\ClientSide.exe.config
+F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ClientSide\bin\Debug\ClientSide.exe
+F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ClientSide\bin\Debug\ClientSide.pdb
+F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ClientSide\bin\Debug\Newtonsoft.Json.dll
+F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ClientSide\bin\Debug\Newtonsoft.Json.xml
+F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ClientSide\obj\Debug\ClientSide.csproj.CopyComplete

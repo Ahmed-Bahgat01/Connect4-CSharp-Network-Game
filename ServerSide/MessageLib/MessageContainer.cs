@@ -1,4 +1,6 @@
 ﻿using Newtonsoft.Json;
+using ServerSide;
+using System.Collections;
 using System.Collections.Generic;
 
 
@@ -16,7 +18,12 @@ namespace MessageLib
         SignUp,
         SignUpResponse,
         SignInResponse,
+        CreateRoom,
         JoinRoom,
+        SpectateRoom,
+
+        DisFromRoom,
+        RoomStatusUpdate,
         // define your new message tag here
     }
     public enum ResponseCode
@@ -113,22 +120,152 @@ namespace MessageLib
             ToPlayerMsgBoxTitle = toPlayerMsgBoxTitle;
         }
     }
-
-    public class JoinRoomMessageContainer : MessageContainer
+    internal class CreateRoomMessageContainer : MessageContainer
     {
-        public ResponseCode JoinResponseCode { get; set; }
-        //public string ToPlayerResponseMessage { get; set; }
-        //public string ToPlayerMsgBoxTitle { get; set; }
-        public string RequestJoinMessage { get; set; }
-
-        public JoinRoomMessageContainer
-            (ResponseCode joinResponseCode, string requestJoinMessage) : base(MessageTag.JoinRoom)
+        public string UserName { get; set; }
+        public string RoomName { get; set; }
+        public GameConfiguration GameConfig { get; set; }
+        public CreateRoomMessageContainer(string userName, string roomName, GameConfiguration gameConfig) : base(MessageTag.CreateRoom)
         {
-            JoinResponseCode = joinResponseCode;
-            //ToPlayerResponseMessage = toPlayerResponseMessage;
-            //ToPlayerMsgBoxTitle = toPlayerMsgBoxTitle;
-            RequestJoinMessage = requestJoinMessage;
+            UserName = userName;
+            RoomName = roomName;
+            GameConfig = gameConfig;
         }
     }
 
+    public class JoinRoomMessageContainer : MessageContainer
+    {
+        public string UserName { get; set; }
+        public int RoomID { get; set; }
+
+        public JoinRoomMessageContainer(string userName, int roomID) : base(MessageTag.JoinRoom)
+        {
+            UserName = userName;
+            RoomID = roomID;
+        }
+    }
+
+    public class SpectateRoomMessageContainer : MessageContainer
+    {
+        public string UserName { get; set; }
+        public int RoomID { get; set; }
+
+        public SpectateRoomMessageContainer(string userName, int roomID) : base(MessageTag.SpectateRoom)
+        {
+            UserName = userName;
+            RoomID = roomID;
+        }
+    }
+
+    public class DisFromRoomMessageContainer : MessageContainer
+    {
+        public string UserName { get; set; }
+        public int RoomID { get; set; }
+
+        public DisFromRoomMessageContainer(string userName, int roomID) : base(MessageTag.SpectateRoom)
+        {
+            UserName = userName;
+            RoomID = roomID;
+        }
+    }
+
+
+    /// <summary>
+    ///     TO BE REMOVED
+    /// </summary>
+    public class RoomStatusUpdateMessageContainer : MessageContainer
+    {
+        public int RoomId { get; set; }
+        public string RoomName { get; set; }
+        public int Player1Id { get; set; }
+        public string Player1Name { get; set; }
+        public int? Player2Id { get; set; }
+        public string Player2Name { get; set; }
+
+
+        // one player constructor
+        public RoomStatusUpdateMessageContainer
+            (int roomId,
+            string roomName,
+            int player1Id,
+            string player1Name
+            ) : base(MessageTag.RoomStatusUpdate)
+        {
+            RoomId = roomId;
+            RoomName = roomName;
+            Player1Id = player1Id;
+            Player1Name = player1Name;
+            Player2Id = null;
+            Player2Name = null;
+        }
+
+        // 2 players constructor
+        public RoomStatusUpdateMessageContainer
+            (int roomId, 
+            string roomName, 
+            int player1Id, 
+            string player1Name, 
+            int player2Id, 
+            string player2Name
+            ):base(MessageTag.RoomStatusUpdate)
+        {
+            RoomId = roomId;
+            RoomName = roomName;
+            Player1Id = player1Id;
+            Player1Name = player1Name;
+            Player2Id = player2Id;
+            Player2Name = player2Name;
+        }
+
+        
+
+
+
+
+    }
+    public class CreateRoomV2MessageContainer : MessageContainer
+    {
+        public int RoomId { get; set; }
+        public string RoomName { get; set; }
+        public int Player1Id { get; set; }
+        public string Player1Name { get; set; }
+        public int? Player2Id { get; set; }
+        public string Player2Name { get; set; }
+
+
+        // one player constructor
+        public CreateRoomV2MessageContainer
+            (int roomId,
+            string roomName,
+            int player1Id,
+            string player1Name
+            ) : base(MessageTag.RoomStatusUpdate)
+        {
+            RoomId = roomId;
+            RoomName = roomName;
+            Player1Id = player1Id;
+            Player1Name = player1Name;
+            Player2Id = null;
+            Player2Name = null;
+        }
+
+        // 2 players constructor
+        public CreateRoomV2MessageContainer
+            (int roomId,
+            string roomName,
+            //int player1Id,
+            string player1Name,
+            //int player2Id,
+            string player2Name
+            ) : base(MessageTag.RoomStatusUpdate)
+        {
+            RoomId = roomId;
+            RoomName = roomName;
+            //Player1Id = player1Id;
+            Player1Name = player1Name;
+            //Player2Id = player2Id;
+            Player2Name = player2Name;
+        }
+
+    }
 }

@@ -27,126 +27,11 @@ namespace ClientSide
         private StreamReader _streamReader;
         private StreamWriter _streamWriter;
         private Thread ListeningThread;
-        private Dictionary<MessageTag, Action<string>> MessageHandlerDic;
+        //private Dictionary<MessageTag, Action<string>> MessageHandlerDic;
 
         public SignForm()
         {
             InitializeComponent();
-
-            MessageHandlerDic = new Dictionary<MessageTag, Action<string>>
-            {
-                { MessageTag.SignUpResponse, MessageHandlers.SignUpResponseHandler },
-                { MessageTag.SignInResponse, MessageHandlers.SignInResponseHandler },
-
-                // >>>>>>> REGISTER messageTag with messageHandler here <<<<<<<
-            };
-        }
-
-
-        // METHODS
-
-        /// <summary>
-        ///     function to send object of type MessageContainer that you defined to server
-        /// </summary>
-        /// <param name="msg"></param>
-        private void SendMsg(MessageContainer msg)
-        {
-            _streamWriter.WriteLine(msg.ToJSON());
-        }
-
-
-        /// <summary>
-        ///     handles streams and starts connnection with server
-        /// </summary>
-        private void Connect()
-        {
-            _tcpClient = new TcpClient();
-            _tcpClient.Connect(_IP, _PORT);
-            _networkStream = _tcpClient.GetStream();
-            _streamReader = new StreamReader(_networkStream);
-            _streamWriter = new StreamWriter(_networkStream);
-            _streamWriter.AutoFlush = true;
-            //_streamWriter.WriteLine("connected from client");
-        }
-
-
-        /// <summary>
-        ///     DEPRECATED function needs to be removed
-        /// </summary>
-        private void SendDisconnect()
-        {
-            _streamWriter.WriteLine("!DISCONNECT");   //change format
-            CloseClient();
-        }
-        private void CloseClient()
-        {
-            _streamReader.Close();
-            _streamWriter.Close();
-            _tcpClient.Close();
-        }
-
-
-        /// <summary>
-        ///     asynchronous function that listens for incomming messages 
-        /// </summary>
-        private void ListenMessage()
-        {
-            ListeningThread = new Thread(() => {
-                while (true)
-                {
-                    try
-                    {
-                        string msg = _streamReader.ReadLine();
-                        if (msg == "!DIS")
-                        {
-                            CloseClient();
-                            ListeningThread.Abort();
-                        }
-                        else
-                        {
-                            // decerializing message
-                            SignUpResponseMessageContainer resObj;
-                            resObj = JsonConvert.DeserializeObject<SignUpResponseMessageContainer>(msg);
-                            // mapping message to it's handler
-                            MessageHandlerDic[resObj.Tag](msg);
-                        }
-                    }
-                    catch (IOException ex)
-                    {
-                        break;
-                    }
-                    catch (ObjectDisposedException ex)
-                    {
-                        break;
-                    }
-                }
-            });
-
-            ListeningThread.Start();
-        }
-
-
-        /// <summary>
-        ///     function that abstracts(masks) starting connection and listening 
-        ///     for incomming messages from server
-        /// </summary>
-        /// <returns> 
-        ///     bool: indicates if connection success or failed
-        /// </returns>
-        private bool StartConnection()
-        {
-            bool success = true;
-            try
-            {
-                Connect();
-                ListenMessage();
-            }
-            catch (SocketException ex)
-            {
-                MessageBox.Show("server is not available!!");
-                success = false;
-            }
-            return success;
         }
 
         private bool IsValidSignFormInput()
@@ -166,10 +51,13 @@ namespace ClientSide
         /// </summary>
         private void SignIn()
         {
-            if(IsValidSignFormInput())
+            if (IsValidSignFormInput())
             {
                 SignInMessageContainer msg = new SignInMessageContainer(UserNameTextBox.Text,PasswordTextBox.Text);
-                SendMsg(msg);
+                Client._UserName = UserNameTextBox.Text;
+                Client.SendMsg(msg);
+                HomePage home = new HomePage();
+                home.Show();
             }
             else
                 MessageBox.Show("make sure to input your correct credentials", "Invalid Inputs", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -180,7 +68,8 @@ namespace ClientSide
             if (IsValidSignFormInput())
             {
                 SignUpMessageContainer msg = new SignUpMessageContainer(UserNameTextBox.Text, PasswordTextBox.Text);
-                SendMsg(msg);
+                Client._UserName=UserNameTextBox.Text;
+                Client.SendMsg(msg);
             }
             else
                 MessageBox.Show("Not Valid Inputs");
@@ -191,17 +80,22 @@ namespace ClientSide
         // EVENT HANDLERS
         private void SignInBtn_Click(object sender, EventArgs e)
         {
-            if (StartConnection())
+            if (Client.StartConnection())
+            {
                 SignIn();
-            HomePage home = new HomePage();
-            home.Show();
+            }
         }
         private void SignUpBtn_Click(object sender, EventArgs e)
         {
-            if(StartConnection())
+            if(Client.StartConnection())
                 SignUp();
             HomePage home = new HomePage();
             home.Show();
+        }
+
+        private void SignForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Client.SendDisconnect();
         }
     }
 }

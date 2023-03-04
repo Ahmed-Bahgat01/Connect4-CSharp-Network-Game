@@ -52,6 +52,11 @@
     <Compile Include="..\MessageLib\MessageContainer.cs">
       <Link>MessageContainer.cs</Link>
     </Compile>
+    <Compile Include="..\ServerSide\GameConfiguration.cs">
+      <Link>GameConfiguration.cs</Link>
+    </Compile>
+    <Compile Include="Client.cs" />
+    <Compile Include="CustomRoomPanel.cs" />
     <Compile Include="Game.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -99,6 +104,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

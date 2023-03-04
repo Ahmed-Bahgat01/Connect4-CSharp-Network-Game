@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MessageLib;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -33,7 +34,7 @@ namespace ClientSide
             InitializeComponent();
 
             //welcome text
-            compName = "Welcome UserName";
+            compName = "Welcome "+Client._UserName;
             strColor = Color.DarkRed;
             fontFamily = "Times New Roman";
             fontSize = 20;
@@ -41,13 +42,42 @@ namespace ClientSide
 
             for (int i = 0; i< 5; i++)
             {
-                roomPanel = createPanel(i);
+                roomPanel = createPanel(200,i);
                 flowLayoutPanel1.Controls.Add(roomPanel);
             }
 
-            
+        }
 
-            
+        private void RoomUpdateHandler(RoomStatusUpdateMessageContainer updateObj)
+        {
+            // check if room exists
+            if (Client.RoomPanelDic.ContainsKey(updateObj.RoomId))
+            {
+                //TODO:
+                // if exist update it's data
+                CustomRoomPanel targetPanel = Client.RoomPanelDic[updateObj.RoomId];
+                int targetPanelIndex = this.Controls.IndexOf(targetPanel.RoomPanel);
+                this.Controls[this.Controls.IndexOf(targetPanel.TextBox1)].Text = 
+            }
+            else  // if not exist create the room
+            {
+                //create UI for room
+                CustomRoomPanel newCustomRoomPanel = new CustomRoomPanel(200, 
+                    updateObj.RoomId,
+                    updateObj.RoomName,
+                    updateObj.Player1Id,
+                    updateObj.Player1Name,
+                    updateObj.Player2Id,
+                    updateObj.Player2Name
+                    );
+
+                // attach panel to form
+                this.Controls.Add(newCustomRoomPanel.RoomPanel);
+
+                // TODO: UPDATE DIC
+                Client.RoomPanelDic.Add(updateObj.RoomId, newCustomRoomPanel);
+
+            }
         }
 
         private void HomePage_Paint(object sender, PaintEventArgs e)
@@ -67,7 +97,7 @@ namespace ClientSide
             strBrush = new SolidBrush(title);
             StringFormat strFrmt = new StringFormat();
             strFrmt.Alignment = StringAlignment.Center;
-            Rectangle rect1 = new Rectangle(50, 100, this.Width, 100);
+            Rectangle rect1 = new Rectangle(0, 0, this.Width, 100);
             g.DrawString(compName, strFont, strBrush, rect1, strFrmt);
         }
 
@@ -81,8 +111,12 @@ namespace ClientSide
             config_Result = config.ShowDialog();
             if(config_Result == DialogResult.OK)
             {
+                
                 size = config.Size;
                 color = config.Colorr;
+
+                CreateRoomMessageContainer msg = new CreateRoomMessageContainer(Client._UserName, config.RoomName, new ServerSide.GameConfiguration(size, color));
+                Client.SendMsg(msg);
 
                 Invalidate();
 
@@ -92,7 +126,14 @@ namespace ClientSide
 
         }
 
-        public Panel createPanel(int height, int id)
+        public Panel createPanel
+            (int height, 
+            int roomId,
+            string roomName,
+            int player1Id, 
+            string player1Name, 
+            int? player2Id, 
+            string player2Name )
         {
             Panel panel1 = new Panel();
             Label label1 = new Label();
