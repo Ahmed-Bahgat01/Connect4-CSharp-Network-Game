@@ -48,6 +48,38 @@ namespace ClientSide
 
         }
 
+        private void RoomUpdateHandler(RoomStatusUpdateMessageContainer updateObj)
+        {
+            // check if room exists
+            if (Client.RoomPanelDic.ContainsKey(updateObj.RoomId))
+            {
+                //TODO:
+                // if exist update it's data
+                CustomRoomPanel targetPanel = Client.RoomPanelDic[updateObj.RoomId];
+                int targetPanelIndex = this.Controls.IndexOf(targetPanel.RoomPanel);
+                this.Controls[this.Controls.IndexOf(targetPanel.TextBox1)].Text = 
+            }
+            else  // if not exist create the room
+            {
+                //create UI for room
+                CustomRoomPanel newCustomRoomPanel = new CustomRoomPanel(200, 
+                    updateObj.RoomId,
+                    updateObj.RoomName,
+                    updateObj.Player1Id,
+                    updateObj.Player1Name,
+                    updateObj.Player2Id,
+                    updateObj.Player2Name
+                    );
+
+                // attach panel to form
+                this.Controls.Add(newCustomRoomPanel.RoomPanel);
+
+                // TODO: UPDATE DIC
+                Client.RoomPanelDic.Add(updateObj.RoomId, newCustomRoomPanel);
+
+            }
+        }
+
         private void HomePage_Paint(object sender, PaintEventArgs e)
         {
             DisplayString();
@@ -94,7 +126,14 @@ namespace ClientSide
 
         }
 
-        public Panel createPanel(int height, int id)
+        public Panel createPanel
+            (int height, 
+            int roomId,
+            string roomName,
+            int player1Id, 
+            string player1Name, 
+            int? player2Id, 
+            string player2Name )
         {
             Panel panel1 = new Panel();
             Label label1 = new Label();
