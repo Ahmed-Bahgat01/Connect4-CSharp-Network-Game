@@ -119,11 +119,11 @@ namespace ServerSide
                     _rooms.Add(newRoom);
                     newRoom._roomIsEmptyEvent += RoomIsEmptyEventHandler;
                     //newRoom._RoomCreatedEvent += RoomCreatedEventHandler;
-                    if (_RoomCreatedEvent != null)
+                    if (_RoomCreatedEvent != null)          //raising RoomCreatedEvent
                     {
                         _RoomCreatedEvent(newRoom);
                     }
-                    //send rooms to user
+                    // TODO: send rooms to user
                     newRoom._RoomUpdateEvent += RoomUpdateEventHandler;
                     break;
                 }

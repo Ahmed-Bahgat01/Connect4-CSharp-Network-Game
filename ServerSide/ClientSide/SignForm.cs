@@ -51,11 +51,13 @@ namespace ClientSide
         /// </summary>
         private void SignIn()
         {
-            if(IsValidSignFormInput())
+            if (IsValidSignFormInput())
             {
                 SignInMessageContainer msg = new SignInMessageContainer(UserNameTextBox.Text,PasswordTextBox.Text);
                 Client._UserName = UserNameTextBox.Text;
                 Client.SendMsg(msg);
+                HomePage home = new HomePage();
+                home.Show();
             }
             else
                 MessageBox.Show("make sure to input your correct credentials", "Invalid Inputs", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -79,9 +81,9 @@ namespace ClientSide
         private void SignInBtn_Click(object sender, EventArgs e)
         {
             if (Client.StartConnection())
+            {
                 SignIn();
-            HomePage home = new HomePage();
-            home.Show();
+            }
         }
         private void SignUpBtn_Click(object sender, EventArgs e)
         {
@@ -89,6 +91,11 @@ namespace ClientSide
                 SignUp();
             HomePage home = new HomePage();
             home.Show();
+        }
+
+        private void SignForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Client.SendDisconnect();
         }
     }
 }

@@ -34,7 +34,7 @@ namespace ClientSide
             InitializeComponent();
 
             //welcome text
-            compName = "Welcome UserName";
+            compName = "Welcome "+Client._UserName;
             strColor = Color.DarkRed;
             fontFamily = "Times New Roman";
             fontSize = 20;
@@ -46,9 +46,6 @@ namespace ClientSide
                 flowLayoutPanel1.Controls.Add(roomPanel);
             }
 
-            
-
-            
         }
 
         private void RoomUpdateHandler(RoomStatusUpdateMessageContainer updateObj)
@@ -100,7 +97,7 @@ namespace ClientSide
             strBrush = new SolidBrush(title);
             StringFormat strFrmt = new StringFormat();
             strFrmt.Alignment = StringAlignment.Center;
-            Rectangle rect1 = new Rectangle(50, 100, this.Width, 100);
+            Rectangle rect1 = new Rectangle(0, 0, this.Width, 100);
             g.DrawString(compName, strFont, strBrush, rect1, strFrmt);
         }
 
