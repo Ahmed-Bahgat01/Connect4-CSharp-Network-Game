@@ -361,3 +361,11 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/ServerSide/ClientSide/bin/Debug/ClientSide.exe
+/ServerSide/ClientSide/bin/Debug/ClientSide.pdb
+/ServerSide/ClientSide/obj/Debug/ClientSide.exe
+/ServerSide/ClientSide/obj/Debug/ClientSide.pdb
+/ServerSide/ClientSide/obj/Debug/DesignTimeResolveAssemblyReferences.cache
+/ServerSide/ClientSide/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+/ServerSide/ClientSide/obj/Debug/ClientSide.csproj.CopyComplete
+/ServerSide/.vs/ServerSide/v17/.futdcache.v2
