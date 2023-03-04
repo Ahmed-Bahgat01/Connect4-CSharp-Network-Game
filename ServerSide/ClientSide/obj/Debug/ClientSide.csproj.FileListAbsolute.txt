@@ -23,3 +23,19 @@ C:\Users\ahbah\Source\Repos\Connect4-CSharp-Network-Game\ServerSide\ClientSide\o
 C:\Users\ahbah\source\repos\Connect4-CSharp-Network-Game\ServerSide\ClientSide\bin\Debug\Newtonsoft.Json.dll
 C:\Users\ahbah\source\repos\Connect4-CSharp-Network-Game\ServerSide\ClientSide\bin\Debug\Newtonsoft.Json.xml
 C:\Users\ahbah\source\repos\Connect4-CSharp-Network-Game\ServerSide\ClientSide\obj\Debug\ClientSide.csproj.CopyComplete
+E:\ITI\Visual C#\Project\Connect4\ServerSide\ClientSide\bin\Debug\ClientSide.exe.config
+E:\ITI\Visual C#\Project\Connect4\ServerSide\ClientSide\bin\Debug\ClientSide.exe
+E:\ITI\Visual C#\Project\Connect4\ServerSide\ClientSide\bin\Debug\ClientSide.pdb
+E:\ITI\Visual C#\Project\Connect4\ServerSide\ClientSide\bin\Debug\Newtonsoft.Json.dll
+E:\ITI\Visual C#\Project\Connect4\ServerSide\ClientSide\bin\Debug\Newtonsoft.Json.xml
+E:\ITI\Visual C#\Project\Connect4\ServerSide\ClientSide\obj\Debug\ClientSide.csproj.AssemblyReference.cache
+E:\ITI\Visual C#\Project\Connect4\ServerSide\ClientSide\obj\Debug\ClientSide.HomePage.resources
+E:\ITI\Visual C#\Project\Connect4\ServerSide\ClientSide\obj\Debug\ClientSide.SignForm.resources
+E:\ITI\Visual C#\Project\Connect4\ServerSide\ClientSide\obj\Debug\ClientSide.Properties.Resources.resources
+E:\ITI\Visual C#\Project\Connect4\ServerSide\ClientSide\obj\Debug\ClientSide.csproj.GenerateResource.cache
+E:\ITI\Visual C#\Project\Connect4\ServerSide\ClientSide\obj\Debug\ClientSide.csproj.CoreCompileInputs.cache
+E:\ITI\Visual C#\Project\Connect4\ServerSide\ClientSide\obj\Debug\ClientSide.csproj.CopyComplete
+E:\ITI\Visual C#\Project\Connect4\ServerSide\ClientSide\obj\Debug\ClientSide.exe
+E:\ITI\Visual C#\Project\Connect4\ServerSide\ClientSide\obj\Debug\ClientSide.pdb
+E:\ITI\Visual C#\Project\Connect4\ServerSide\ClientSide\obj\Debug\ClientSide.Game.resources
+E:\ITI\Visual C#\Project\Connect4\ServerSide\ClientSide\obj\Debug\ClientSide.RoomConfiguration.resources

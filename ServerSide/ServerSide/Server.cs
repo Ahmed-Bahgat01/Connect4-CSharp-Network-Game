@@ -14,15 +14,14 @@ using Newtonsoft.Json;
 namespace ServerSide
 {
 
-    internal class Server
+    internal partial class Server
     {
-        private List<Player> _players;
+        public List<Player> _players;
         private IPAddress _IP = IPAddress.Parse("127.0.0.1");
         private int _PORT = 5500;
         private TcpListener _tcpListener;
         private string _gameHistoryPath;
         private string _userDataPath;
-        private Thread _playerThread;
         private Dictionary<MessageTag, Action<object, string>> MessageHandlerDic;
 
 
@@ -35,8 +34,8 @@ namespace ServerSide
 
             MessageHandlerDic = new Dictionary<MessageTag, Action<object, string>>
             {
-                { MessageTag.SignIn, MessageHandlers.SignInHandler },
-                { MessageTag.SignUp, MessageHandlers.SignUpHandler },
+                { MessageTag.SignIn, SignInHandler },
+                { MessageTag.SignUp, SignUpHandler },
                 // >>>>>>> REGISTER messageTag with messageHandler here <<<<<<<
             };
         }
@@ -66,12 +65,9 @@ namespace ServerSide
                     _players.Add(newPlayer);                                                //add the connected player to the list
 
                     newPlayer._recievedMessageEvent += RecievedPlayerMessageHandler;
-                    _players.Add(newPlayer);
+                    //_players.Add(newPlayer);
 
-                    if (_playerConnectedEvent != null)                                      //fires event when player is Connect
-                    {
-                        _playerConnectedEvent(this, newPlayer._userName);
-                    }
+                    
                 }
                 catch (ObjectDisposedException e)                                           //on server stop
                 {

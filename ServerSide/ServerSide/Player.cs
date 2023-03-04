@@ -11,14 +11,14 @@ using System.Windows.Forms;
 
 namespace ServerSide
 {
-    enum Status {Waiting,Playing,Spectating,Disconnected}
+    enum Status {Connected,Waiting,Playing,Spectating,Disconnected}
     internal class Player
     {
         public event Action<object, string> _recievedMessageEvent;
         public event Action<Player> _PlayerDisconnectedEvent;
         public int _id { get; set; }
         public string _userName { get; set; } = "player";   //"player" to be removed
-        public Status _status { get; set; }                 //Waiting,Playing,Spectating,Disconnected
+        public Status _status { get; set; }                 //Connected,Waiting,Playing,Spectating,Disconnected
         public Session _session { get; set; }               //socket data
 
         public Player(TcpClient tcpClient)
@@ -66,6 +66,10 @@ namespace ServerSide
             }
 
             
+        }
+        public void displayPlayer()     //for test only         //to be deleted
+        {
+            MessageBox.Show(_id.ToString() + "\n" + _userName.ToString() + "\n" + _status.ToString() + "\n");
         }
     }
 }
