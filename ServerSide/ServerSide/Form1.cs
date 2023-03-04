@@ -51,5 +51,13 @@ namespace ServerSide
                 p.displayPlayer();
             }
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            foreach (var r in _server._rooms)
+            {
+                r.displayRoom();
+            }
+        }
     }
 }

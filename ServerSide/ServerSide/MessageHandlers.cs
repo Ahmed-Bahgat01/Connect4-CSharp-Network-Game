@@ -27,7 +27,12 @@ namespace ServerSide
             SignInMessageContainer SignInObj;
             SignInObj = JsonConvert.DeserializeObject<SignInMessageContainer>(recievedMessage);
             //MessageBox.Show($"from sign in handler: username={SignInObj.UserName} ,password={SignInObj.Password}");
+            _players.Last()._userName = SignInObj.UserName;
 
+            if (_playerConnectedEvent != null)                                      //fires event when player is Connect
+            {
+                _playerConnectedEvent(this, _players.Last()._userName);
+            }
 
             // search if valid username and password
             // checking if file exists
@@ -54,12 +59,7 @@ namespace ServerSide
             // sending response to player
             (sender as Player)._session.SendMessage(response);
             //MessageBox.Show($"from sign in handler: username={SignInObj.UserName} ,password={SignInObj.Password}");
-            _players.Last()._userName= SignInObj.UserName;
-
-            if (_playerConnectedEvent != null)                                      //fires event when player is Connect
-            {
-                _playerConnectedEvent(this, _players.Last()._userName);
-            }
+            
 
         }
 
@@ -100,5 +100,97 @@ namespace ServerSide
 
         }
 
+        public void CreateRoomHandler(object sender, string recievedMessage)
+        {
+            CreateRoomMessageContainer CreateRoomObj;
+            CreateRoomObj = JsonConvert.DeserializeObject<CreateRoomMessageContainer>(recievedMessage);
+
+            int id = _rooms.Count() + 1;
+
+            foreach(var player in _players)
+            {
+                if(player._userName== CreateRoomObj.UserName)
+                {
+                    Player p = player;
+                    Room newRoom = new Room(p, id, CreateRoomObj.RoomName, CreateRoomObj.GameConfig);
+                    _rooms.Add(newRoom);
+                    newRoom._roomIsEmptyEvent += RoomIsEmptyEventHandler;
+                    break;
+                }
+            }
+        }
+
+        public void JoinRoomHandler(object sender, string recievedMessage)
+        {
+            JoinRoomMessageContainer JoinRoomObj;
+            JoinRoomObj = JsonConvert.DeserializeObject<JoinRoomMessageContainer>(recievedMessage);
+
+            foreach (var player in _players)
+            {
+                if (player._userName == JoinRoomObj.UserName)
+                {
+                    Player p = player;
+                    
+                    foreach(var room in _rooms)
+                    {
+                        if(room._ID == JoinRoomObj.RoomID)
+                        {
+                            room.AddPlayer(p);
+                            break;
+                        }
+                    }
+                    
+                    break;
+                }
+            }
+        }
+
+        public void SpectateRoomHandler(object sender, string recievedMessage)
+        {
+            SpectateRoomMessageContainer SpecRoomObj;
+            SpecRoomObj = JsonConvert.DeserializeObject<SpectateRoomMessageContainer>(recievedMessage);
+
+            foreach (var player in _players)
+            {
+                if (player._userName == SpecRoomObj.UserName)
+                {
+                    Player p = player;
+                    foreach (var room in _rooms)
+                    {
+                        if (room._ID == SpecRoomObj.RoomID)
+                        {
+                            room.AddSpectator(p);
+                            break;
+                        }
+                    }
+
+                    break;
+                }
+            }
+        }
+
+        public void DisFromRoomHandler(object sender, string recievedMessage)
+        {
+            SpectateRoomMessageContainer SpecRoomObj;
+            SpecRoomObj = JsonConvert.DeserializeObject<SpectateRoomMessageContainer>(recievedMessage);
+
+            foreach (var player in _players)
+            {
+                if (player._userName == SpecRoomObj.UserName)
+                {
+                    Player p = player;
+                    foreach (var room in _rooms)
+                    {
+                        if (room._ID == SpecRoomObj.RoomID)
+                        {
+                            room.RemovePlayer(p);
+                            break;
+                        }
+                    }
+
+                    break;
+                }
+            }
+        }
     }
 }
