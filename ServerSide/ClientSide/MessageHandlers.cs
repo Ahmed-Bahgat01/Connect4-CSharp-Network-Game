@@ -10,7 +10,7 @@ using System.Windows.Forms;
 namespace ClientSide
 {
     /// <summary>
-    ///     this class has contains all message handlers
+    ///     this class contains all message handlers
     /// </summary>
     internal class MessageHandlers
     {

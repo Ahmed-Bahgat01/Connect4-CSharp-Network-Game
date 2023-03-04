@@ -39,3 +39,6 @@ E:\ITI\Visual C#\Project\Connect4\ServerSide\ClientSide\obj\Debug\ClientSide.exe
 E:\ITI\Visual C#\Project\Connect4\ServerSide\ClientSide\obj\Debug\ClientSide.pdb
 E:\ITI\Visual C#\Project\Connect4\ServerSide\ClientSide\obj\Debug\ClientSide.Game.resources
 E:\ITI\Visual C#\Project\Connect4\ServerSide\ClientSide\obj\Debug\ClientSide.RoomConfiguration.resources
+C:\Users\ahbah\source\repos\Connect4-CSharp-Network-Game\ServerSide\ClientSide\obj\Debug\ClientSide.Game.resources
+C:\Users\ahbah\source\repos\Connect4-CSharp-Network-Game\ServerSide\ClientSide\obj\Debug\ClientSide.HomePage.resources
+C:\Users\ahbah\source\repos\Connect4-CSharp-Network-Game\ServerSide\ClientSide\obj\Debug\ClientSide.RoomConfiguration.resources
