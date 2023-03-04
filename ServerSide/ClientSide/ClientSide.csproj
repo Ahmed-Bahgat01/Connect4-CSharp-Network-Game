@@ -52,6 +52,9 @@
     <Compile Include="..\MessageLib\MessageContainer.cs">
       <Link>MessageContainer.cs</Link>
     </Compile>
+    <Compile Include="..\ServerSide\GameConfiguration.cs">
+      <Link>GameConfiguration.cs</Link>
+    </Compile>
     <Compile Include="Game.cs">
       <SubType>Form</SubType>
     </Compile>
