@@ -32,21 +32,12 @@ namespace ClientSide
                 // >>>>>>> REGISTER messageTag with messageHandler here <<<<<<<
         };
 
+        // Dic maping roomid with room panel in UI
+        public static Dictionary<int, Panel> RoomPanelDic = new Dictionary<int,Panel>();
 
 
 
-        //// CONSTRUCTOR
-        //public Client()
-        //{
 
-            //MessageHandlerDic = new Dictionary<MessageTag, Action<string>>
-            //{
-            //    { MessageTag.SignUpResponse, MessageHandlers.SignUpResponseHandler },
-            //    { MessageTag.SignInResponse, MessageHandlers.SignInResponseHandler },
-
-            //    // >>>>>>> REGISTER messageTag with messageHandler here <<<<<<<
-            //};
-        //}
 
 
 

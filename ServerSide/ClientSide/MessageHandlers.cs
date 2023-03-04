@@ -41,6 +41,27 @@ namespace ClientSide
                 MessageBox.Show(msg, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
+        // TODO:
+
+        public static void RoomStatusUpdate(string recievedMessage)
+        {
+            RoomStatusUpdateMessageContainer RoomStatus;
+            RoomStatus = JsonConvert.DeserializeObject<RoomStatusUpdateMessageContainer>(recievedMessage);
+            // check if room exists
+            if (Client.RoomPanelDic.ContainsKey(RoomStatus.RoomId))
+            {
+                //TODO:
+                // if exist update it's data
+
+            }
+            else  // if not exist create the room
+            {
+                
+                // TODO: create UI for room
+            }
+
+
+        }
         
     }
 }
