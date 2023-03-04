@@ -85,6 +85,11 @@ namespace ServerSide
                 _session = _session
             };
         }
+
+        public override string ToString()
+        {
+            return (_id.ToString() + ", " +_userName.ToString()+ ", " + _status.ToString());
+        }
     }
 }
 

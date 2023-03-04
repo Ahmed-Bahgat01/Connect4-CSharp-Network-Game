@@ -13,7 +13,8 @@ namespace ServerSide
     internal class Room
     {
         public event Action<Room> _roomIsEmptyEvent;
-        public event Action<Room> _RoomDataChangedEvent;        //an event that is fired when any change is occured in the room to be broadcasted
+        public event Action<Room> _RoomUpdateEvent;        //an event that is fired when any change is occured in the room to be broadcasted
+        public event Action<Room> _RoomCreatedEvent;
         public GameConfiguration _gameConfig 
         { 
             get; 
@@ -58,9 +59,9 @@ namespace ServerSide
             _gameConfig= gameConfig;
             _name= RoomName;
             _ID= id;
-            if (_RoomDataChangedEvent != null)
+            if (_RoomCreatedEvent != null)
             {
-                _RoomDataChangedEvent(this);
+                _RoomCreatedEvent(this);
             }
         }
 
@@ -75,9 +76,9 @@ namespace ServerSide
             //    //handle
             //    MessageBox.Show("only 2 players can join the room")
             //}
-            if (_RoomDataChangedEvent != null)
+            if (_RoomUpdateEvent != null)
             {
-                _RoomDataChangedEvent(this);
+                _RoomUpdateEvent(this);
             }
         }
         public void RemovePlayer(Player p)
@@ -85,10 +86,19 @@ namespace ServerSide
             if(_players.Contains(p))
             {
                 _players.Remove(p);
+                if (_RoomUpdateEvent != null)
+                {
+                    _RoomUpdateEvent(this);
+                }
             }
             else if (_spectators.Contains(p))
             {
                 _spectators.Remove(p);
+                _players.Remove(p);
+                if (_RoomUpdateEvent != null)
+                {
+                    _RoomUpdateEvent(this);
+                }
             }
 
             if (_players.Count() == 0)
@@ -103,16 +113,33 @@ namespace ServerSide
         {
             _spectators.Add(p);
 
-            if (_RoomDataChangedEvent != null)
+            if (_RoomUpdateEvent != null)
             {
-                _RoomDataChangedEvent(this);
+                _RoomUpdateEvent(this);
             }
         }
 
-        public void displayRoom()     //for test only         //to be deleted
+        public override string ToString()
         {
-            MessageBox.Show(_gameConfig.ToString() + "\n" + _ID.ToString() + "\n" + _name.ToString() + "\n" +
-                _roomStatus.ToString() + "\n" + _players.ToString() + "\n"+ _spectators.ToString()); 
+            string roomStr = _ID.ToString() +", "+ _name.ToString() + ", " + _gameConfig.ToString() + ", " +
+                _roomStatus.ToString() ;
+            roomStr += " || Players:";
+            foreach (var p in _players)
+            {
+                roomStr += p.ToString();
+                roomStr += ", ";
+            }
+            roomStr += " || Spectators:";
+            foreach (var s in _spectators)
+            {
+                roomStr += s.ToString();
+                roomStr += ", ";
+            }
+            return roomStr;
+        }
+        public void displayRoom()     //for test only         //to be deleted
+        { 
+            MessageBox.Show(ToString()); 
         }
     }
 }

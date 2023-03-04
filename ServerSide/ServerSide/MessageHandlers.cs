@@ -104,10 +104,13 @@ namespace ServerSide
         {
             CreateRoomMessageContainer CreateRoomObj;
             CreateRoomObj = JsonConvert.DeserializeObject<CreateRoomMessageContainer>(recievedMessage);
+            int id;
+            
+            id = _rooms.Count() + 1;
+            
+            
 
-            int id = _rooms.Count() + 1;
-
-            foreach(var player in _players)
+            foreach (var player in _players)
             {
                 if(player._userName== CreateRoomObj.UserName)
                 {
@@ -115,6 +118,13 @@ namespace ServerSide
                     Room newRoom = new Room(p, id, CreateRoomObj.RoomName, CreateRoomObj.GameConfig);
                     _rooms.Add(newRoom);
                     newRoom._roomIsEmptyEvent += RoomIsEmptyEventHandler;
+                    //newRoom._RoomCreatedEvent += RoomCreatedEventHandler;
+                    if (_RoomCreatedEvent != null)
+                    {
+                        _RoomCreatedEvent(newRoom);
+                    }
+                    //send rooms to user
+                    newRoom._RoomUpdateEvent += RoomUpdateEventHandler;
                     break;
                 }
             }

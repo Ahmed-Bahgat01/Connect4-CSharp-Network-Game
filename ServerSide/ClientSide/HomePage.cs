@@ -82,10 +82,12 @@ namespace ClientSide
             config_Result = config.ShowDialog();
             if(config_Result == DialogResult.OK)
             {
-                //CreateRoomMessageContainer msg = new CreateRoomMessageContainer("koko", "room1", new ServerSide.GameConfiguration(1, Color.Red));
-                //SendMsg(msg);
+                
                 size = config.Size;
                 color = config.Colorr;
+
+                CreateRoomMessageContainer msg = new CreateRoomMessageContainer(Client._UserName, config.RoomName, new ServerSide.GameConfiguration(size, color));
+                Client.SendMsg(msg);
 
                 Invalidate();
 
