@@ -36,3 +36,17 @@ E:\ITI\Visual C#\Project\Connect4\ServerSide\ServerSide\obj\Debug\ServerSide.csp
 E:\ITI\Visual C#\Project\Connect4\ServerSide\ServerSide\obj\Debug\ServerSide.csproj.CopyComplete
 E:\ITI\Visual C#\Project\Connect4\ServerSide\ServerSide\obj\Debug\ServerSide.exe
 E:\ITI\Visual C#\Project\Connect4\ServerSide\ServerSide\obj\Debug\ServerSide.pdb
+F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ServerSide\bin\Debug\ServerSide.exe.config
+F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ServerSide\bin\Debug\ServerSide.exe
+F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ServerSide\bin\Debug\ServerSide.pdb
+F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ServerSide\bin\Debug\Newtonsoft.Json.dll
+F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ServerSide\bin\Debug\Newtonsoft.Json.xml
+F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ServerSide\obj\Debug\ServerSide.csproj.AssemblyReference.cache
+F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ServerSide\obj\Debug\ServerSide.csproj.SuggestedBindingRedirects.cache
+F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ServerSide\obj\Debug\ServerSide.Form1.resources
+F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ServerSide\obj\Debug\ServerSide.Properties.Resources.resources
+F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ServerSide\obj\Debug\ServerSide.csproj.GenerateResource.cache
+F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ServerSide\obj\Debug\ServerSide.csproj.CoreCompileInputs.cache
+F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ServerSide\obj\Debug\ServerSide.csproj.CopyComplete
+F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ServerSide\obj\Debug\ServerSide.exe
+F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ServerSide\obj\Debug\ServerSide.pdb

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using ServerSide;
 using System.Collections.Generic;
 
 
@@ -16,6 +17,8 @@ namespace MessageLib
         SignUp,
         SignUpResponse,
         SignInResponse,
+        CreateRoom,
+        JoinRoom
         // define your new message tag here
     }
     public enum ResponseCode
@@ -112,5 +115,28 @@ namespace MessageLib
             ToPlayerMsgBoxTitle = toPlayerMsgBoxTitle;
         }
     }
-    
+    public class CreateRoomMessageContainer : MessageContainer
+    {
+        public string UserName { get; set; }
+        public string RoomName { get; set; }
+        public GameConfiguration GameConfig { get; set; }
+        public CreateRoomMessageContainer(string userName, string roomName, GameConfiguration gameConfig) : base(MessageTag.CreateRoom)
+        {
+            UserName = userName;
+            RoomName = roomName;
+            GameConfig = gameConfig;
+        }
+    }
+
+    public class JoinRoomMessageContainer : MessageContainer
+    {
+        public string UserName { get; set; }
+        public int RoomID { get; set; }
+
+        public JoinRoomMessageContainer(string userName, int roomID) : base(MessageTag.JoinRoom)
+        {
+            UserName = userName;
+            RoomID = roomID;
+        }
+    }
 }

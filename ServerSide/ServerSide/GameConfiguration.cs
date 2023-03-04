@@ -9,16 +9,13 @@ namespace ServerSide
 {
     internal class GameConfiguration
     {
-        public int _boardSize
-        {
-            get;
-            set;
-        }
+        public int _boardSize { get; set; }
 
-        public Color _boardColor
-        {
-            get;
-            set;
+        public Color _boardColor { get; set; }
+        
+        public GameConfiguration(int boardSize,Color color) { 
+            _boardColor= color;
+            _boardSize= boardSize;
         }
 
     }

@@ -21,6 +21,8 @@ namespace ServerSide
         public Status _status { get; set; }                 //Connected,Waiting,Playing,Spectating,Disconnected
         public Session _session { get; set; }               //socket data
 
+        private Player() { }
+
         public Player(TcpClient tcpClient)
         {
             _session = new Session(tcpClient);
@@ -32,6 +34,7 @@ namespace ServerSide
         {
             _session.Stop();
         }
+
 
         private async void ListenMessage()
         {
@@ -70,6 +73,17 @@ namespace ServerSide
         public void displayPlayer()     //for test only         //to be deleted
         {
             MessageBox.Show(_id.ToString() + "\n" + _userName.ToString() + "\n" + _status.ToString() + "\n");
+        }
+
+        public Player Copy()
+        {
+            return new Player
+            {
+                _id = _id,
+                _userName = _userName,
+                _status = _status,
+                _session = _session
+            };
         }
     }
 }

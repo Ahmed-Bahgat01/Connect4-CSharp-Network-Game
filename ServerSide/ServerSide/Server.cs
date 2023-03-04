@@ -17,6 +17,7 @@ namespace ServerSide
     internal partial class Server
     {
         public List<Player> _players;
+        private List<Room> _rooms;
         private IPAddress _IP = IPAddress.Parse("127.0.0.1");
         private int _PORT = 5500;
         private TcpListener _tcpListener;
@@ -36,6 +37,8 @@ namespace ServerSide
             {
                 { MessageTag.SignIn, SignInHandler },
                 { MessageTag.SignUp, SignUpHandler },
+                { MessageTag.CreateRoom, CreateRoomHandler },
+                { MessageTag.JoinRoom, JoinRoomHandler },
                 // >>>>>>> REGISTER messageTag with messageHandler here <<<<<<<
             };
         }
@@ -141,6 +144,11 @@ namespace ServerSide
         public void ClientRecievedMessageHandler(object sender, string message)     //on reciving message form player
         {
             MessageBox.Show(message);       //to be removed
+        }
+
+        public void RoomIsEmptyEventHandler(Room sender)
+        {
+            _rooms.Remove(sender);
         }
     }
 }
