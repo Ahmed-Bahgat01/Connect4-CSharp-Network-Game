@@ -41,8 +41,8 @@ namespace ClientSide
 
             for (int i = 0; i< 5; i++)
             {
-                //roomPanel = createPanel(i);
-                //flowLayoutPanel1.Controls.Add(roomPanel);
+                roomPanel = createPanel(200, i);
+                flowLayoutPanel1.Controls.Add(roomPanel);
             }
 
             
