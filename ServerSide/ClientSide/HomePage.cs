@@ -48,6 +48,29 @@ namespace ClientSide
 
         }
 
+        private void RoomCreationHandler(CreateRoomV2MessageContainer updateObj)
+        {
+            //create UI for room
+            CustomRoomPanel newCustomRoomPanel = new CustomRoomPanel(200,
+                updateObj.RoomId,
+                updateObj.RoomName,
+                updateObj.Player1Id,
+                updateObj.Player1Name,
+                updateObj.Player2Id,
+                updateObj.Player2Name
+                );
+
+            // attach panel to form
+            this.Controls.Add(newCustomRoomPanel.RoomPanel);
+
+            // TODO: UPDATE DIC
+            Client.RoomPanelDic.Add(updateObj.RoomId, newCustomRoomPanel);
+        }
+
+        /// <summary>
+        ///     TO BE REMOVED
+        /// </summary>
+        /// <param name="updateObj"></param>
         private void RoomUpdateHandler(RoomStatusUpdateMessageContainer updateObj)
         {
             // check if room exists
@@ -65,9 +88,9 @@ namespace ClientSide
                 CustomRoomPanel newCustomRoomPanel = new CustomRoomPanel(200, 
                     updateObj.RoomId,
                     updateObj.RoomName,
-                    updateObj.Player1Id,
+                    //updateObj.Player1Id,
                     updateObj.Player1Name,
-                    updateObj.Player2Id,
+                    //updateObj.Player2Id,
                     updateObj.Player2Name
                     );
 
