@@ -34,15 +34,6 @@ namespace ClientSide
             InitializeComponent();
         }
 
-
-
-
-
-
-
-
-       
-
         private bool IsValidSignFormInput()
         {
             // rules flags
@@ -63,6 +54,7 @@ namespace ClientSide
             if(IsValidSignFormInput())
             {
                 SignInMessageContainer msg = new SignInMessageContainer(UserNameTextBox.Text,PasswordTextBox.Text);
+                Client._UserName = UserNameTextBox.Text;
                 Client.SendMsg(msg);
             }
             else
@@ -74,6 +66,7 @@ namespace ClientSide
             if (IsValidSignFormInput())
             {
                 SignUpMessageContainer msg = new SignUpMessageContainer(UserNameTextBox.Text, PasswordTextBox.Text);
+                Client._UserName=UserNameTextBox.Text;
                 Client.SendMsg(msg);
             }
             else

@@ -16,6 +16,7 @@ namespace ClientSide
 {
     internal static class Client
     {
+        public static string _UserName { get; set; }
         private static IPAddress _IP = IPAddress.Parse("127.0.0.1");
         private static int _PORT = 5500;
         private static TcpClient _tcpClient;

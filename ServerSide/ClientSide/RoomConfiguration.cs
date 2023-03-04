@@ -21,6 +21,7 @@ namespace ClientSide
 
         private void button1_Click(object sender, EventArgs e)
         {
+            RoomName = RoomNameTextBox.Text;
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
@@ -134,5 +135,7 @@ namespace ClientSide
                 return colr;
             }
         }
+
+        public string RoomName { get; set; }
     }
 }

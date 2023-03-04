@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MessageLib;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -41,7 +42,7 @@ namespace ClientSide
 
             for (int i = 0; i< 5; i++)
             {
-                roomPanel = createPanel(200, i);
+                roomPanel = createPanel(200,i);
                 flowLayoutPanel1.Controls.Add(roomPanel);
             }
 
@@ -81,8 +82,12 @@ namespace ClientSide
             config_Result = config.ShowDialog();
             if(config_Result == DialogResult.OK)
             {
+                
                 size = config.Size;
                 color = config.Colorr;
+
+                CreateRoomMessageContainer msg = new CreateRoomMessageContainer(Client._UserName, config.RoomName, new ServerSide.GameConfiguration(size, color));
+                Client.SendMsg(msg);
 
                 Invalidate();
 

@@ -16,6 +16,10 @@ namespace ServerSide
 
     internal partial class Server
     {
+        public event Action<Player> _PlayerDisconnectedEvent;
+        public event Action<Room> _RoomUpdateEvent;
+        public event Action<Room> _RoomCreatedEvent;
+        public event Action<Room> _RoomDeleteEvent;
         public List<Player> _players;
         public List<Room> _rooms;
         private IPAddress _IP = IPAddress.Parse("127.0.0.1");
@@ -31,7 +35,7 @@ namespace ServerSide
         {
             _tcpListener = new TcpListener(_IP, _PORT);
             _players = new List<Player>();
-
+            _rooms = new List<Room>();
 
             MessageHandlerDic = new Dictionary<MessageTag, Action<object, string>>
             {
@@ -91,7 +95,7 @@ namespace ServerSide
             {
                 try
                 {
-                    player._session._streamWriter.WriteLine("!DIS");        //send disconnect Formatted msg to all player
+                    player._session._streamWriter.WriteLine("!DIS");    //send disconnect Formatted msg to all player
                 }
                 catch
                 {
@@ -129,12 +133,17 @@ namespace ServerSide
             {
                 player._session._streamWriter.WriteLine(msg);
             }
+
         }
 
 
         private void PlayerDisconnectedMessageHandler(Player sender)                //on player disconnect
         {
             _players.Remove(sender);
+            if (_PlayerDisconnectedEvent != null)      //firing event when player disconnected
+            {
+                _PlayerDisconnectedEvent(sender);
+            }
         }
 
 
@@ -147,11 +156,34 @@ namespace ServerSide
         public void ClientRecievedMessageHandler(object sender, string message)     //on reciving message form player
         {
             MessageBox.Show(message);       //to be removed
+            
         }
 
         public void RoomIsEmptyEventHandler(Room sender)
         {
             _rooms.Remove(sender);
+            if (_RoomDeleteEvent != null)
+            {
+                _RoomDeleteEvent(sender);
+            }
+            //send rooms to user
+        }
+
+        public void RoomCreatedEventHandler(Room sender)
+        {
+
+            
+            
+        }
+
+        public void RoomUpdateEventHandler(Room sender)
+        {
+
+            if (_RoomUpdateEvent != null)
+            {
+                _RoomUpdateEvent(sender);
+            }
+            //send rooms to user
         }
     }
 }

@@ -8,4 +8,4 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = MessageLib
-build_property.ProjectDir = C:\Users\ahbah\source\repos\Connect4-CSharp-Network-Game\ServerSide\MessageLib\
+build_property.ProjectDir = F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\MessageLib\

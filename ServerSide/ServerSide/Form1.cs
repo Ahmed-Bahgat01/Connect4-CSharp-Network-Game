@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace ServerSide
 {
@@ -19,6 +20,10 @@ namespace ServerSide
             StopBtn.Enabled = false;
             _server = new Server();
             _server._playerConnectedEvent += playerConnectedHandler;    //subscribe into player Connection event
+            _server._PlayerDisconnectedEvent += PlayerDisconnectedHandler;
+
+            _server._RoomCreatedEvent += RoomCreatedEventHandler;
+            _server._RoomUpdateEvent += RoomUpdateEventHandler;
         }
 
         private void StartBtn_Click(object sender, EventArgs e)
@@ -57,6 +62,28 @@ namespace ServerSide
             foreach (var r in _server._rooms)
             {
                 r.displayRoom();
+            }
+        }
+
+        private void PlayerDisconnectedHandler(Player player)
+        {
+            PlayersListBox.Items.Remove(player._userName);
+        }
+
+        private void RoomCreatedEventHandler(Room room)
+        {
+            RoomsListBox.Items.Add(room.ToString());
+        }
+        private void RoomUpdateEventHandler(Room room)
+        {
+            foreach (string strRoom in RoomsListBox.Items)
+            {
+                if (strRoom.Split(',')[0] == room._ID.ToString())
+                {
+                    int index = RoomsListBox.Items.IndexOf(strRoom);
+                    RoomsListBox.Items.Remove(strRoom);
+                    RoomsListBox.Items.Insert(index, room.ToString());
+                }
             }
         }
     }
