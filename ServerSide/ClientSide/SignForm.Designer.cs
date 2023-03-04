@@ -101,6 +101,7 @@
             this.Controls.Add(this.SignInBtn);
             this.Name = "SignForm";
             this.Text = "Connect 4";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SignForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
