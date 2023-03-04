@@ -33,6 +33,7 @@ namespace ClientSide
         {
             SignInResponseMessageContainer ResponseObj;
             ResponseObj = JsonConvert.DeserializeObject<SignInResponseMessageContainer>(recievedMessage);
+
             string msg = ResponseObj.ToPlayerResponseMessage;
             string title = ResponseObj.ToPlayerMsgBoxTitle;
             if (ResponseObj.SignInResponseCode == ResponseCode.Success)
