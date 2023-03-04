@@ -12,7 +12,7 @@ namespace ClientSide
     /// <summary>
     ///     this class contains all message handlers
     /// </summary>
-    internal class MessageHandlers
+    internal partial class Client
     {
 
         // HANDLERS
@@ -43,25 +43,38 @@ namespace ClientSide
 
         // TODO:
 
+        /// <summary>
+        ///     TO BE REMOVED
+        /// </summary>
+        /// <param name="recievedMessage"></param>
         public static void RoomStatusUpdate(string recievedMessage)
         {
             RoomStatusUpdateMessageContainer RoomStatus;
             RoomStatus = JsonConvert.DeserializeObject<RoomStatusUpdateMessageContainer>(recievedMessage);
-            // check if room exists
-            if (Client.RoomPanelDic.ContainsKey(RoomStatus.RoomId))
+
+            // raise event of room status update
+            if (RoomUpdateEvent != null)      //firing event when room update notification for ui to handle
             {
-                //TODO:
-                // if exist update it's data
-
+                RoomUpdateEvent(RoomStatus);
             }
-            else  // if not exist create the room
-            {
-                
-                // TODO: create UI for room
-            }
-
-
         }
         
+
+        public static void CreateRoomHandler(string recievedMessage)
+        {
+            CreateRoomV2MessageContainer RoomStatus;
+            RoomStatus = JsonConvert.DeserializeObject<CreateRoomV2MessageContainer>(recievedMessage);
+
+            // raise event of room creation
+            if (CreateRoomEvent != null)      //firing event when room create notification for ui to handle
+            {
+                CreateRoomEvent(RoomStatus);
+            }
+        }
+
+
+
+
+
     }
 }
