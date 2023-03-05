@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MessageLib;
 
 namespace ClientSide
 {
@@ -63,65 +64,14 @@ namespace ClientSide
             }
             Player1Brush = new SolidBrush(player1Color);
             Player2Brush = new SolidBrush(player2Color);
+
+            Client.OtherPlayerMoveEvent += OtherPlayerMoveHandler;
         }
 
         private void Form1_MouseClick(object sender, MouseEventArgs e)
-        {
-
+        { 
             int colIndex = GetColClicked(e.Location);
-            if (colIndex != -1)
-            {
-                int rowIndex = EmptyRow(colIndex); //index of the empty row in the column
-
-                try
-                {
-                    this.board[rowIndex, colIndex] = this.turn;
-                }
-                catch
-                {
-                    MessageBox.Show("empty column");
-                }
-
-                if (rowIndex != -1) //entier collum not full yet
-                {
-                    if (this.turn == 1)
-                    {
-                        Graphics g = this.CreateGraphics();
-                        //for (int i = 32; i<= 32 + 48 * rowIndex; i++)
-                        //{ 
-                        g.FillEllipse(Player1Brush, 32 + 48 * colIndex, 32 + 48 * rowIndex, 32, 32);
-                        //}
-                        checkedFullBoard(this.board);
-
-                        int winner = this.WinnerPlayer(this.board[rowIndex, colIndex]);
-                        if (winner != -1) //there if a winner player
-                        {
-                            MessageBox.Show($"congratulation player {winner}");
-                            //Application.Restart();
-                        }
-
-                        this.turn = 2;
-                    }
-                    else if (this.turn == 2)
-                    {
-                        Graphics g = this.CreateGraphics();
-                        //for (int i = 32; i<= 32 + 48 * rowIndex; i++)
-                        //{
-                        g.FillEllipse(Player2Brush, 32 + 48 * colIndex, 32 + 48 * rowIndex, 32, 32);
-                        checkedFullBoard(this.board);
-
-                        //}
-                        int winner = this.WinnerPlayer(this.board[rowIndex, colIndex]);
-                        if (winner != -1) //there if a winner player
-                        {
-                            MessageBox.Show($"congratulation player {winner}");
-                            //Application.Restart();
-                        }
-                        this.turn = 1;
-                    }
-                }
-            }
-
+            play(colIndex);
         }
 
         private int GetColClicked(Point mouse) //take the point of the clicked position and return the index of the clicked column
@@ -253,5 +203,101 @@ namespace ClientSide
                 Application.Restart();
             }
         }
+
+        private void Game_Load(object sender, EventArgs e)
+        {
+
+        }
+        private void play(int colIndex)
+        {
+            if (colIndex != -1)
+            {
+                int rowIndex = EmptyRow(colIndex); //index of the empty row in the column
+
+                try
+                {
+                    this.board[rowIndex, colIndex] = this.turn;
+                }
+                catch
+                {
+                    MessageBox.Show("empty column");
+                }
+
+                if (rowIndex != -1) //entier collum not full yet
+                {
+                    if (this.turn == 1)
+                    {
+                        Graphics g = this.CreateGraphics();
+                        //for (int i = 32; i<= 32 + 48 * rowIndex; i++)
+                        //{ 
+                        g.FillEllipse(Player1Brush, 32 + 48 * colIndex, 32 + 48 * rowIndex, 32, 32);
+                        //}
+                        checkedFullBoard(this.board);
+
+                        int winner = this.WinnerPlayer(this.board[rowIndex, colIndex]);
+                        if (winner != -1) //there if a winner player
+                        {
+                            MessageBox.Show($"congratulation player {winner}");
+                            Application.Restart();
+                        }
+
+                        this.turn = 2;
+                    }
+
+                    //otherSideMove();
+                    OtherPlayerMoveMessageContainer message = new OtherPlayerMoveMessageContainer(colIndex);
+                    Client.SendMsg(message);
+                }
+            }
+
+        }
+        private void OtherPlayerMoveHandler(OtherPlayerMoveMessageContainer obj)
+        {
+            otherSideMove(obj.ColNum);
+        }
+        private void otherSideMove(int colIndex)
+        {
+            //Random rnd = new Random();
+            //int colIndex = rnd.Next(0, ColNum[boardSize]);
+            if (colIndex != -1)
+            {
+                int rowIndex = EmptyRow(colIndex); //index of the empty row in the column
+
+                try
+                {
+                    this.board[rowIndex, colIndex] = this.turn;
+                }
+                catch
+                {
+                    MessageBox.Show("empty column");
+                }
+
+                if (rowIndex != -1) //entier collum not full yet
+                {
+
+                    if (this.turn == 2)
+                    {
+                        Graphics g = this.CreateGraphics();
+                        //for (int i = 32; i<= 32 + 48 * rowIndex; i++)
+                        //{
+                        g.FillEllipse(Player2Brush, 32 + 48 * colIndex, 32 + 48 * rowIndex, 32, 32);
+                        checkedFullBoard(this.board);
+
+                        //}
+                        int winner = this.WinnerPlayer(this.board[rowIndex, colIndex]);
+                        if (winner != -1) //there if a winner player
+                        {
+                            MessageBox.Show($"congratulation player {winner}");
+                            Application.Restart();
+                        }
+                        this.turn = 1;
+                    }
+                }
+
+            }
+
+
+        }
     }
+
 }

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ahbah\\source\\repos\\Connect4-CSharp-Network-Game\\ServerSide\\MessageLib\\MessageLib.csproj": {}
+    "C:\\Users\\ITI\\Source\\Repos\\Connect4\\ServerSide\\MessageLib\\MessageLib.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ahbah\\source\\repos\\Connect4-CSharp-Network-Game\\ServerSide\\MessageLib\\MessageLib.csproj": {
+    "C:\\Users\\ITI\\Source\\Repos\\Connect4\\ServerSide\\MessageLib\\MessageLib.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ahbah\\source\\repos\\Connect4-CSharp-Network-Game\\ServerSide\\MessageLib\\MessageLib.csproj",
+        "projectUniqueName": "C:\\Users\\ITI\\Source\\Repos\\Connect4\\ServerSide\\MessageLib\\MessageLib.csproj",
         "projectName": "MessageLib",
-        "projectPath": "C:\\Users\\ahbah\\source\\repos\\Connect4-CSharp-Network-Game\\ServerSide\\MessageLib\\MessageLib.csproj",
-        "packagesPath": "C:\\Users\\ahbah\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ahbah\\source\\repos\\Connect4-CSharp-Network-Game\\ServerSide\\MessageLib\\obj\\",
+        "projectPath": "C:\\Users\\ITI\\Source\\Repos\\Connect4\\ServerSide\\MessageLib\\MessageLib.csproj",
+        "packagesPath": "C:\\Users\\ITI\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ITI\\Source\\Repos\\Connect4\\ServerSide\\MessageLib\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ahbah\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ITI\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

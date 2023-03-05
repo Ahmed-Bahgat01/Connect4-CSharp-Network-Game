@@ -26,7 +26,7 @@ namespace ClientSide
         private static Thread ListeningThread;
         //public static event Action<RoomStatusUpdateMessageContainer> RoomUpdateEvent;
         public static event Action<CreateRoomV2MessageContainer> CreateRoomEvent;
-        public static event Action<OtherPlayerMoveMessageContainer> OtherPlayerMoveEvent;
+        public static event Action<OtherPlayerMoveMessageContainer> OtherPlayerMoveEvent ;
         public static event Action<JoinRoomMessageContainer> PlayerJoinedRoomEvent;
         public static event Action<LeaveRoomMessageContainer> PlayerLeftRoomEvent;
         private static Dictionary<MessageTag, Action<string>> MessageHandlerDic = new Dictionary<MessageTag, Action<string>>
