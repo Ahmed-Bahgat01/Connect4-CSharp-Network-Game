@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "apj2pOjEg5eDgEwy9aJDbERdsCoxZpyv9b1WIJpnsVM2VMbUDQC8FBYxVFvckK0hGeBueNmGqiEUHZ7VQKpDww==",
+  "dgSpecHash": "LKnFI95tV0nc2DipB9OZhrCpIhtXs9R+qAWVk+V2wxMj6rCh1a4qoKS+44ATDqoyAxj7zfzKQ2yg0MWnb1c9bQ==",
   "success": true,
-  "projectFilePath": "E:\\ITI\\Visual C#\\Project\\Connect4\\ServerSide\\MessageLib\\MessageLib.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\ahbah\\source\\repos\\Connect4-CSharp-Network-Game\\ServerSide\\MessageLib\\MessageLib.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ahbah\\.nuget\\packages\\newtonsoft.json\\13.0.2\\newtonsoft.json.13.0.2.nupkg.sha512"
+  ],
   "logs": []
 }

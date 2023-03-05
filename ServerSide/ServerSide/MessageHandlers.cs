@@ -137,7 +137,7 @@ namespace ServerSide
 
             foreach (var player in _players)
             {
-                if (player._userName == JoinRoomObj.UserName)
+                if (player._userName == JoinRoomObj.PlayerName)
                 {
                     Player p = player;
                     
