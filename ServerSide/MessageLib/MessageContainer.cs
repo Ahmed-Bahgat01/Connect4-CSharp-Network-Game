@@ -21,6 +21,7 @@ namespace MessageLib
         CreateRoom,
         JoinRoom,
         SpectateRoom,
+        OtherPlayerMove,
 
         DisFromRoom,
         RoomStatusUpdate,
@@ -267,5 +268,14 @@ namespace MessageLib
             Player2Name = player2Name;
         }
 
+    }
+
+    public class OtherPlayerMoveMessageContainer : MessageContainer
+    {
+        public int ColNum { get; set; }
+        public OtherPlayerMoveMessageContainer(int colNum) : base(MessageTag.OtherPlayerMove)
+        {
+            ColNum = colNum;
+        }
     }
 }

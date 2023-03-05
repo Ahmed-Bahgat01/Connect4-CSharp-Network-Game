@@ -73,7 +73,15 @@ namespace ClientSide
             }
         }
 
+        public static void OtherPlayerMoveHandler(string recievedMessage)
+        {
+            OtherPlayerMoveMessageContainer OtherPlayerMove;
+            OtherPlayerMove = JsonConvert.DeserializeObject<OtherPlayerMoveMessageContainer>(recievedMessage);
 
+
+
+
+        }
 
 
 
