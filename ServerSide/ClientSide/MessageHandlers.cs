@@ -107,16 +107,5 @@ namespace ClientSide
             }
         }
 
-
-
-
-
-
-
-
-       
-
-
-
     }
 }

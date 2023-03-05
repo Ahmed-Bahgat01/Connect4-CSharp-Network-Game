@@ -33,6 +33,7 @@ namespace ClientSide
         {
             { MessageTag.SignUpResponse, SignUpResponseHandler },
             { MessageTag.SignInResponse, SignInResponseHandler },
+            { MessageTag.RoomStatusUpdate, CreateRoomHandler },
 
                 // >>>>>>> REGISTER messageTag with messageHandler here <<<<<<<
         };
@@ -153,6 +154,12 @@ namespace ClientSide
                 success = false;
             }
             return success;
+        }
+
+        public static bool IsConnected()
+        {
+            if (_networkStream == null) return false;
+            else return true;
         }
 
     }
