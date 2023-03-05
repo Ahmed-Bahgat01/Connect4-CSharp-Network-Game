@@ -48,17 +48,17 @@ namespace ClientSide
         ///     TO BE REMOVED
         /// </summary>
         /// <param name="recievedMessage"></param>
-        public static void RoomStatusUpdate(string recievedMessage)
-        {
-            RoomStatusUpdateMessageContainer RoomStatus;
-            RoomStatus = JsonConvert.DeserializeObject<RoomStatusUpdateMessageContainer>(recievedMessage);
+        //public static void RoomStatusUpdate(string recievedMessage)
+        //{
+        //    RoomStatusUpdateMessageContainer RoomStatus;
+        //    RoomStatus = JsonConvert.DeserializeObject<RoomStatusUpdateMessageContainer>(recievedMessage);
 
-            // raise event of room status update
-            if (RoomUpdateEvent != null)      //firing event when room update notification for ui to handle
-            {
-                RoomUpdateEvent(RoomStatus);
-            }
-        }
+        //    // raise event of room status update
+        //    if (RoomUpdateEvent != null)      //firing event when room update notification for ui to handle
+        //    {
+        //        RoomUpdateEvent(RoomStatus);
+        //    }
+        //}
         
 
         public static void CreateRoomHandler(string recievedMessage)
@@ -77,6 +77,34 @@ namespace ClientSide
         {
             OtherPlayerMoveMessageContainer OtherPlayerMove;
             OtherPlayerMove = JsonConvert.DeserializeObject<OtherPlayerMoveMessageContainer>(recievedMessage);
+        }
+        public static void PlayerJoinedRoomHandler(string recievedMessage)
+        {
+            JoinRoomMessageContainer RecievedObj;
+            RecievedObj = JsonConvert.DeserializeObject<JoinRoomMessageContainer>(recievedMessage);
+
+            // raise event of player joined room
+            if(PlayerJoinedRoomEvent != null)
+            {
+                PlayerJoinedRoomEvent(RecievedObj);
+            }
+        }
+
+        public static void PlayerLeftRoomHandler(string recievedMessage)
+        {
+            LeaveRoomMessageContainer RecievedObj;
+            RecievedObj = JsonConvert.DeserializeObject<LeaveRoomMessageContainer>(recievedMessage);
+
+            // raise event of player joined room
+            if (PlayerLeftRoomEvent != null)
+            {
+                PlayerLeftRoomEvent(RecievedObj);
+            }
+        }
+
+
+
+
 
 
 
