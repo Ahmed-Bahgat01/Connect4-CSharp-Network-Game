@@ -260,7 +260,7 @@ namespace MessageLib
         }
 
         // 2 players constructor
-        public CreateRoomV2MessageContainer
+        /*public CreateRoomV2MessageContainer
             (int roomId,
             string roomName,
             //int player1Id,
@@ -275,7 +275,7 @@ namespace MessageLib
             Player1Name = player1Name;
             //Player2Id = player2Id;
             Player2Name = player2Name;
-        }
+        }*/
 
     }
 

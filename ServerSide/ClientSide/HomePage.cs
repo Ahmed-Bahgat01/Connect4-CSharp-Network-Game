@@ -57,6 +57,7 @@ namespace ClientSide
 
         private void RoomCreationHandler(CreateRoomV2MessageContainer updateObj)
         {
+            MessageBox.Show("asdasd");
             //create UI for room
             CustomRoomPanel newCustomRoomPanel = new CustomRoomPanel(200,
                 updateObj.RoomId,
@@ -64,7 +65,7 @@ namespace ClientSide
                 //updateObj.Player1Id,
                 updateObj.Player1Name,
                 //updateObj.Player2Id,
-                updateObj.Player2Name
+                updateObj.Player2Name 
                 );
 
             
@@ -157,7 +158,7 @@ namespace ClientSide
             config_Result = config.ShowDialog();
             if(config_Result == DialogResult.OK)
             {
-                
+                MessageBox.Show($"{config.Colorr}");
                 size = config.Size;
                 color = config.Colorr;
 

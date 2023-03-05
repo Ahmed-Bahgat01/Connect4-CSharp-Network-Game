@@ -59,3 +59,20 @@ F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ClientSide\bin\Debug\Client
 F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ClientSide\bin\Debug\Newtonsoft.Json.dll
 F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ClientSide\bin\Debug\Newtonsoft.Json.xml
 F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ClientSide\obj\Debug\ClientSide.csproj.CopyComplete
+C:\Users\ITI\Source\Repos\Connect4\ServerSide\ClientSide\obj\Debug\ClientSide.csproj.AssemblyReference.cache
+C:\Users\ITI\Source\Repos\Connect4\ServerSide\ClientSide\obj\Debug\ClientSide.csproj.SuggestedBindingRedirects.cache
+C:\Users\ITI\Source\Repos\Connect4\ServerSide\ClientSide\obj\Debug\ClientSide.Game.resources
+C:\Users\ITI\Source\Repos\Connect4\ServerSide\ClientSide\obj\Debug\ClientSide.HomePage.resources
+C:\Users\ITI\Source\Repos\Connect4\ServerSide\ClientSide\obj\Debug\ClientSide.RoomConfiguration.resources
+C:\Users\ITI\Source\Repos\Connect4\ServerSide\ClientSide\obj\Debug\ClientSide.SignForm.resources
+C:\Users\ITI\Source\Repos\Connect4\ServerSide\ClientSide\obj\Debug\ClientSide.Properties.Resources.resources
+C:\Users\ITI\Source\Repos\Connect4\ServerSide\ClientSide\obj\Debug\ClientSide.csproj.GenerateResource.cache
+C:\Users\ITI\Source\Repos\Connect4\ServerSide\ClientSide\obj\Debug\ClientSide.csproj.CoreCompileInputs.cache
+C:\Users\ITI\Source\Repos\Connect4\ServerSide\ClientSide\obj\Debug\ClientSide.exe
+C:\Users\ITI\Source\Repos\Connect4\ServerSide\ClientSide\obj\Debug\ClientSide.pdb
+C:\Users\ITI\Source\Repos\Connect4\ServerSide\ClientSide\bin\Debug\ClientSide.exe.config
+C:\Users\ITI\Source\Repos\Connect4\ServerSide\ClientSide\bin\Debug\ClientSide.exe
+C:\Users\ITI\Source\Repos\Connect4\ServerSide\ClientSide\bin\Debug\ClientSide.pdb
+C:\Users\ITI\Source\Repos\Connect4\ServerSide\ClientSide\bin\Debug\Newtonsoft.Json.dll
+C:\Users\ITI\Source\Repos\Connect4\ServerSide\ClientSide\bin\Debug\Newtonsoft.Json.xml
+C:\Users\ITI\Source\Repos\Connect4\ServerSide\ClientSide\obj\Debug\ClientSide.csproj.CopyComplete

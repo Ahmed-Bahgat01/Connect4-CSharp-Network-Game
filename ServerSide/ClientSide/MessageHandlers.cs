@@ -77,7 +77,12 @@ namespace ClientSide
         {
             OtherPlayerMoveMessageContainer OtherPlayerMove;
             OtherPlayerMove = JsonConvert.DeserializeObject<OtherPlayerMoveMessageContainer>(recievedMessage);
+            if(OtherPlayerMoveEvent!=null)
+            {
+                OtherPlayerMoveEvent(OtherPlayerMove);
+            }
         }
+
         public static void PlayerJoinedRoomHandler(string recievedMessage)
         {
             JoinRoomMessageContainer RecievedObj;
@@ -101,17 +106,6 @@ namespace ClientSide
                 PlayerLeftRoomEvent(RecievedObj);
             }
         }
-
-
-
-
-
-
-
-
-        }
-
-
 
     }
 }

@@ -50,3 +50,17 @@ F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ServerSide\obj\Debug\Server
 F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ServerSide\obj\Debug\ServerSide.csproj.CopyComplete
 F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ServerSide\obj\Debug\ServerSide.exe
 F:\learn\iti\3)backend\visual c#\Connect4\ServerSide\ServerSide\obj\Debug\ServerSide.pdb
+C:\Users\ITI\Source\Repos\Connect4\ServerSide\ServerSide\bin\Debug\ServerSide.exe.config
+C:\Users\ITI\Source\Repos\Connect4\ServerSide\ServerSide\bin\Debug\ServerSide.exe
+C:\Users\ITI\Source\Repos\Connect4\ServerSide\ServerSide\bin\Debug\ServerSide.pdb
+C:\Users\ITI\Source\Repos\Connect4\ServerSide\ServerSide\bin\Debug\Newtonsoft.Json.dll
+C:\Users\ITI\Source\Repos\Connect4\ServerSide\ServerSide\bin\Debug\Newtonsoft.Json.xml
+C:\Users\ITI\Source\Repos\Connect4\ServerSide\ServerSide\obj\Debug\ServerSide.csproj.AssemblyReference.cache
+C:\Users\ITI\Source\Repos\Connect4\ServerSide\ServerSide\obj\Debug\ServerSide.csproj.SuggestedBindingRedirects.cache
+C:\Users\ITI\Source\Repos\Connect4\ServerSide\ServerSide\obj\Debug\ServerSide.Form1.resources
+C:\Users\ITI\Source\Repos\Connect4\ServerSide\ServerSide\obj\Debug\ServerSide.Properties.Resources.resources
+C:\Users\ITI\Source\Repos\Connect4\ServerSide\ServerSide\obj\Debug\ServerSide.csproj.GenerateResource.cache
+C:\Users\ITI\Source\Repos\Connect4\ServerSide\ServerSide\obj\Debug\ServerSide.csproj.CoreCompileInputs.cache
+C:\Users\ITI\Source\Repos\Connect4\ServerSide\ServerSide\obj\Debug\ServerSide.csproj.CopyComplete
+C:\Users\ITI\Source\Repos\Connect4\ServerSide\ServerSide\obj\Debug\ServerSide.exe
+C:\Users\ITI\Source\Repos\Connect4\ServerSide\ServerSide\obj\Debug\ServerSide.pdb

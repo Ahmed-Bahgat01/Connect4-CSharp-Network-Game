@@ -95,7 +95,11 @@ namespace ClientSide
 
         private void SignForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Client.SendDisconnect();
+            if (Client.IsConnected())
+            {
+                Client.SendDisconnect();
+            }
+            
         }
     }
 }
