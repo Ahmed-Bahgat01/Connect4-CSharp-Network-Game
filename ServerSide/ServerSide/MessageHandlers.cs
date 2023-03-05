@@ -107,8 +107,6 @@ namespace ServerSide
             int id;
             
             id = _rooms.Count() + 1;
-            
-            
 
             foreach (var player in _players)
             {
@@ -119,11 +117,14 @@ namespace ServerSide
                     _rooms.Add(newRoom);
                     newRoom._roomIsEmptyEvent += RoomIsEmptyEventHandler;
                     //newRoom._RoomCreatedEvent += RoomCreatedEventHandler;
+                    //newRoom._RoomCreatedEvent += RoomCreatedEventHandler;
                     if (_RoomCreatedEvent != null)          //raising RoomCreatedEvent
                     {
                         _RoomCreatedEvent(newRoom);
                     }
                     // TODO: send rooms to user
+                    CreateRoomV2MessageContainer msg = new CreateRoomV2MessageContainer(newRoom._ID, newRoom._name, newRoom._players[0]._id, newRoom._players[0]._userName);
+                    Broadcast(msg);
                     newRoom._RoomUpdateEvent += RoomUpdateEventHandler;
                     break;
                 }
