@@ -43,7 +43,7 @@ namespace ServerSide
 
         private void button1_Click(object sender, EventArgs e)
         {
-            _server.Broadcast("test from server");
+            //_server.Broadcast("test from server");
         }
         private void playerConnectedHandler(object sender, string userName)
         {

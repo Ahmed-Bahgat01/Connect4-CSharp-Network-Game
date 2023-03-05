@@ -10,6 +10,7 @@ using System.Threading;
 using System.Windows.Forms;
 using MessageLib;
 using Newtonsoft.Json;
+using System.Drawing;
 
 namespace ServerSide
 {
@@ -127,11 +128,12 @@ namespace ServerSide
         /// <param name="msg">
         ///     NOTE: message here is not serialized from object
         /// </param>
-        public void Broadcast(string msg)     
+        public void Broadcast(MessageContainer msg)     
         {
             foreach (Player player in _players)
             {
-                player._session._streamWriter.WriteLine(msg);
+                MessageBox.Show(player.ToString());
+                player._session._streamWriter.WriteLine(msg.ToJSON());
             }
 
         }
@@ -171,8 +173,8 @@ namespace ServerSide
 
         public void RoomCreatedEventHandler(Room sender)
         {
-
-
+            /*CreateRoomV2MessageContainer msg = new CreateRoomV2MessageContainer(sender._ID, sender._name, sender._players[0]._id, sender._players[0]._userName);
+            Broadcast(msg);*/
             //TODO:send rooms to user
         }
 
