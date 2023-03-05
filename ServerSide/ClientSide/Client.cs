@@ -14,7 +14,7 @@ using System.Windows.Forms;
 
 namespace ClientSide
 {
-    internal static class Client
+    internal static partial class Client
     {
         public static string _UserName { get; set; }
         private static IPAddress _IP = IPAddress.Parse("127.0.0.1");
@@ -24,16 +24,21 @@ namespace ClientSide
         private static StreamReader _streamReader;
         private static StreamWriter _streamWriter;
         private static Thread ListeningThread;
+        //public static event Action<RoomStatusUpdateMessageContainer> RoomUpdateEvent;
+        public static event Action<CreateRoomV2MessageContainer> CreateRoomEvent;
+        public static event Action<OtherPlayerMoveMessageContainer> OtherPlayerMoveEvent;
+        public static event Action<JoinRoomMessageContainer> PlayerJoinedRoomEvent;
+        public static event Action<LeaveRoomMessageContainer> PlayerLeftRoomEvent;
         private static Dictionary<MessageTag, Action<string>> MessageHandlerDic = new Dictionary<MessageTag, Action<string>>
         {
-            { MessageTag.SignUpResponse, MessageHandlers.SignUpResponseHandler },
-            { MessageTag.SignInResponse, MessageHandlers.SignInResponseHandler },
+            { MessageTag.SignUpResponse, SignUpResponseHandler },
+            { MessageTag.SignInResponse, SignInResponseHandler },
 
                 // >>>>>>> REGISTER messageTag with messageHandler here <<<<<<<
         };
 
         // Dic maping roomid with room panel in UI
-        public static Dictionary<int, Panel> RoomPanelDic = new Dictionary<int,Panel>();
+        public static Dictionary<int, CustomRoomPanel> RoomPanelDic = new Dictionary<int,CustomRoomPanel>();
 
 
 

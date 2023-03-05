@@ -21,8 +21,11 @@ namespace MessageLib
         CreateRoom,
         JoinRoom,
         SpectateRoom,
+        OtherPlayerMove,
+
         DisFromRoom,
         RoomStatusUpdate,
+        LeaveRoom,
         // define your new message tag here
     }
     public enum ResponseCode
@@ -134,12 +137,26 @@ namespace MessageLib
 
     public class JoinRoomMessageContainer : MessageContainer
     {
-        public string UserName { get; set; }
+        //public int PlayerId { get; set; }
+        public string PlayerName { get; set; }
         public int RoomID { get; set; }
 
-        public JoinRoomMessageContainer(string userName, int roomID) : base(MessageTag.JoinRoom)
+        public JoinRoomMessageContainer(string playerName, int roomID) : base(MessageTag.JoinRoom)
         {
-            UserName = userName;
+            //PlayerId = playerId;
+            PlayerName = playerName;
+            RoomID = roomID;
+        }
+    }
+
+    public class LeaveRoomMessageContainer : MessageContainer
+    {
+        public string PlayerName { get; set; }
+        public int RoomID { get; set; }
+
+        public LeaveRoomMessageContainer(string playerName, int roomID) : base(MessageTag.LeaveRoom)
+        {
+            PlayerName = playerName;
             RoomID = roomID;
         }
     }
@@ -168,7 +185,55 @@ namespace MessageLib
         }
     }
 
-    public class RoomStatusUpdateMessageContainer : MessageContainer
+
+    /// <summary>
+    ///     TO BE REMOVED
+    /// </summary>
+    //public class RoomStatusUpdateMessageContainer : MessageContainer
+    //{
+    //    public int RoomId { get; set; }
+    //    public string RoomName { get; set; }
+    //    public int Player1Id { get; set; }
+    //    public string Player1Name { get; set; }
+    //    public int? Player2Id { get; set; }
+    //    public string Player2Name { get; set; }
+
+
+    //    // one player constructor
+    //    public RoomStatusUpdateMessageContainer
+    //        (int roomId,
+    //        string roomName,
+    //        int player1Id,
+    //        string player1Name
+    //        ) : base(MessageTag.RoomStatusUpdate)
+    //    {
+    //        RoomId = roomId;
+    //        RoomName = roomName;
+    //        Player1Id = player1Id;
+    //        Player1Name = player1Name;
+    //        Player2Id = null;
+    //        Player2Name = null;
+    //    }
+
+    //    // 2 players constructor
+    //    public RoomStatusUpdateMessageContainer
+    //        (int roomId, 
+    //        string roomName, 
+    //        int player1Id, 
+    //        string player1Name, 
+    //        int player2Id, 
+    //        string player2Name
+    //        ):base(MessageTag.RoomStatusUpdate)
+    //    {
+    //        RoomId = roomId;
+    //        RoomName = roomName;
+    //        Player1Id = player1Id;
+    //        Player1Name = player1Name;
+    //        Player2Id = player2Id;
+    //        Player2Name = player2Name;
+    //    }
+    //}
+    public class CreateRoomV2MessageContainer : MessageContainer
     {
         public int RoomId { get; set; }
         public string RoomName { get; set; }
@@ -179,7 +244,7 @@ namespace MessageLib
 
 
         // one player constructor
-        public RoomStatusUpdateMessageContainer
+        public CreateRoomV2MessageContainer
             (int roomId,
             string roomName,
             int player1Id,
@@ -195,27 +260,31 @@ namespace MessageLib
         }
 
         // 2 players constructor
-        public RoomStatusUpdateMessageContainer
-            (int roomId, 
-            string roomName, 
-            int player1Id, 
-            string player1Name, 
-            int player2Id, 
+        public CreateRoomV2MessageContainer
+            (int roomId,
+            string roomName,
+            //int player1Id,
+            string player1Name,
+            //int player2Id,
             string player2Name
-            ):base(MessageTag.RoomStatusUpdate)
+            ) : base(MessageTag.RoomStatusUpdate)
         {
             RoomId = roomId;
             RoomName = roomName;
-            Player1Id = player1Id;
+            //Player1Id = player1Id;
             Player1Name = player1Name;
-            Player2Id = player2Id;
+            //Player2Id = player2Id;
             Player2Name = player2Name;
         }
 
-
-
-
     }
 
-    
+    public class OtherPlayerMoveMessageContainer : MessageContainer
+    {
+        public int ColNum { get; set; }
+        public OtherPlayerMoveMessageContainer(int colNum) : base(MessageTag.OtherPlayerMove)
+        {
+            ColNum = colNum;
+        }
+    }
 }

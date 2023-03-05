@@ -12,7 +12,7 @@ namespace ClientSide
     /// <summary>
     ///     this class contains all message handlers
     /// </summary>
-    internal class MessageHandlers
+    internal partial class Client
     {
 
         // HANDLERS
@@ -33,6 +33,7 @@ namespace ClientSide
         {
             SignInResponseMessageContainer ResponseObj;
             ResponseObj = JsonConvert.DeserializeObject<SignInResponseMessageContainer>(recievedMessage);
+
             string msg = ResponseObj.ToPlayerResponseMessage;
             string title = ResponseObj.ToPlayerMsgBoxTitle;
             if (ResponseObj.SignInResponseCode == ResponseCode.Success)
@@ -43,25 +44,74 @@ namespace ClientSide
 
         // TODO:
 
-        public static void RoomStatusUpdate(string recievedMessage)
-        {
-            RoomStatusUpdateMessageContainer RoomStatus;
-            RoomStatus = JsonConvert.DeserializeObject<RoomStatusUpdateMessageContainer>(recievedMessage);
-            // check if room exists
-            if (Client.RoomPanelDic.ContainsKey(RoomStatus.RoomId))
-            {
-                //TODO:
-                // if exist update it's data
+        /// <summary>
+        ///     TO BE REMOVED
+        /// </summary>
+        /// <param name="recievedMessage"></param>
+        //public static void RoomStatusUpdate(string recievedMessage)
+        //{
+        //    RoomStatusUpdateMessageContainer RoomStatus;
+        //    RoomStatus = JsonConvert.DeserializeObject<RoomStatusUpdateMessageContainer>(recievedMessage);
 
-            }
-            else  // if not exist create the room
+        //    // raise event of room status update
+        //    if (RoomUpdateEvent != null)      //firing event when room update notification for ui to handle
+        //    {
+        //        RoomUpdateEvent(RoomStatus);
+        //    }
+        //}
+        
+
+        public static void CreateRoomHandler(string recievedMessage)
+        {
+            CreateRoomV2MessageContainer RoomStatus;
+            RoomStatus = JsonConvert.DeserializeObject<CreateRoomV2MessageContainer>(recievedMessage);
+
+            // raise event of room creation
+            if (CreateRoomEvent != null)      //firing event when room create notification for ui to handle
             {
-                
-                // TODO: create UI for room
+                CreateRoomEvent(RoomStatus);
             }
+        }
+
+        public static void OtherPlayerMoveHandler(string recievedMessage)
+        {
+            OtherPlayerMoveMessageContainer OtherPlayerMove;
+            OtherPlayerMove = JsonConvert.DeserializeObject<OtherPlayerMoveMessageContainer>(recievedMessage);
+        }
+        public static void PlayerJoinedRoomHandler(string recievedMessage)
+        {
+            JoinRoomMessageContainer RecievedObj;
+            RecievedObj = JsonConvert.DeserializeObject<JoinRoomMessageContainer>(recievedMessage);
+
+            // raise event of player joined room
+            if(PlayerJoinedRoomEvent != null)
+            {
+                PlayerJoinedRoomEvent(RecievedObj);
+            }
+        }
+
+        public static void PlayerLeftRoomHandler(string recievedMessage)
+        {
+            LeaveRoomMessageContainer RecievedObj;
+            RecievedObj = JsonConvert.DeserializeObject<LeaveRoomMessageContainer>(recievedMessage);
+
+            // raise event of player joined room
+            if (PlayerLeftRoomEvent != null)
+            {
+                PlayerLeftRoomEvent(RecievedObj);
+            }
+        }
+
+
+
+
+
+
 
 
         }
-        
+
+
+
     }
 }
