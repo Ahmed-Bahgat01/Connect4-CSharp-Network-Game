@@ -300,17 +300,8 @@ namespace ClientSide
         }
         private void OtherPlayerMoveHandler(OtherPlayerMoveMessageContainer obj)
         {
-            if (obj.IsWinningMove)
-            {
-                otherSideMove(obj.ColNum);
-                // TODO: SHOW MESSAGEBOX THAT OTHER PLAYER WON
-                // TODO:  OPEN PALY AGAIN FORM
-            }
-            else
-            {
-                otherSideMove(obj.ColNum);
-            }
-        }
+            
+        
             if (SpectatorMode)
             {
                 int colIndex = obj.ColNum;
@@ -371,7 +362,17 @@ namespace ClientSide
             }
             else
             {
-                otherSideMove(obj.ColNum);
+                if (obj.IsWinningMove)
+                {
+                    otherSideMove(obj.ColNum);
+                    // TODO: SHOW MESSAGEBOX THAT OTHER PLAYER WON
+                    // TODO:  OPEN PALY AGAIN FORM
+                }
+                else
+                {
+                    otherSideMove(obj.ColNum);
+                }
+                //otherSideMove(obj.ColNum);
             }
         }
 

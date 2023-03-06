@@ -287,7 +287,7 @@ namespace MessageLib
         }
         public OtherPlayerMoveMessageContainer Clone()
         {
-            OtherPlayerMoveMessageContainer clone = new OtherPlayerMoveMessageContainer(ColNum);
+            OtherPlayerMoveMessageContainer clone = new OtherPlayerMoveMessageContainer(ColNum, IsWinningMove);
             clone.Tag = Tag;
             return clone;
         }
