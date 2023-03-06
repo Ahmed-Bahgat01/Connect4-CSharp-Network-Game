@@ -8,6 +8,11 @@ using System.Windows.Forms;
 
 namespace ClientSide
 {
+
+
+    /// <summary>
+    ///     LEGACY CLASS : TO BE REMOVED
+    /// </summary>
     internal class CustomRoomPanel
     {
         public int Height { get; set; }
@@ -80,8 +85,6 @@ namespace ClientSide
                 MessageBox.Show(RoomPanel.Text);
             }
             WatchButton.Click += button2_Click;
-
-            //this.Controls.Add(panel1);
             RoomPanel.Controls.Add(RoomName);
             RoomPanel.Controls.Add(Player1);
             RoomPanel.Controls.Add(Player2);
