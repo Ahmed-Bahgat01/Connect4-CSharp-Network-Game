@@ -26,6 +26,7 @@ namespace MessageLib
         OpenRoomForJoinedPlayer,
         SpectateRoom,
         OtherPlayerMove,
+        
 
         DisFromRoom,
         RoomStatusUpdate,
@@ -226,13 +227,16 @@ namespace MessageLib
         public int? Player2Id { get; set; }
         public string Player2Name { get; set; }
 
+        public string RoomStatus { get; set; }
+
 
         // one player constructor
         public CreateRoomV2MessageContainer
             (int roomId,
             string roomName,
             int player1Id,
-            string player1Name
+            string player1Name,
+            string roomStatus
             ) : base(MessageTag.RoomStatusUpdate)
         {
             RoomId = roomId;
@@ -241,6 +245,7 @@ namespace MessageLib
             Player1Name = player1Name;
             Player2Id = null;
             Player2Name = null;
+            RoomStatus = roomStatus;
         }
 
         // 2 players constructor
@@ -278,7 +283,15 @@ namespace MessageLib
         {
             ColNum = colNum;
         }
+        public OtherPlayerMoveMessageContainer Clone()
+        {
+            OtherPlayerMoveMessageContainer clone = new OtherPlayerMoveMessageContainer(ColNum);
+            clone.Tag = Tag;
+            return clone;
+        }
     }
+
+    
 
     public class SendReadyContainer : MessageContainer
     {
@@ -296,10 +309,12 @@ namespace MessageLib
         //public GameConfiguration GameConfig { get; set; }
         public int size;
         public Color color;
-        public StartGameContainer(int s,Color c) : base(MessageTag.StartGame)
+        public string RoomStatus;
+        public StartGameContainer(int s,Color c, string roomStatus = null) : base(MessageTag.StartGame)
         {
-            size= s;
-            color= c;
+            size = s;
+            color = c;
+            RoomStatus = roomStatus;
         }
     }
     public class RefreshRoomListContainer : MessageContainer
@@ -318,10 +333,13 @@ namespace MessageLib
         public string Player1Name { get; set; }
         public string Player2Name { get; set; }
 
+        public string RoomStatus { get; set; }
+
         public SendRoomToRoomListMessageContainer
             (int roomId,
             string roomName,
             string player1Name,
+            string roomStatus,
             string player2Name = null
             ) : base(MessageTag.SendRoomToRoomList)
         {
@@ -329,6 +347,7 @@ namespace MessageLib
             RoomName = roomName;
             Player1Name = player1Name;
             Player2Name = player2Name;
+            RoomStatus = roomStatus;
         }
     }
 }

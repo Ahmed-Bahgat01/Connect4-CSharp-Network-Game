@@ -28,6 +28,7 @@ namespace ClientSide
         //public static event Action<RoomStatusUpdateMessageContainer> RoomUpdateEvent;
         public static event Action<CreateRoomV2MessageContainer> CreateRoomEvent;
         public static event Action<OtherPlayerMoveMessageContainer> OtherPlayerMoveEvent ;
+        
         public static event Action<JoinRoomMessageContainer> PlayerJoinedRoomEvent;
         public static event Action<LeaveRoomMessageContainer> PlayerLeftRoomEvent;
         public static event Action<SignInResponseMessageContainer> SignedInSuccessfullyEvent;
@@ -49,7 +50,7 @@ namespace ClientSide
             { MessageTag.SendRoomToRoomList ,SendRoomToRoomListHandler },
             
             { MessageTag.OtherPlayerMove, OtherPlayerMoveHandler },
-
+            
                 // >>>>>>> REGISTER messageTag with messageHandler here <<<<<<<
         };
 

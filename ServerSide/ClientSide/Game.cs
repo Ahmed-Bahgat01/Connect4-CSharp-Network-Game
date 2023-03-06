@@ -31,6 +31,8 @@ namespace ClientSide
 
         SolidBrush Player1Brush;
         SolidBrush Player2Brush;
+
+        Boolean SpectatorMode = false;
         public Game()
         {
             InitializeComponent();
@@ -45,7 +47,7 @@ namespace ClientSide
             Player2Brush = new SolidBrush(player2Color);
         }
 
-        public Game(int size, Color player1)
+        public Game(int size, Color player1,Boolean spectatorMode=false)
         {
             InitializeComponent();
             this.boardSize = size;
@@ -73,12 +75,17 @@ namespace ClientSide
             Player2Brush = new SolidBrush(player2Color);
 
             Client.OtherPlayerMoveEvent += OtherPlayerMoveHandler;
+            /*if (spectatorMode==true)
+            {
+                Client.spectatedMoveEvent += spectatedMoveHandler;
+            }*/
+            SpectatorMode = spectatorMode;
         }
 
         private void Form1_MouseClick(object sender, MouseEventArgs e)
         { 
             int colIndex = GetColClicked(e.Location);
-            if(turn == 1)
+            if(turn == 1 && SpectatorMode==false)
                 play(colIndex);
         }
 
@@ -253,12 +260,12 @@ namespace ClientSide
                         //}
                         checkedFullBoard(this.board);
 
-                        int winner = this.WinnerPlayer(this.board[rowIndex, colIndex]);
+                        /*int winner = this.WinnerPlayer(this.board[rowIndex, colIndex]);
                         if (winner != -1) //there if a winner player
                         {
                             MessageBox.Show($"congratulation player {winner}");
                             Application.Restart();
-                        }
+                        }*/
 
                         this.turn = 2;
 
@@ -275,7 +282,68 @@ namespace ClientSide
         }
         private void OtherPlayerMoveHandler(OtherPlayerMoveMessageContainer obj)
         {
-            otherSideMove(obj.ColNum);
+            if (SpectatorMode)
+            {
+                int colIndex = obj.ColNum;
+                if (colIndex != -1)
+                {
+                    int rowIndex = EmptyRow(colIndex); //index of the empty row in the column
+
+                    try
+                    {
+                        this.board[rowIndex, colIndex] = this.turn;
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Full Column");
+                    }
+
+                    if (rowIndex != -1) //entier collum not full yet
+                    {
+
+                        if (this.turn == 1)
+                        {
+                            Graphics g = this.CreateGraphics();
+                            //for (int i = 32; i<= 32 + 48 * rowIndex; i++)
+                            //{ 
+                            g.FillEllipse(Player1Brush, 32 + 48 * colIndex, 32 + 48 * rowIndex, 32, 32);
+                            //}
+                            checkedFullBoard(this.board);
+
+                            int winner = this.WinnerPlayer(this.board[rowIndex, colIndex]);
+                            if (winner != -1) //there if a winner player
+                            {
+                                MessageBox.Show($"congratulation player {winner}");
+                                Application.Restart();
+                            }
+
+                            this.turn = 2;
+                        }
+                        else if (this.turn == 2)
+                        {
+                            Graphics g = this.CreateGraphics();
+                            //for (int i = 32; i<= 32 + 48 * rowIndex; i++)
+                            //{
+                            g.FillEllipse(Player2Brush, 32 + 48 * colIndex, 32 + 48 * rowIndex, 32, 32);
+                            checkedFullBoard(this.board);
+
+                            //}
+                            int winner = this.WinnerPlayer(this.board[rowIndex, colIndex]);
+                            if (winner != -1) //there if a winner player
+                            {
+                                MessageBox.Show($"congratulation player {winner}");
+                                Application.Restart();
+                            }
+                            this.turn = 1;
+                        }
+
+                    }
+                }
+            }
+            else
+            {
+                otherSideMove(obj.ColNum);
+            }
         }
 
 
@@ -297,7 +365,7 @@ namespace ClientSide
                 }
                 catch
                 {
-                    MessageBox.Show("empty column");
+                    MessageBox.Show("Full column");
                 }
 
                 if (rowIndex != -1) //entier collum not full yet
@@ -323,8 +391,6 @@ namespace ClientSide
                 }
 
             }
-
-
         }
     }
 
