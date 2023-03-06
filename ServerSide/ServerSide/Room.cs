@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -77,6 +78,14 @@ namespace ServerSide
                 
                 // >>>>>>> REGISTER messageTag with messageHandler here <<<<<<<
             };
+        }
+
+        public Color GetSecondPlayerColor()
+        {
+            if(_gameConfig._boardColor == Color.Red)
+                return Color.Yellow;
+            else
+                return Color.Red;
         }
 
         public void AddPlayer(Player p)
