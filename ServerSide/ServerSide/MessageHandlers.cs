@@ -29,10 +29,7 @@ namespace ServerSide
             //MessageBox.Show($"from sign in handler: username={SignInObj.UserName} ,password={SignInObj.Password}");
             _players.Last()._userName = SignInObj.UserName;
 
-            if (_playerConnectedEvent != null)                                      //fires event when player is Connect
-            {
-                _playerConnectedEvent(this, _players.Last()._userName);
-            }
+            
 
             // search if valid username and password
             // checking if file exists
@@ -51,9 +48,16 @@ namespace ServerSide
                     }
                 }
             }
+            // send signin response to player
             SignInResponseMessageContainer response;
             if (ValidCredential)
+            {
+                if (PlayerSuccessfullSignInEvent != null)                                      //fires event when player is Connect
+                {
+                    PlayerSuccessfullSignInEvent(this, _players.Last()._userName);
+                }
                 response = new SignInResponseMessageContainer(ResponseCode.Success, "Signed up Successfully", "Success");
+            }
             else
                 response = new SignInResponseMessageContainer(ResponseCode.Failed, "Invalid Credential, try again", "Failed");
             // sending response to player
@@ -108,23 +112,27 @@ namespace ServerSide
             
             id = _rooms.Count() + 1;
 
-            foreach (var player in _players)
+            foreach (var player in _players)                        //search for the caller in players list
             {
-                if(player._userName== CreateRoomObj.UserName)
+                if(player._userName== CreateRoomObj.UserName)       //when found
                 {
                     Player p = player;
                     Room newRoom = new Room(p, id, CreateRoomObj.RoomName, CreateRoomObj.GameConfig);
                     _rooms.Add(newRoom);
                     newRoom._roomIsEmptyEvent += RoomIsEmptyEventHandler;
-                    //newRoom._RoomCreatedEvent += RoomCreatedEventHandler;
-                    //newRoom._RoomCreatedEvent += RoomCreatedEventHandler;
-                    if (_RoomCreatedEvent != null)          //raising RoomCreatedEvent
+
+                    
+                    
+                    if (_RoomCreatedEvent != null)          //raising RoomCreatedEvent to append in the form
                     {
                         _RoomCreatedEvent(newRoom);
                     }
-                    // TODO: send rooms to user
+                    
                     CreateRoomV2MessageContainer msg = new CreateRoomV2MessageContainer(newRoom._ID, newRoom._name, newRoom._players[0]._id, newRoom._players[0]._userName);
-                    Broadcast(msg);
+                    Broadcast(msg);                                 //open the room form for the player
+
+                    // TODO: resend all rooms to user
+                    
                     newRoom._RoomUpdateEvent += RoomUpdateEventHandler;
                     break;
                 }
@@ -147,6 +155,14 @@ namespace ServerSide
                         if(room._ID == JoinRoomObj.RoomID)
                         {
                             room.AddPlayer(p);
+
+                            ////open the room form to player
+                            OpenRoomForJoinedPlayerMessageContainer msg = new OpenRoomForJoinedPlayerMessageContainer(room._ID, room._name, room._players[0]._userName, p._userName);
+                            p.SendMsg(msg);
+
+                            ////add the player to all opened room form
+                            
+
                             break;
                         }
                     }
@@ -154,6 +170,8 @@ namespace ServerSide
                     break;
                 }
             }
+
+            
         }
 
         public void SpectateRoomHandler(object sender, string recievedMessage)
@@ -202,6 +220,41 @@ namespace ServerSide
                     break;
                 }
             }
+        }
+
+        public void SendReadyHandler(object sender, string recievedMessage)
+        {
+            SendReadyContainer SpecRoomObj;
+            SpecRoomObj = JsonConvert.DeserializeObject<SendReadyContainer>(recievedMessage);
+
+            foreach (var room in _rooms)
+            {
+                if (room._ID == SpecRoomObj.RoomID)
+                {
+                    room._readyList.Add(true);
+                   // MessageBox.Show(room._readyList[0].ToString());
+                    if(room._readyList.Count == 2)
+                    {
+                        //send start game
+                        //MessageBox.Show("start game");
+                        
+                        
+                        foreach (var p in room._players)
+                        {
+                            //MessageBox.Show("start game");
+                            StartGameContainer msg = new StartGameContainer(room._gameConfig._boardSize, room._gameConfig._boardColor);
+                            p.SendMsg(msg);
+                            //MessageBox.Show(msg.size.ToString());
+
+                        }
+
+                    }
+                    break;
+                }
+            }
+
+
+
         }
     }
 }

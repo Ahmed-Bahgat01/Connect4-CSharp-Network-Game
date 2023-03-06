@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,7 +38,14 @@ namespace ClientSide
             string msg = ResponseObj.ToPlayerResponseMessage;
             string title = ResponseObj.ToPlayerMsgBoxTitle;
             if (ResponseObj.SignInResponseCode == ResponseCode.Success)
+            {
                 MessageBox.Show(msg, title, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //fire event that signed in successfully
+               SignedInSuccessfullyEvent(ResponseObj);
+
+                
+
+            }
             else if (ResponseObj.SignInResponseCode == ResponseCode.Failed)
                 MessageBox.Show(msg, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
@@ -105,6 +113,37 @@ namespace ClientSide
             {
                 PlayerLeftRoomEvent(RecievedObj);
             }
+        }
+
+        public static void OpenRoomForJoinedPlayerHandler(string recievedMessage)
+        {
+            OpenRoomForJoinedPlayerMessageContainer RecievedObj;
+            RecievedObj = JsonConvert.DeserializeObject<OpenRoomForJoinedPlayerMessageContainer>(recievedMessage);
+
+            if (CanJoinRoomEvent != null)
+            {
+                CanJoinRoomEvent(RecievedObj);
+            }
+        }
+
+        public static void StartGameHandler(string recievedMessage)
+        {
+
+
+            StartGameContainer RecievedObj;
+            RecievedObj = JsonConvert.DeserializeObject<StartGameContainer>(recievedMessage);
+
+            if(startgameEvent!= null)
+            {
+                startgameEvent(RecievedObj);
+            }
+            /*roomForm.Close();
+            MessageBox.Show("other side");
+            int size = RecievedObj.size;
+            Color color = RecievedObj.color;
+            Game game = new Game(size, color);
+            
+            game.Show();*/
         }
 
     }

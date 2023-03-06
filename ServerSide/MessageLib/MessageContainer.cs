@@ -2,7 +2,7 @@
 using ServerSide;
 using System.Collections;
 using System.Collections.Generic;
-
+using System.Drawing;
 
 namespace MessageLib
 {
@@ -20,12 +20,15 @@ namespace MessageLib
         SignInResponse,
         CreateRoom,
         JoinRoom,
+        StartGame,
+        OpenRoomForJoinedPlayer,
         SpectateRoom,
         OtherPlayerMove,
 
         DisFromRoom,
         RoomStatusUpdate,
         LeaveRoom,
+        SendReady
         // define your new message tag here
     }
     public enum ResponseCode
@@ -122,6 +125,10 @@ namespace MessageLib
             ToPlayerMsgBoxTitle = toPlayerMsgBoxTitle;
         }
     }
+
+    /// <summary>
+    ///     sent from client to server when client create new room (has room configuration)
+    /// </summary>
     internal class CreateRoomMessageContainer : MessageContainer
     {
         public string UserName { get; set; }
@@ -185,54 +192,29 @@ namespace MessageLib
         }
     }
 
+    public class OpenRoomForJoinedPlayerMessageContainer : MessageContainer
+    {
+        public int RoomId { get; set; }
+        public string RoomName { get; set; }
+        public int Player1Id { get; set; }
+        public string Player1Name { get; set; }
+        public int? Player2Id { get; set; }
+        public string Player2Name { get; set; }
 
-    /// <summary>
-    ///     TO BE REMOVED
-    /// </summary>
-    //public class RoomStatusUpdateMessageContainer : MessageContainer
-    //{
-    //    public int RoomId { get; set; }
-    //    public string RoomName { get; set; }
-    //    public int Player1Id { get; set; }
-    //    public string Player1Name { get; set; }
-    //    public int? Player2Id { get; set; }
-    //    public string Player2Name { get; set; }
+        public OpenRoomForJoinedPlayerMessageContainer
+            (int roomId,
+            string roomName,
+            string player1Name,
+            string player2Name = null
+            ) : base(MessageTag.OpenRoomForJoinedPlayer)
+        {
+            RoomId = roomId;
+            RoomName = roomName;
+            Player1Name = player1Name;
+            Player2Name = player2Name;
+        }
+    }
 
-
-    //    // one player constructor
-    //    public RoomStatusUpdateMessageContainer
-    //        (int roomId,
-    //        string roomName,
-    //        int player1Id,
-    //        string player1Name
-    //        ) : base(MessageTag.RoomStatusUpdate)
-    //    {
-    //        RoomId = roomId;
-    //        RoomName = roomName;
-    //        Player1Id = player1Id;
-    //        Player1Name = player1Name;
-    //        Player2Id = null;
-    //        Player2Name = null;
-    //    }
-
-    //    // 2 players constructor
-    //    public RoomStatusUpdateMessageContainer
-    //        (int roomId, 
-    //        string roomName, 
-    //        int player1Id, 
-    //        string player1Name, 
-    //        int player2Id, 
-    //        string player2Name
-    //        ):base(MessageTag.RoomStatusUpdate)
-    //    {
-    //        RoomId = roomId;
-    //        RoomName = roomName;
-    //        Player1Id = player1Id;
-    //        Player1Name = player1Name;
-    //        Player2Id = player2Id;
-    //        Player2Name = player2Name;
-    //    }
-    //}
     public class CreateRoomV2MessageContainer : MessageContainer
     {
         public int RoomId { get; set; }
@@ -287,4 +269,28 @@ namespace MessageLib
             ColNum = colNum;
         }
     }
+
+    public class SendReadyContainer : MessageContainer
+    {
+
+        public int RoomID;
+
+        public SendReadyContainer(int roomId) : base(MessageTag.SendReady)
+        {
+            RoomID = roomId;
+        }
+
+    }
+    public class StartGameContainer : MessageContainer
+    {
+        //public GameConfiguration GameConfig { get; set; }
+        public int size;
+        public Color color;
+        public StartGameContainer(int s,Color c) : base(MessageTag.StartGame)
+        {
+            size= s;
+            color= c;
+        }
+    }
+
 }

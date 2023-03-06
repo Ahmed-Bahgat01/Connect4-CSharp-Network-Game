@@ -142,6 +142,7 @@
             this.Controls.Add(this.StartBtn);
             this.Name = "Form1";
             this.Text = "ServerSide";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

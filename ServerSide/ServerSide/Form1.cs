@@ -19,7 +19,7 @@ namespace ServerSide
             InitializeComponent();
             StopBtn.Enabled = false;
             _server = new Server();
-            _server._playerConnectedEvent += playerConnectedHandler;    //subscribe into player Connection event
+            _server.PlayerSuccessfullSignInEvent += PlayerSuccessfullSignInHandler;    //subscribe into player Connection event
             _server._PlayerDisconnectedEvent += PlayerDisconnectedHandler;
 
             _server._RoomCreatedEvent += RoomCreatedEventHandler;
@@ -37,6 +37,8 @@ namespace ServerSide
         private void StopBtn_Click(object sender, EventArgs e)
         {
             _server.Stop();
+            PlayersListBox.Items.Clear();
+            RoomsListBox.Items.Clear();
             StartBtn.Enabled = true;
             StopBtn.Enabled = false;
         }
@@ -45,8 +47,12 @@ namespace ServerSide
         {
             //_server.Broadcast("test from server");
         }
-        private void playerConnectedHandler(object sender, string userName)
+
+
+        // CHANGE NAME TO PlayerSuccessSignInHandler
+        private void PlayerSuccessfullSignInHandler(object sender, string userName)
         {
+            // TODO: ADD ONLY WHEN SIGNED IN SUCCESSFULLY
             PlayersListBox.Items.Add(userName);
         }
 
@@ -84,6 +90,7 @@ namespace ServerSide
                     int index = RoomsListBox.Items.IndexOf(strRoom);
                     RoomsListBox.Items.Remove(strRoom);
                     RoomsListBox.Items.Insert(index, room.ToString());
+                    break;
                 }
             }
         }
@@ -100,6 +107,11 @@ namespace ServerSide
                 }
                     
             }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _server.Stop();
         }
     }
 }
