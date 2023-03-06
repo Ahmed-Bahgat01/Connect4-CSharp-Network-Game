@@ -17,11 +17,12 @@ namespace ServerSide
         public event Action<Room> _roomIsEmptyEvent;
         public event Action<Room> _RoomUpdateEvent;        //an event that is fired when any change is occured in the room to be broadcasted
         public event Action<Room> _RoomCreatedEvent;
+        
+        
         public GameConfiguration _gameConfig 
         { 
             get; 
             set; 
-
         }
         public int _ID
         {
@@ -54,6 +55,8 @@ namespace ServerSide
             set;
         }
 
+        public List<OtherPlayerMoveMessageContainer> _movesHistory { set;get; }
+
         public List<Boolean> _readyList {get; set;}
 
         private Dictionary<MessageTag, Action<object, string>> _roomMessageHandlerDic;
@@ -67,6 +70,7 @@ namespace ServerSide
             _gameConfig= gameConfig;
             _name= RoomName;
             _ID= id;
+            _movesHistory = new List<OtherPlayerMoveMessageContainer>();
             p._PlayerDisconnectedEvent += PlayerDisconnectedEvent;
             if (_RoomCreatedEvent != null)
             {
