@@ -37,6 +37,8 @@ namespace ServerSide
         private void StopBtn_Click(object sender, EventArgs e)
         {
             _server.Stop();
+            PlayersListBox.Items.Clear();
+            RoomsListBox.Items.Clear();
             StartBtn.Enabled = true;
             StopBtn.Enabled = false;
         }
@@ -100,6 +102,11 @@ namespace ServerSide
                 }
                     
             }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _server.Stop();
         }
     }
 }

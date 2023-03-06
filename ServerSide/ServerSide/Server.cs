@@ -106,6 +106,7 @@ namespace ServerSide
             }
             _tcpListener.Stop();
             _players.Clear();                                           //clear
+            _rooms.Clear();
         }
         public void RecievedPlayerMessageHandler(object sender, string eventData)
         {
@@ -132,7 +133,7 @@ namespace ServerSide
         {
             foreach (Player player in _players)
             {
-                MessageBox.Show(player.ToString());
+                
                 player._session._streamWriter.WriteLine(msg.ToJSON());
             }
 

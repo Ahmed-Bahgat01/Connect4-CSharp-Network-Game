@@ -76,6 +76,12 @@
     <Compile Include="RoomConfiguration.Designer.cs">
       <DependentUpon>RoomConfiguration.cs</DependentUpon>
     </Compile>
+    <Compile Include="RoomForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RoomForm.Designer.cs">
+      <DependentUpon>RoomForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SignForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -92,6 +98,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="RoomConfiguration.resx">
       <DependentUpon>RoomConfiguration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RoomForm.resx">
+      <DependentUpon>RoomForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SignForm.resx">
       <DependentUpon>SignForm.cs</DependentUpon>
