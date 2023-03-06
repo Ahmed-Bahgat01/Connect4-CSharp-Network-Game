@@ -297,6 +297,40 @@ namespace ClientSide
             }
             //Application.Restart();
             // TODO:  START PLAYAGAIN FORM
+            PlayAgianDialogForm playAgainForm = new PlayAgianDialogForm();
+            DialogResult playAgainResult;
+
+            playAgainResult = playAgainForm.ShowDialog();
+            if(playAgainResult == DialogResult.OK)
+            {
+                // 
+                Application.Restart();
+            }
+            else
+            {
+                Application.Restart();
+            }
+            //DialogResult config_Result;
+            //config.Size = size;
+            //config.Colorr = color;
+
+            //config_Result = config.ShowDialog();
+            //if (config_Result == DialogResult.OK)
+            //{
+            //    //MessageBox.Show($"{config.Colorr}");
+            //    size = config.Size;
+            //    color = config.Colorr;
+
+            //    CreateRoomMessageContainer msg = new CreateRoomMessageContainer(Client._UserName, config.RoomName, new ServerSide.GameConfiguration(size, color));
+            //    Client.SendMsg(msg);
+
+            //    Invalidate();
+
+
+
+            //    //Game game = new Game(size, color);
+            //    //game.Show();
+            //}
         }
         private void OtherPlayerMoveHandler(OtherPlayerMoveMessageContainer obj)
         {
