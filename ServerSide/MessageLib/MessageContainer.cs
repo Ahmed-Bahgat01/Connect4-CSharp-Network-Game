@@ -263,6 +263,14 @@ namespace MessageLib
 
     }
 
+
+    /// <summary>
+    ///     contains move message of player
+    ///     DOUBLE SIDE:
+    ///         1. player sends it when making a move
+    ///         2. server sends it to other player and watchers to notify them with his move
+    ///         TODO: CHANGE IT'S NAME TO PlayMoveMessageContainer
+    /// </summary>
     public class OtherPlayerMoveMessageContainer : MessageContainer
     {           
         public int ColNum { get; set; }

@@ -189,5 +189,11 @@ namespace ClientSide
             // add roomid and listview item to dictionary
             Client.RoomListViewItemDic.Add(updateObj.RoomId, item);
         }
+
+        private void HomePage_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            
+        }
     }
 }
+//ujhiuiuo

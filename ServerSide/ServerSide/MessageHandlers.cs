@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -246,21 +247,68 @@ namespace ServerSide
                     {
                         //send start game
                         //MessageBox.Show("start game");
-                        room._roomStatus = RoomStatus.Running;
-                        
-                        foreach (var p in room._players)
-                        {
-                            //MessageBox.Show("start game");
-                            StartGameContainer msg = new StartGameContainer(room._gameConfig._boardSize, room._gameConfig._boardColor);
-                            p.SendMsg(msg);
-                            //MessageBox.Show(msg.size.ToString());
 
-                        }
+                        Color creatorPlayerColor = room._gameConfig._boardColor;
+                        Color joinedPlayerColor = room.GetSecondPlayerColor();
+                        StartGameContainer msg = new StartGameContainer(room._gameConfig._boardSize, creatorPlayerColor);
+                        room._players[0].SendMsg(msg);
+                        msg = new StartGameContainer(room._gameConfig._boardSize, joinedPlayerColor);
+                        room._players[1].SendMsg(msg);
+                        //foreach (var p in room._players)
+                        //{
+                        //    //MessageBox.Show("start game");
+                        //    StartGameContainer msg = new StartGameContainer(room._gameConfig._boardSize, room._gameConfig._boardColor);
+                        //    p.SendMsg(msg);
+                        //    //MessageBox.Show(msg.size.ToString());
+
+                        //}
 
                     }
                     break;
                 }
             }
+
+
+
+        }
+        public void PlayerMoveHandler(object sender, string recievedMessage)
+        {
+            Player senderPlayer = sender as Player;
+
+            // search for room
+            Room targetedRoom = null;
+            foreach (Room room in _rooms)
+            {
+                foreach (Player roomPlayer in room._players)
+                {
+                    if(senderPlayer._id == roomPlayer._id) // found room and player
+                    {
+                        targetedRoom = room;
+                    }
+                    break;
+                }
+                if (targetedRoom != null)
+                    break;
+            }
+
+            // send move to other player on room 
+            if (targetedRoom != null)
+            {
+                // deserialize message
+                OtherPlayerMoveMessageContainer recievedObj;
+                recievedObj = JsonConvert.DeserializeObject<OtherPlayerMoveMessageContainer>(recievedMessage);
+                OtherPlayerMoveMessageContainer msg = new OtherPlayerMoveMessageContainer(recievedObj.ColNum);
+
+                // send move to players and watchers(player in spectate status)
+                foreach (Player roomPlayer in targetedRoom._players)
+                {
+                    if(roomPlayer._userName != senderPlayer._userName)
+                        roomPlayer.SendMsg(msg);
+                }
+            }
+        }
+    }
+}
         }
         public void RefreshRoomListHandler(object sender, string recievedMessage)
         {

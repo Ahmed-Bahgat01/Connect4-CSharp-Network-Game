@@ -51,7 +51,14 @@ namespace ClientSide
             this.boardSize = size;
             this.boardColumns = new Rectangle[ColNum[boardSize]];
             this.board = new int[RowNum[boardSize], ColNum[boardSize]];
-            this.turn = 1;
+            if(player1 == Color.Red)
+            {
+                this.turn = 1;
+            }
+            else
+            {
+                this.turn = 2;
+            }
             this.player1Color = player1;
             //this.player2Color = player2;
             if(player1 == Color.Red)
@@ -71,7 +78,8 @@ namespace ClientSide
         private void Form1_MouseClick(object sender, MouseEventArgs e)
         { 
             int colIndex = GetColClicked(e.Location);
-            play(colIndex);
+            if(turn == 1)
+                play(colIndex);
         }
 
         private int GetColClicked(Point mouse) //take the point of the clicked position and return the index of the clicked column
@@ -125,6 +133,12 @@ namespace ClientSide
             }
             return true;
         }
+
+        /// <summary>
+        ///     function to decied if player is winner
+        /// </summary>
+        /// <param name="playerToCheck"></param>
+        /// <returns></returns>
         private int WinnerPlayer(int playerToCheck)
         {
             //vertical winner check
@@ -208,6 +222,11 @@ namespace ClientSide
         {
 
         }
+
+        /// <summary>
+        ///     responsible for playing disk on specified col (for this player)
+        /// </summary>
+        /// <param name="colIndex"></param>
         private void play(int colIndex)
         {
             if (colIndex != -1)
@@ -220,7 +239,7 @@ namespace ClientSide
                 }
                 catch
                 {
-                    MessageBox.Show("full column");
+                    MessageBox.Show("Full Column");
                 }
 
                 if (rowIndex != -1) //entier collum not full yet
@@ -242,11 +261,14 @@ namespace ClientSide
                         }
 
                         this.turn = 2;
+
+                        //otherSideMove();
+                        // this should send only if this player turn (turn = 1)
+                        // this right now handled by insure calling for this function only when this player makes click
+                        OtherPlayerMoveMessageContainer message = new OtherPlayerMoveMessageContainer(colIndex);
+                        Client.SendMsg(message);
                     }
 
-                    //otherSideMove();
-                    OtherPlayerMoveMessageContainer message = new OtherPlayerMoveMessageContainer(colIndex);
-                    Client.SendMsg(message);
                 }
             }
 
@@ -255,6 +277,12 @@ namespace ClientSide
         {
             otherSideMove(obj.ColNum);
         }
+
+
+        /// <summary>
+        ///     this function shows other side move on the board
+        /// </summary>
+        /// <param name="colIndex"></param>
         private void otherSideMove(int colIndex)
         {
             //Random rnd = new Random();

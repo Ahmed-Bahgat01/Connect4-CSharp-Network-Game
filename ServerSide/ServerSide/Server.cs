@@ -48,6 +48,9 @@ namespace ServerSide
                 { MessageTag.DisFromRoom, DisFromRoomHandler },
                 { MessageTag.SendReady, SendReadyHandler},
                 { MessageTag.RefreshRoomList, RefreshRoomListHandler }
+
+                { MessageTag.OtherPlayerMove, PlayerMoveHandler }
+
                 // >>>>>>> REGISTER messageTag with messageHandler here <<<<<<<
             };
         }

@@ -47,6 +47,8 @@ namespace ClientSide
             { MessageTag.OpenRoomForJoinedPlayer, OpenRoomForJoinedPlayerHandler },
             { MessageTag.StartGame, StartGameHandler },
             { MessageTag.SendRoomToRoomList ,SendRoomToRoomListHandler }
+            
+            { MessageTag.OtherPlayerMove, OtherPlayerMoveHandler },
 
                 // >>>>>>> REGISTER messageTag with messageHandler here <<<<<<<
         };
