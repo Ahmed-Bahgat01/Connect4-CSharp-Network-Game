@@ -186,53 +186,6 @@ namespace MessageLib
     }
 
 
-    /// <summary>
-    ///     TO BE REMOVED
-    /// </summary>
-    //public class RoomStatusUpdateMessageContainer : MessageContainer
-    //{
-    //    public int RoomId { get; set; }
-    //    public string RoomName { get; set; }
-    //    public int Player1Id { get; set; }
-    //    public string Player1Name { get; set; }
-    //    public int? Player2Id { get; set; }
-    //    public string Player2Name { get; set; }
-
-
-    //    // one player constructor
-    //    public RoomStatusUpdateMessageContainer
-    //        (int roomId,
-    //        string roomName,
-    //        int player1Id,
-    //        string player1Name
-    //        ) : base(MessageTag.RoomStatusUpdate)
-    //    {
-    //        RoomId = roomId;
-    //        RoomName = roomName;
-    //        Player1Id = player1Id;
-    //        Player1Name = player1Name;
-    //        Player2Id = null;
-    //        Player2Name = null;
-    //    }
-
-    //    // 2 players constructor
-    //    public RoomStatusUpdateMessageContainer
-    //        (int roomId, 
-    //        string roomName, 
-    //        int player1Id, 
-    //        string player1Name, 
-    //        int player2Id, 
-    //        string player2Name
-    //        ):base(MessageTag.RoomStatusUpdate)
-    //    {
-    //        RoomId = roomId;
-    //        RoomName = roomName;
-    //        Player1Id = player1Id;
-    //        Player1Name = player1Name;
-    //        Player2Id = player2Id;
-    //        Player2Name = player2Name;
-    //    }
-    //}
     public class CreateRoomV2MessageContainer : MessageContainer
     {
         public int RoomId { get; set; }
