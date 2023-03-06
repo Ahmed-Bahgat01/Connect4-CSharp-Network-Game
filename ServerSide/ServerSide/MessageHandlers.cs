@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,7 @@ namespace ServerSide
     {
         // signup records file path
         public static readonly string AccountsFilePath = "Accounts.json";
+        public static readonly string ResultsFilePath = "Results.txt";
         //public event Action<object, string> RespondToPlayer;
 
 
@@ -57,7 +59,7 @@ namespace ServerSide
                 {
                     PlayerSuccessfullSignInEvent(this, _players.Last()._userName);
                 }
-                response = new SignInResponseMessageContainer(ResponseCode.Success, "Signed up Successfully", "Success");
+                response = new SignInResponseMessageContainer(ResponseCode.Success, "Signed in Successfully", "Success");
             }
             else
                 response = new SignInResponseMessageContainer(ResponseCode.Failed, "Invalid Credential, try again", "Failed");
@@ -94,7 +96,7 @@ namespace ServerSide
             {
                 File.AppendAllText(AccountsFilePath, recievedMessage + Environment.NewLine);
                 // sending message to player that sign up is successfull
-                response = new SignUpResponseMessageContainer(ResponseCode.Success, "Signed up Successfully", "Success");
+                response = new SignUpResponseMessageContainer(ResponseCode.Success, "Signed Up Successfully", "Success");
             }
             else
             {
@@ -319,7 +321,42 @@ namespace ServerSide
                 // deserialize message
                 OtherPlayerMoveMessageContainer recievedObj;
                 recievedObj = JsonConvert.DeserializeObject<OtherPlayerMoveMessageContainer>(recievedMessage);
-                OtherPlayerMoveMessageContainer msg = new OtherPlayerMoveMessageContainer(recievedObj.ColNum);
+                OtherPlayerMoveMessageContainer msg = new OtherPlayerMoveMessageContainer(recievedObj.ColNum, recievedObj.IsWinningMove);
+
+                // TODO: BEFORE SENDING TO OTHER PLAYERS CHECK IF WINNING MOVE (RECORD RESULT HERE)
+                if (recievedObj.IsWinningMove)
+                {
+                    senderPlayer._score += 1;
+                    // formated date
+                    DateTime localDate = DateTime.Now;
+                    string dateText = localDate.ToString(new CultureInfo("en-GB"));
+                    Player player1 = targetedRoom._players[0];
+                    Player player2 = targetedRoom._players[1];
+                    string resultRecord = $"{player1._userName} \"{player1._score}\", {player2._userName} \"{player2._score}\" ,{dateText}";
+                    File.AppendAllText(ResultsFilePath, resultRecord + Environment.NewLine);
+                    // save game score
+
+                    //DateTime LocalDate;
+                    //string DesktopPath;
+                    //string Pth;
+                    //string CurrentDate;
+
+                    //private static string getFormattedCurrentDate()
+                    //{
+                    //    LocalDate = DateTime.Now;
+                    //    return LocalDate.ToString(new CultureInfo("en-GB"));
+                    //}
+
+                    //private static void SaveGameScore(Player HostPlayer, Player GuestPlayer, Room CurrentRoom)
+                    //{
+                    //    DesktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                    //    Pth = Path.Combine(DesktopPath, "GameScore.txt");
+                    //    string currentDate = getFormattedCurrentDate();
+                    //    string gameScore = $"{HostPlayer.Name}: {CurrentRoom.RoomPlayers[0].Score}\t{GuestPlayer.Name}: {CurrentRoom.RoomPlayers[1].Score}\t Date: {CurrentDate} \n";
+                    //    File.AppendAllText(Pth, gameScore);
+                    //}
+                }
+
 
                 targetedRoom._movesHistory.Add(msg);
 

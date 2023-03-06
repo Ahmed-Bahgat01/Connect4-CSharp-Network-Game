@@ -251,8 +251,11 @@ namespace ClientSide
 
                 if (rowIndex != -1) //entier collum not full yet
                 {
+
+
                     if (this.turn == 1)
                     {
+                        OtherPlayerMoveMessageContainer message = new OtherPlayerMoveMessageContainer(colIndex, false);
                         Graphics g = this.CreateGraphics();
                         //for (int i = 32; i<= 32 + 48 * rowIndex; i++)
                         //{ 
@@ -260,28 +263,54 @@ namespace ClientSide
                         //}
                         checkedFullBoard(this.board);
 
-                        /*int winner = this.WinnerPlayer(this.board[rowIndex, colIndex]);
+                        int winner = this.WinnerPlayer(this.board[rowIndex, colIndex]);
                         if (winner != -1) //there if a winner player
                         {
-                            MessageBox.Show($"congratulation player {winner}");
-                            Application.Restart();
-                        }*/
+                            // send winning message to server
+                            message = new OtherPlayerMoveMessageContainer(colIndex, true);
+                            Client.SendMsg(message);
+                            EndGame(winner);
+                        }
+                        else
+                        {
+                            Client.SendMsg(message);
+
+                        }
 
                         this.turn = 2;
 
-                        //otherSideMove();
-                        // this should send only if this player turn (turn = 1)
-                        // this right now handled by insure calling for this function only when this player makes click
-                        OtherPlayerMoveMessageContainer message = new OtherPlayerMoveMessageContainer(colIndex);
-                        Client.SendMsg(message);
                     }
 
                 }
             }
 
         }
+        private void EndGame(int winner)
+        {
+            if (winner == 1)
+            {
+                MessageBox.Show($"YOU WIN");
+            }
+            else
+            {
+                MessageBox.Show($"YOU LOOSE");
+            }
+            //Application.Restart();
+            // TODO:  START PLAYAGAIN FORM
+        }
         private void OtherPlayerMoveHandler(OtherPlayerMoveMessageContainer obj)
         {
+            if (obj.IsWinningMove)
+            {
+                otherSideMove(obj.ColNum);
+                // TODO: SHOW MESSAGEBOX THAT OTHER PLAYER WON
+                // TODO:  OPEN PALY AGAIN FORM
+            }
+            else
+            {
+                otherSideMove(obj.ColNum);
+            }
+        }
             if (SpectatorMode)
             {
                 int colIndex = obj.ColNum;
@@ -383,8 +412,16 @@ namespace ClientSide
                         int winner = this.WinnerPlayer(this.board[rowIndex, colIndex]);
                         if (winner != -1) //there if a winner player
                         {
-                            MessageBox.Show($"congratulation player {winner}");
-                            Application.Restart();
+                            EndGame(winner);
+                            //if(winner == 1)
+                            //{
+                            //    MessageBox.Show($"YOU WIN");
+                            //}
+                            //else
+                            //{
+                            //    MessageBox.Show($"YOU LOOSE");
+                            //}
+                            //Application.Restart();
                         }
                         this.turn = 1;
                     }

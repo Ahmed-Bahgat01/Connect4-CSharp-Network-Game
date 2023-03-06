@@ -110,8 +110,8 @@ namespace ClientSide
         {
             if(Client.StartConnection())
                 SignUp();
-            HomePage home = new HomePage();
-            home.Show();
+            //HomePage home = new HomePage();
+            //home.Show();
         }
 
         private void SignForm_FormClosing(object sender, FormClosingEventArgs e)

@@ -279,9 +279,11 @@ namespace MessageLib
     public class OtherPlayerMoveMessageContainer : MessageContainer
     {           
         public int ColNum { get; set; }
-        public OtherPlayerMoveMessageContainer(int colNum) : base(MessageTag.OtherPlayerMove)
+        public bool IsWinningMove { get; set; }
+        public OtherPlayerMoveMessageContainer(int colNum, bool isWinningMove) : base(MessageTag.OtherPlayerMove)
         {
             ColNum = colNum;
+            IsWinningMove = isWinningMove;
         }
         public OtherPlayerMoveMessageContainer Clone()
         {

@@ -22,6 +22,8 @@ namespace ServerSide
         public Status _status { get; set; }                 //Connected,Waiting,Playing,Spectating,Disconnected
         public Session _session { get; set; }               //socket data
 
+        public int _score { get; set; }
+
         private Player() { }
 
         public Player(TcpClient tcpClient)
@@ -29,6 +31,7 @@ namespace ServerSide
             _session = new Session(tcpClient);
             ListenMessage();
             _status = Status.Waiting;
+            _score = 0;
         }
 
         public void EndClient()                             //close player streams
