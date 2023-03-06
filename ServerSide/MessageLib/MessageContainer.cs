@@ -125,6 +125,10 @@ namespace MessageLib
             ToPlayerMsgBoxTitle = toPlayerMsgBoxTitle;
         }
     }
+
+    /// <summary>
+    ///     sent from client to server when client create new room (has room configuration)
+    /// </summary>
     internal class CreateRoomMessageContainer : MessageContainer
     {
         public string UserName { get; set; }

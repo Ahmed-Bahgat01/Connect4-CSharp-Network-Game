@@ -29,11 +29,30 @@ namespace ClientSide
         private Thread ListeningThread;
         //private Dictionary<MessageTag, Action<string>> MessageHandlerDic;
 
+
+        // CONSTRUCTOR
         public SignForm()
         {
             InitializeComponent();
+
+            Client.SignedInSuccessfullyEvent += SignedInSuccessfullyHandler;
         }
 
+
+
+
+        // METHODS
+
+        private void SignedInSuccessfullyHandler(SignInResponseMessageContainer eventObj)
+        {
+            // show home page
+            this.Invoke(new Action(() =>
+            {
+                HomePage home = new HomePage();
+                home.Show();
+            }));
+            // TODO: HIDE SIGN FORM
+        }
         private bool IsValidSignFormInput()
         {
             // rules flags
@@ -56,8 +75,10 @@ namespace ClientSide
                 SignInMessageContainer msg = new SignInMessageContainer(UserNameTextBox.Text,PasswordTextBox.Text);
                 Client._UserName = UserNameTextBox.Text;
                 Client.SendMsg(msg);
-                HomePage home = new HomePage();
-                home.Show();
+
+                // TO BE MOVED TO SUCCESS SIGN IN HANDLER
+                //HomePage home = new HomePage();
+                //home.Show();
             }
             else
                 MessageBox.Show("make sure to input your correct credentials", "Invalid Inputs", MessageBoxButtons.OK, MessageBoxIcon.Warning);

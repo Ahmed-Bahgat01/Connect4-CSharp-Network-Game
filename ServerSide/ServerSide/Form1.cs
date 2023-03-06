@@ -19,7 +19,7 @@ namespace ServerSide
             InitializeComponent();
             StopBtn.Enabled = false;
             _server = new Server();
-            _server._playerConnectedEvent += playerConnectedHandler;    //subscribe into player Connection event
+            _server.PlayerSuccessfullSignInEvent += PlayerSuccessfullSignInHandler;    //subscribe into player Connection event
             _server._PlayerDisconnectedEvent += PlayerDisconnectedHandler;
 
             _server._RoomCreatedEvent += RoomCreatedEventHandler;
@@ -47,8 +47,12 @@ namespace ServerSide
         {
             //_server.Broadcast("test from server");
         }
-        private void playerConnectedHandler(object sender, string userName)
+
+
+        // CHANGE NAME TO PlayerSuccessSignInHandler
+        private void PlayerSuccessfullSignInHandler(object sender, string userName)
         {
+            // TODO: ADD ONLY WHEN SIGNED IN SUCCESSFULLY
             PlayersListBox.Items.Add(userName);
         }
 

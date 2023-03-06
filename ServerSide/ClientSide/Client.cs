@@ -29,6 +29,7 @@ namespace ClientSide
         public static event Action<OtherPlayerMoveMessageContainer> OtherPlayerMoveEvent ;
         public static event Action<JoinRoomMessageContainer> PlayerJoinedRoomEvent;
         public static event Action<LeaveRoomMessageContainer> PlayerLeftRoomEvent;
+        public static event Action<SignInResponseMessageContainer> SignedInSuccessfullyEvent;
 
         // this dictionary maps each room to it's list item in UI
         public static Dictionary<int, ListViewItem> RoomListViewItemDic= new Dictionary<int, ListViewItem>();

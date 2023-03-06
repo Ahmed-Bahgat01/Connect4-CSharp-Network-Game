@@ -31,7 +31,7 @@ namespace ServerSide
         private Dictionary<MessageTag, Action<object, string>> MessageHandlerDic;
 
 
-        public event Action<object, string> _playerConnectedEvent;
+        public event Action<object, string> PlayerSuccessfullSignInEvent;
         public Server()
         {
             _tcpListener = new TcpListener(_IP, _PORT);
