@@ -232,18 +232,19 @@ namespace ServerSide
                 if (room._ID == SpecRoomObj.RoomID)
                 {
                     room._readyList.Add(true);
-                    MessageBox.Show(room._readyList[0].ToString());
-                    if(room._readyList.Count == 1)
+                   // MessageBox.Show(room._readyList[0].ToString());
+                    if(room._readyList.Count == 2)
                     {
                         //send start game
-                        MessageBox.Show("start game");
+                        //MessageBox.Show("start game");
                         
                         
                         foreach (var p in room._players)
                         {
-                            MessageBox.Show("start game");
+                            //MessageBox.Show("start game");
                             StartGameContainer msg = new StartGameContainer(room._gameConfig._boardSize, room._gameConfig._boardColor);
                             p.SendMsg(msg);
+                            //MessageBox.Show(msg.size.ToString());
 
                         }
 
