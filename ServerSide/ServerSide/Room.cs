@@ -38,6 +38,7 @@ namespace ServerSide
         public RoomStatus _roomStatus
         {
             get;
+            set;
         }
 
 

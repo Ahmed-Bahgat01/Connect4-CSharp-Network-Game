@@ -33,14 +33,17 @@ namespace ClientSide
             this.button3 = new System.Windows.Forms.Button();
             this.RoomsListView = new System.Windows.Forms.ListView();
             this.roomNameCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.RoomNameColHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.player1NameCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.player2NameCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.RoomStatusCol = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.RefreshBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(76, 58);
+            this.label1.Location = new System.Drawing.Point(8, 37);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(111, 16);
@@ -49,7 +52,7 @@ namespace ClientSide
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(783, 379);
+            this.button3.Location = new System.Drawing.Point(612, 437);
             this.button3.Margin = new System.Windows.Forms.Padding(4);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(176, 42);
@@ -62,13 +65,15 @@ namespace ClientSide
             // 
             this.RoomsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.roomNameCol,
+            this.RoomNameColHeader,
             this.player1NameCol,
-            this.player2NameCol});
+            this.player2NameCol,
+            this.RoomStatusCol});
             this.RoomsListView.FullRowSelect = true;
             this.RoomsListView.HideSelection = false;
-            this.RoomsListView.Location = new System.Drawing.Point(79, 105);
+            this.RoomsListView.Location = new System.Drawing.Point(11, 56);
             this.RoomsListView.Name = "RoomsListView";
-            this.RoomsListView.Size = new System.Drawing.Size(573, 465);
+            this.RoomsListView.Size = new System.Drawing.Size(573, 446);
             this.RoomsListView.TabIndex = 17;
             this.RoomsListView.UseCompatibleStateImageBehavior = false;
             this.RoomsListView.View = System.Windows.Forms.View.Details;
@@ -76,24 +81,45 @@ namespace ClientSide
             // 
             // roomNameCol
             // 
-            this.roomNameCol.Text = "Room";
-            this.roomNameCol.Width = 115;
+            this.roomNameCol.Text = "ID";
+            this.roomNameCol.Width = 46;
+            // 
+            // RoomNameColHeader
+            // 
+            this.RoomNameColHeader.Text = "Room Name";
+            this.RoomNameColHeader.Width = 134;
             // 
             // player1NameCol
             // 
             this.player1NameCol.Text = "Player 1";
-            this.player1NameCol.Width = 144;
+            this.player1NameCol.Width = 114;
             // 
             // player2NameCol
             // 
             this.player2NameCol.Text = "Player 2";
-            this.player2NameCol.Width = 137;
+            this.player2NameCol.Width = 119;
+            // 
+            // RoomStatusCol
+            // 
+            this.RoomStatusCol.Text = "Status";
+            // 
+            // RefreshBtn
+            // 
+            this.RefreshBtn.Location = new System.Drawing.Point(612, 75);
+            this.RefreshBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.RefreshBtn.Name = "RefreshBtn";
+            this.RefreshBtn.Size = new System.Drawing.Size(176, 42);
+            this.RefreshBtn.TabIndex = 18;
+            this.RefreshBtn.Text = "Refresh List";
+            this.RefreshBtn.UseVisualStyleBackColor = true;
+            this.RefreshBtn.Click += new System.EventHandler(this.RefreshBtn_Click);
             // 
             // HomePage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1200, 727);
+            this.ClientSize = new System.Drawing.Size(854, 522);
+            this.Controls.Add(this.RefreshBtn);
             this.Controls.Add(this.RoomsListView);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.label1);
@@ -116,5 +142,8 @@ namespace ClientSide
         private System.Windows.Forms.ColumnHeader roomNameCol;
         private System.Windows.Forms.ColumnHeader player1NameCol;
         private System.Windows.Forms.ColumnHeader player2NameCol;
+        private System.Windows.Forms.ColumnHeader RoomNameColHeader;
+        private System.Windows.Forms.Button RefreshBtn;
+        private System.Windows.Forms.ColumnHeader RoomStatusCol;
     }
 }

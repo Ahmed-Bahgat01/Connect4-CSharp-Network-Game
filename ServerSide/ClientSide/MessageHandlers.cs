@@ -146,5 +146,16 @@ namespace ClientSide
             game.Show();*/
         }
 
+        public static void SendRoomToRoomListHandler(string recievedMessage)
+        {
+            SendRoomToRoomListMessageContainer RecievedObj;
+            RecievedObj = JsonConvert.DeserializeObject<SendRoomToRoomListMessageContainer>(recievedMessage);
+
+            if (RefreshRoomListEvent != null)
+            {
+                RefreshRoomListEvent(RecievedObj);
+            }
+        }
+
     }
 }

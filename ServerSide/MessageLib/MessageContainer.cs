@@ -21,6 +21,8 @@ namespace MessageLib
         CreateRoom,
         JoinRoom,
         StartGame,
+        RefreshRoomList,
+        SendRoomToRoomList,
         OpenRoomForJoinedPlayer,
         SpectateRoom,
         OtherPlayerMove,
@@ -300,5 +302,33 @@ namespace MessageLib
             color= c;
         }
     }
+    public class RefreshRoomListContainer : MessageContainer
+    {
+        public string PlayerName;
+        public RefreshRoomListContainer(string playerName):base(MessageTag.RefreshRoomList)
+        {
+            PlayerName = playerName;
+        }
+    }
 
+    public class SendRoomToRoomListMessageContainer : MessageContainer
+    {
+        public int RoomId { get; set; }
+        public string RoomName { get; set; }
+        public string Player1Name { get; set; }
+        public string Player2Name { get; set; }
+
+        public SendRoomToRoomListMessageContainer
+            (int roomId,
+            string roomName,
+            string player1Name,
+            string player2Name = null
+            ) : base(MessageTag.SendRoomToRoomList)
+        {
+            RoomId = roomId;
+            RoomName = roomName;
+            Player1Name = player1Name;
+            Player2Name = player2Name;
+        }
+    }
 }
