@@ -38,9 +38,12 @@
             // 
             // SignInBtn
             // 
-            this.SignInBtn.Location = new System.Drawing.Point(181, 153);
+            this.SignInBtn.Font = new System.Drawing.Font("Viner Hand ITC", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SignInBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.SignInBtn.Location = new System.Drawing.Point(185, 174);
+            this.SignInBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.SignInBtn.Name = "SignInBtn";
-            this.SignInBtn.Size = new System.Drawing.Size(75, 33);
+            this.SignInBtn.Size = new System.Drawing.Size(114, 27);
             this.SignInBtn.TabIndex = 0;
             this.SignInBtn.Text = "Sign In";
             this.SignInBtn.UseVisualStyleBackColor = true;
@@ -48,9 +51,12 @@
             // 
             // SignUpBtn
             // 
-            this.SignUpBtn.Location = new System.Drawing.Point(21, 153);
+            this.SignUpBtn.Font = new System.Drawing.Font("Viner Hand ITC", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SignUpBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.SignUpBtn.Location = new System.Drawing.Point(28, 174);
+            this.SignUpBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.SignUpBtn.Name = "SignUpBtn";
-            this.SignUpBtn.Size = new System.Drawing.Size(75, 33);
+            this.SignUpBtn.Size = new System.Drawing.Size(102, 27);
             this.SignUpBtn.TabIndex = 1;
             this.SignUpBtn.Text = "Sign Up";
             this.SignUpBtn.UseVisualStyleBackColor = true;
@@ -58,47 +64,56 @@
             // 
             // UserNameTextBox
             // 
-            this.UserNameTextBox.Location = new System.Drawing.Point(21, 37);
+            this.UserNameTextBox.Location = new System.Drawing.Point(28, 48);
+            this.UserNameTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.UserNameTextBox.Name = "UserNameTextBox";
-            this.UserNameTextBox.Size = new System.Drawing.Size(235, 22);
+            this.UserNameTextBox.Size = new System.Drawing.Size(177, 20);
             this.UserNameTextBox.TabIndex = 2;
             // 
             // PasswordTextBox
             // 
-            this.PasswordTextBox.Location = new System.Drawing.Point(21, 104);
+            this.PasswordTextBox.Location = new System.Drawing.Point(28, 129);
+            this.PasswordTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.PasswordTextBox.Name = "PasswordTextBox";
-            this.PasswordTextBox.Size = new System.Drawing.Size(235, 22);
+            this.PasswordTextBox.Size = new System.Drawing.Size(177, 20);
             this.PasswordTextBox.TabIndex = 3;
             // 
             // UsernameLabel
             // 
             this.UsernameLabel.AutoSize = true;
-            this.UsernameLabel.Location = new System.Drawing.Point(18, 18);
+            this.UsernameLabel.Font = new System.Drawing.Font("Viner Hand ITC", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UsernameLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.UsernameLabel.Location = new System.Drawing.Point(14, 15);
+            this.UsernameLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.UsernameLabel.Name = "UsernameLabel";
-            this.UsernameLabel.Size = new System.Drawing.Size(70, 16);
+            this.UsernameLabel.Size = new System.Drawing.Size(107, 31);
             this.UsernameLabel.TabIndex = 4;
             this.UsernameLabel.Text = "Username";
             // 
             // PasswordLabel
             // 
             this.PasswordLabel.AutoSize = true;
-            this.PasswordLabel.Location = new System.Drawing.Point(18, 85);
+            this.PasswordLabel.Font = new System.Drawing.Font("Viner Hand ITC", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PasswordLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.PasswordLabel.Location = new System.Drawing.Point(14, 84);
+            this.PasswordLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.PasswordLabel.Name = "PasswordLabel";
-            this.PasswordLabel.Size = new System.Drawing.Size(67, 16);
+            this.PasswordLabel.Size = new System.Drawing.Size(99, 31);
             this.PasswordLabel.TabIndex = 5;
             this.PasswordLabel.Text = "Password";
             // 
             // SignForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(287, 216);
+            this.ClientSize = new System.Drawing.Size(330, 225);
             this.Controls.Add(this.PasswordLabel);
             this.Controls.Add(this.UsernameLabel);
             this.Controls.Add(this.PasswordTextBox);
             this.Controls.Add(this.UserNameTextBox);
             this.Controls.Add(this.SignUpBtn);
             this.Controls.Add(this.SignInBtn);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "SignForm";
             this.Text = "Connect 4";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SignForm_FormClosing);

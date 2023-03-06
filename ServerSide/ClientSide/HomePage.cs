@@ -41,10 +41,10 @@ namespace ClientSide
 
             //welcome text
             compName = "Welcome "+Client._UserName;
-            strColor = Color.DarkRed;
+            strColor = Color.FromArgb(128, 128, 255);
             fontFamily = "Times New Roman";
-            fontSize = 20;
-            title = Color.DarkRed;
+            fontSize = 40;
+            title = Color.FromArgb(128, 128, 255);
 
             // subscribe in room events
             Client.CreateRoomEvent += RoomCreationHandler;
