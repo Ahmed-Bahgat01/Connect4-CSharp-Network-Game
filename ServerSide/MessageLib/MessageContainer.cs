@@ -233,7 +233,7 @@ namespace MessageLib
     }
 
     public class OtherPlayerMoveMessageContainer : MessageContainer
-    {
+    {           
         public int ColNum { get; set; }
         public OtherPlayerMoveMessageContainer(int colNum) : base(MessageTag.OtherPlayerMove)
         {

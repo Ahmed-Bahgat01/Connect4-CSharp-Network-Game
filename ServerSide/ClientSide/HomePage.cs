@@ -117,7 +117,7 @@ namespace ClientSide
             config_Result = config.ShowDialog();
             if(config_Result == DialogResult.OK)
             {
-                
+                MessageBox.Show($"{config.Colorr}");
                 size = config.Size;
                 color = config.Colorr;
 
