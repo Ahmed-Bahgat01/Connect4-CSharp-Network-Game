@@ -126,8 +126,8 @@ namespace ClientSide
                         else
                         {
                             // decerializing message
-                            SignUpResponseMessageContainer resObj;
-                            resObj = JsonConvert.DeserializeObject<SignUpResponseMessageContainer>(msg);
+                            MessageContainer resObj;
+                            resObj = JsonConvert.DeserializeObject<MessageContainer>(msg);
                             // mapping message to it's handler
                             MessageHandlerDic[resObj.Tag](msg);
                         }

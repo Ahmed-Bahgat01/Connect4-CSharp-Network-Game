@@ -25,7 +25,10 @@ namespace ClientSide
             string msg = ResponseObj.ToPlayerResponseMessage;
             string title = ResponseObj.ToPlayerMsgBoxTitle;
             if (ResponseObj.SignUpResponseCode == ResponseCode.Success)
-                MessageBox.Show(msg, title,MessageBoxButtons.OK,MessageBoxIcon.Information);
+            {
+                MessageBox.Show(msg, title, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //SignedInSuccessfullyEvent(new SignInResponseMessageContainer(ResponseCode.Success, "Signed Up Successfully ...Signing in for you", "Success"));
+            }
             else if(ResponseObj.SignUpResponseCode == ResponseCode.Failed)
                 MessageBox.Show(msg, title,MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
         }
@@ -42,9 +45,6 @@ namespace ClientSide
                 MessageBox.Show(msg, title, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 //fire event that signed in successfully
                SignedInSuccessfullyEvent(ResponseObj);
-
-                
-
             }
             else if (ResponseObj.SignInResponseCode == ResponseCode.Failed)
                 MessageBox.Show(msg, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);

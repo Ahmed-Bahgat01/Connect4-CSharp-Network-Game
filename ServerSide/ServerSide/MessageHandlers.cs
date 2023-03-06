@@ -57,7 +57,7 @@ namespace ServerSide
                 {
                     PlayerSuccessfullSignInEvent(this, _players.Last()._userName);
                 }
-                response = new SignInResponseMessageContainer(ResponseCode.Success, "Signed up Successfully", "Success");
+                response = new SignInResponseMessageContainer(ResponseCode.Success, "Signed in Successfully", "Success");
             }
             else
                 response = new SignInResponseMessageContainer(ResponseCode.Failed, "Invalid Credential, try again", "Failed");
@@ -94,7 +94,7 @@ namespace ServerSide
             {
                 File.AppendAllText(AccountsFilePath, recievedMessage + Environment.NewLine);
                 // sending message to player that sign up is successfull
-                response = new SignUpResponseMessageContainer(ResponseCode.Success, "Signed up Successfully", "Success");
+                response = new SignUpResponseMessageContainer(ResponseCode.Success, "Signed Up Successfully", "Success");
             }
             else
             {
