@@ -26,9 +26,13 @@ namespace ClientSide
         private static Thread ListeningThread;
         //public static event Action<RoomStatusUpdateMessageContainer> RoomUpdateEvent;
         public static event Action<CreateRoomV2MessageContainer> CreateRoomEvent;
-        public static event Action<OtherPlayerMoveMessageContainer> OtherPlayerMoveEvent;
+        public static event Action<OtherPlayerMoveMessageContainer> OtherPlayerMoveEvent ;
         public static event Action<JoinRoomMessageContainer> PlayerJoinedRoomEvent;
         public static event Action<LeaveRoomMessageContainer> PlayerLeftRoomEvent;
+
+        // this dictionary maps each room to it's list item in UI
+        public static Dictionary<int, ListViewItem> RoomListViewItemDic= new Dictionary<int, ListViewItem>();
+
         private static Dictionary<MessageTag, Action<string>> MessageHandlerDic = new Dictionary<MessageTag, Action<string>>
         {
             { MessageTag.SignUpResponse, SignUpResponseHandler },
@@ -38,8 +42,10 @@ namespace ClientSide
                 // >>>>>>> REGISTER messageTag with messageHandler here <<<<<<<
         };
 
+
+        /// TO BE REMOVED
         // Dic maping roomid with room panel in UI
-        public static Dictionary<int, CustomRoomPanel> RoomPanelDic = new Dictionary<int,CustomRoomPanel>();
+        //public static Dictionary<int, CustomRoomPanel> RoomPanelDic = new Dictionary<int,CustomRoomPanel>();
 
 
 
