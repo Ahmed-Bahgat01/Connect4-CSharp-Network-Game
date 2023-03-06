@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MessageLib;
 
 namespace ServerSide
 {
@@ -51,11 +52,16 @@ namespace ServerSide
             set;
         }
 
+        public List<Boolean> _readyList {get; set;}
+
+        private Dictionary<MessageTag, Action<object, string>> _roomMessageHandlerDic;
+
         public Room(Player p,int id,string RoomName, GameConfiguration gameConfig) {
             _players= new List<Player>();
             _players.Add(p);
             _spectators= new List<Player>();
-            _roomStatus= RoomStatus.Waiting;
+            _readyList= new List<Boolean>();
+            _roomStatus = RoomStatus.Waiting;
             _gameConfig= gameConfig;
             _name= RoomName;
             _ID= id;
@@ -64,6 +70,13 @@ namespace ServerSide
             {
                 _RoomCreatedEvent(this);
             }
+
+            _roomMessageHandlerDic = new Dictionary<MessageTag, Action<object, string>>
+            {
+               // { MessageTag.SignIn, SignInHandler },
+                
+                // >>>>>>> REGISTER messageTag with messageHandler here <<<<<<<
+            };
         }
 
         public void AddPlayer(Player p)

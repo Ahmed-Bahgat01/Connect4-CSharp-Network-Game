@@ -86,6 +86,7 @@ namespace ServerSide
                     int index = RoomsListBox.Items.IndexOf(strRoom);
                     RoomsListBox.Items.Remove(strRoom);
                     RoomsListBox.Items.Insert(index, room.ToString());
+                    break;
                 }
             }
         }

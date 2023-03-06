@@ -89,6 +89,7 @@
             this.ReadyBtn.TabIndex = 5;
             this.ReadyBtn.Text = "Ready";
             this.ReadyBtn.UseVisualStyleBackColor = true;
+            this.ReadyBtn.Click += new System.EventHandler(this.ReadyBtn_Click);
             // 
             // RoomForm
             // 

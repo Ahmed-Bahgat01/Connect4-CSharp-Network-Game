@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MessageLib;
 
 namespace ClientSide
 {
@@ -17,6 +18,32 @@ namespace ClientSide
         public RoomForm()
         {
             InitializeComponent();
+        }
+
+        public RoomForm(int id,string roomName,string creatorName)
+        {
+            InitializeComponent();
+            _roomId = id;
+            _roomName = roomName;
+            this.Text= _roomName;
+            PlayerslistBox.Items.Add(creatorName);
+        }
+
+        public RoomForm(int id, string roomName, string creatorName, string joinnerName)
+        {
+            InitializeComponent();
+            _roomId = id;
+            _roomName = roomName;
+            this.Text = _roomName;
+            PlayerslistBox.Items.Add(creatorName);
+            PlayerslistBox.Items.Add(joinnerName);
+        }
+
+        private void ReadyBtn_Click(object sender, EventArgs e)
+        {
+            SendReadyContainer msg = new SendReadyContainer(_roomId);
+            Client.SendMsg(msg);
+            ReadyBtn.Enabled = false;
         }
     }
 }

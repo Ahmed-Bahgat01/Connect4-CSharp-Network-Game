@@ -45,7 +45,8 @@ namespace ServerSide
                 { MessageTag.CreateRoom, CreateRoomHandler },
                 { MessageTag.JoinRoom, JoinRoomHandler },
                 { MessageTag.SpectateRoom, SpectateRoomHandler },
-                { MessageTag.DisFromRoom, DisFromRoomHandler }
+                { MessageTag.DisFromRoom, DisFromRoomHandler },
+                { MessageTag.SendReady, SendReadyHandler}
                 // >>>>>>> REGISTER messageTag with messageHandler here <<<<<<<
             };
         }
@@ -139,6 +140,8 @@ namespace ServerSide
 
         }
 
+        
+
 
         private void PlayerDisconnectedMessageHandler(Player sender)                //on player disconnect
         {
@@ -188,5 +191,7 @@ namespace ServerSide
             }
             //send rooms to user
         }
+
+        
     }
 }

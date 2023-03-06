@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -105,6 +106,28 @@ namespace ClientSide
             {
                 PlayerLeftRoomEvent(RecievedObj);
             }
+        }
+
+        public static void OpenRoomForJoinedPlayerHandler(string recievedMessage)
+        {
+            OpenRoomForJoinedPlayerMessageContainer RecievedObj;
+            RecievedObj = JsonConvert.DeserializeObject<OpenRoomForJoinedPlayerMessageContainer>(recievedMessage);
+
+            RoomForm roomForm = new RoomForm(RecievedObj.RoomId, RecievedObj.RoomName, RecievedObj.Player1Name, RecievedObj.Player2Name);
+            roomForm.ShowDialog();
+        }
+
+        public static void StartGameHandler(string recievedMessage)
+        {
+            StartGameContainer RecievedObj;
+            RecievedObj = JsonConvert.DeserializeObject<StartGameContainer>(recievedMessage);
+
+            MessageBox.Show("other side");
+            int size = RecievedObj.size;
+            Color color = RecievedObj.color;
+            Game game = new Game(size, color);
+            
+            game.Show();
         }
 
     }
