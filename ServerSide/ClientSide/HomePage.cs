@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Net.Mime.MediaTypeNames;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ClientSide
 {
@@ -50,21 +51,30 @@ namespace ClientSide
             Client.PlayerJoinedRoomEvent += PlayerJoinedRoomHandler;
             Client.PlayerLeftRoomEvent += PlayerLeftRoomHandler;
 
+
+
         }
 
         
 
         private void RoomCreationHandler(CreateRoomV2MessageContainer updateObj)
         {
-            MessageBox.Show("asdasd");
+            //MessageBox.Show("asdasd");
 
             // LIST VIEW
-            string[] row = { updateObj.RoomName, updateObj.Player1Name, updateObj.Player2Name };
+            string[] row = { updateObj.RoomId.ToString(),updateObj.RoomName, updateObj.Player1Name, updateObj.Player2Name };
             ListViewItem item = new ListViewItem(row);
             RoomsListView.Invoke(new Action( () => { RoomsListView.Items.Add(item); }));
 
             // add roomid and listview item to dictionary
             Client.RoomListViewItemDic.Add(updateObj.RoomId, item);
+
+            //open room form
+            if (Client._UserName == updateObj.Player1Name)
+            {
+                RoomForm roomForm = new RoomForm(updateObj.RoomId, updateObj.RoomName, updateObj.Player1Name);
+                roomForm.ShowDialog();
+            }
         }
 
         private void PlayerJoinedRoomHandler(JoinRoomMessageContainer eventObj)
@@ -117,7 +127,7 @@ namespace ClientSide
             config_Result = config.ShowDialog();
             if(config_Result == DialogResult.OK)
             {
-                MessageBox.Show($"{config.Colorr}");
+                //MessageBox.Show($"{config.Colorr}");
                 size = config.Size;
                 color = config.Colorr;
 
@@ -126,8 +136,22 @@ namespace ClientSide
 
                 Invalidate();
 
-                Game game = new Game(size, color);
-                game.Show();
+                
+
+                //Game game = new Game(size, color);
+                //game.Show();
+            }
+        }
+
+        private void RoomsListView_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (RoomsListView.SelectedItems.Count > 0)
+            {
+                ListViewItem item = RoomsListView.SelectedItems[0];
+                int roomId = int.Parse(item.SubItems[0].Text);
+
+                JoinRoomMessageContainer msg = new JoinRoomMessageContainer(Client._UserName, roomId);
+                Client.SendMsg(msg);
             }
         }
     }

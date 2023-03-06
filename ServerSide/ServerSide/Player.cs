@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MessageLib;
 
 namespace ServerSide
 {
@@ -89,6 +90,11 @@ namespace ServerSide
         public override string ToString()
         {
             return (_id.ToString() + ", " +_userName.ToString()+ ", " + _status.ToString());
+        }
+
+        public void SendMsg(MessageContainer msg)
+        {
+            this._session._streamWriter.WriteLine(msg.ToJSON());
         }
     }
 }

@@ -50,7 +50,7 @@ namespace ClientSide
             // button3
             // 
             this.button3.Location = new System.Drawing.Point(783, 379);
-            this.button3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button3.Margin = new System.Windows.Forms.Padding(4);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(176, 42);
             this.button3.TabIndex = 16;
@@ -64,6 +64,7 @@ namespace ClientSide
             this.roomNameCol,
             this.player1NameCol,
             this.player2NameCol});
+            this.RoomsListView.FullRowSelect = true;
             this.RoomsListView.HideSelection = false;
             this.RoomsListView.Location = new System.Drawing.Point(79, 105);
             this.RoomsListView.Name = "RoomsListView";
@@ -71,6 +72,7 @@ namespace ClientSide
             this.RoomsListView.TabIndex = 17;
             this.RoomsListView.UseCompatibleStateImageBehavior = false;
             this.RoomsListView.View = System.Windows.Forms.View.Details;
+            this.RoomsListView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.RoomsListView_MouseDoubleClick);
             // 
             // roomNameCol
             // 
@@ -95,7 +97,7 @@ namespace ClientSide
             this.Controls.Add(this.RoomsListView);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "HomePage";
             this.Text = "HomePage";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.HomePage_Paint);

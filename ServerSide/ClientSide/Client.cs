@@ -39,6 +39,8 @@ namespace ClientSide
             { MessageTag.SignUpResponse, SignUpResponseHandler },
             { MessageTag.SignInResponse, SignInResponseHandler },
             { MessageTag.RoomStatusUpdate, CreateRoomHandler },
+            { MessageTag.OpenRoomForJoinedPlayer, OpenRoomForJoinedPlayerHandler },
+            { MessageTag.StartGame,StartGameHandler }
 
                 // >>>>>>> REGISTER messageTag with messageHandler here <<<<<<<
         };

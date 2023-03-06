@@ -45,7 +45,8 @@ namespace ServerSide
                 { MessageTag.CreateRoom, CreateRoomHandler },
                 { MessageTag.JoinRoom, JoinRoomHandler },
                 { MessageTag.SpectateRoom, SpectateRoomHandler },
-                { MessageTag.DisFromRoom, DisFromRoomHandler }
+                { MessageTag.DisFromRoom, DisFromRoomHandler },
+                { MessageTag.SendReady, SendReadyHandler}
                 // >>>>>>> REGISTER messageTag with messageHandler here <<<<<<<
             };
         }
@@ -106,6 +107,7 @@ namespace ServerSide
             }
             _tcpListener.Stop();
             _players.Clear();                                           //clear
+            _rooms.Clear();
         }
         public void RecievedPlayerMessageHandler(object sender, string eventData)
         {
@@ -132,11 +134,13 @@ namespace ServerSide
         {
             foreach (Player player in _players)
             {
-                MessageBox.Show(player.ToString());
+                
                 player._session._streamWriter.WriteLine(msg.ToJSON());
             }
 
         }
+
+        
 
 
         private void PlayerDisconnectedMessageHandler(Player sender)                //on player disconnect
@@ -187,5 +191,7 @@ namespace ServerSide
             }
             //send rooms to user
         }
+
+        
     }
 }

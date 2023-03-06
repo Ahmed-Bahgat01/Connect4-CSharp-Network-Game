@@ -37,6 +37,8 @@ namespace ServerSide
         private void StopBtn_Click(object sender, EventArgs e)
         {
             _server.Stop();
+            PlayersListBox.Items.Clear();
+            RoomsListBox.Items.Clear();
             StartBtn.Enabled = true;
             StopBtn.Enabled = false;
         }
@@ -88,6 +90,7 @@ namespace ServerSide
                     int index = RoomsListBox.Items.IndexOf(strRoom);
                     RoomsListBox.Items.Remove(strRoom);
                     RoomsListBox.Items.Insert(index, room.ToString());
+                    break;
                 }
             }
         }
@@ -104,6 +107,11 @@ namespace ServerSide
                 }
                     
             }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _server.Stop();
         }
     }
 }
