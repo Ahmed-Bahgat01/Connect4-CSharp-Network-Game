@@ -51,7 +51,9 @@ namespace ClientSide
             Client.PlayerJoinedRoomEvent += PlayerJoinedRoomHandler;
             Client.PlayerLeftRoomEvent += PlayerLeftRoomHandler;
             Client.CanJoinRoomEvent += CanJoinRoomEventHandler;
-                
+            Client.RefreshRoomListEvent += RefreshRoomListHandler;
+
+
 
         }
 
@@ -168,6 +170,24 @@ namespace ClientSide
                 roomForm.Show();
             }));
             
+        }
+
+        public void RefreshBtn_Click(object sender, EventArgs e)
+        {
+            RefreshRoomListContainer msg = new RefreshRoomListContainer(Client._UserName);
+            Client.SendMsg(msg);
+        }
+        private void RefreshRoomListHandler(SendRoomToRoomListMessageContainer updateObj)
+        {
+            Client.RoomListViewItemDic.Clear();
+            RoomsListView.Items.Clear();
+            // LIST VIEW
+            string[] row = { updateObj.RoomId.ToString(), updateObj.RoomName, updateObj.Player1Name, updateObj.Player2Name };
+            ListViewItem item = new ListViewItem(row);
+            RoomsListView.Invoke(new Action(() => { RoomsListView.Items.Add(item); }));
+
+            // add roomid and listview item to dictionary
+            Client.RoomListViewItemDic.Add(updateObj.RoomId, item);
         }
     }
 }

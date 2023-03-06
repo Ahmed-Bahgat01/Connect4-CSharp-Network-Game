@@ -220,7 +220,7 @@ namespace ClientSide
                 }
                 catch
                 {
-                    MessageBox.Show("empty column");
+                    MessageBox.Show("full column");
                 }
 
                 if (rowIndex != -1) //entier collum not full yet

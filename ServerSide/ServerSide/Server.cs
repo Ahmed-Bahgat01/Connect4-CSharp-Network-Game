@@ -46,7 +46,8 @@ namespace ServerSide
                 { MessageTag.JoinRoom, JoinRoomHandler },
                 { MessageTag.SpectateRoom, SpectateRoomHandler },
                 { MessageTag.DisFromRoom, DisFromRoomHandler },
-                { MessageTag.SendReady, SendReadyHandler}
+                { MessageTag.SendReady, SendReadyHandler},
+                { MessageTag.RefreshRoomList, RefreshRoomListHandler }
                 // >>>>>>> REGISTER messageTag with messageHandler here <<<<<<<
             };
         }

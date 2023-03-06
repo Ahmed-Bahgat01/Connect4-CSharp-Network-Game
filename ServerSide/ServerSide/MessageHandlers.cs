@@ -129,7 +129,7 @@ namespace ServerSide
                     }
                     
                     CreateRoomV2MessageContainer msg = new CreateRoomV2MessageContainer(newRoom._ID, newRoom._name, newRoom._players[0]._id, newRoom._players[0]._userName);
-                    Broadcast(msg);                                 //open the room form for the player
+                    p.SendMsg(msg);                                 //open the room form for the player
 
                     // TODO: resend all rooms to user
                     
@@ -154,16 +154,25 @@ namespace ServerSide
                     {
                         if(room._ID == JoinRoomObj.RoomID)
                         {
-                            room.AddPlayer(p);
+                            if (room._roomStatus == RoomStatus.Waiting)
+                            {
+                                if (room._players.Count < 2 && !room._players.Contains(p))
+                                {
+                                    room.AddPlayer(p);
 
-                            ////open the room form to player
-                            OpenRoomForJoinedPlayerMessageContainer msg = new OpenRoomForJoinedPlayerMessageContainer(room._ID, room._name, room._players[0]._userName, p._userName);
-                            p.SendMsg(msg);
+                                    ////open the room form to player
+                                    OpenRoomForJoinedPlayerMessageContainer msg = new OpenRoomForJoinedPlayerMessageContainer(room._ID, room._name, room._players[0]._userName, p._userName);
+                                    p.SendMsg(msg);
 
-                            ////add the player to all opened room form
-                            
+                                    ////add the player to all opened room form
 
-                            break;
+
+                                    break;
+                                }
+                            }else if (room._roomStatus == RoomStatus.Running && !room._players.Contains(p) && !room._spectators.Contains(p))
+                            {
+                                //sendMsg()         //start spectating game
+                            }
                         }
                     }
                     
@@ -237,7 +246,7 @@ namespace ServerSide
                     {
                         //send start game
                         //MessageBox.Show("start game");
-                        
+                        room._roomStatus = RoomStatus.Running;
                         
                         foreach (var p in room._players)
                         {
@@ -252,9 +261,33 @@ namespace ServerSide
                     break;
                 }
             }
-
-
-
+        }
+        public void RefreshRoomListHandler(object sender, string recievedMessage)
+        {
+            RefreshRoomListContainer RefreshObj;
+            RefreshObj = JsonConvert.DeserializeObject<RefreshRoomListContainer>(recievedMessage);
+            foreach (var p in _players)
+            {
+                if(p._userName == RefreshObj.PlayerName)
+                {
+                    foreach (var room in _rooms)
+                    {
+                        if(room._players.Count== 2)
+                        {
+                            SendRoomToRoomListMessageContainer msg = new SendRoomToRoomListMessageContainer(room._ID, room._name, room._players[0]._userName, room._players[1]._userName);
+                            p.SendMsg(msg);
+                        }
+                        else if(room._players.Count== 1)
+                        {
+                            SendRoomToRoomListMessageContainer msg = new SendRoomToRoomListMessageContainer(room._ID, room._name, room._players[0]._userName);
+                            p.SendMsg(msg);
+                        }
+                        
+                        
+                    }
+                    
+                }
+            }
         }
     }
 }
