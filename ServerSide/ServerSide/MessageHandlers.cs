@@ -29,10 +29,7 @@ namespace ServerSide
             //MessageBox.Show($"from sign in handler: username={SignInObj.UserName} ,password={SignInObj.Password}");
             _players.Last()._userName = SignInObj.UserName;
 
-            if (_playerConnectedEvent != null)                                      //fires event when player is Connect
-            {
-                _playerConnectedEvent(this, _players.Last()._userName);
-            }
+            
 
             // search if valid username and password
             // checking if file exists
@@ -51,9 +48,16 @@ namespace ServerSide
                     }
                 }
             }
+            // send signin response to player
             SignInResponseMessageContainer response;
             if (ValidCredential)
+            {
+                if (PlayerSuccessfullSignInEvent != null)                                      //fires event when player is Connect
+                {
+                    PlayerSuccessfullSignInEvent(this, _players.Last()._userName);
+                }
                 response = new SignInResponseMessageContainer(ResponseCode.Success, "Signed up Successfully", "Success");
+            }
             else
                 response = new SignInResponseMessageContainer(ResponseCode.Failed, "Invalid Credential, try again", "Failed");
             // sending response to player

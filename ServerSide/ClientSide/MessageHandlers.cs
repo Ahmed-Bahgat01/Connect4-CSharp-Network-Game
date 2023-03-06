@@ -37,7 +37,14 @@ namespace ClientSide
             string msg = ResponseObj.ToPlayerResponseMessage;
             string title = ResponseObj.ToPlayerMsgBoxTitle;
             if (ResponseObj.SignInResponseCode == ResponseCode.Success)
+            {
                 MessageBox.Show(msg, title, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //fire event that signed in successfully
+               SignedInSuccessfullyEvent(ResponseObj);
+
+                
+
+            }
             else if (ResponseObj.SignInResponseCode == ResponseCode.Failed)
                 MessageBox.Show(msg, title, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
