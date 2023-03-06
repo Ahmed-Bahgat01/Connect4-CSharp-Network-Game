@@ -31,6 +31,8 @@ namespace ClientSide
 
         SolidBrush Player1Brush;
         SolidBrush Player2Brush;
+
+        Boolean SpectatorMode = false;
         public Game()
         {
             InitializeComponent();
@@ -45,7 +47,7 @@ namespace ClientSide
             Player2Brush = new SolidBrush(player2Color);
         }
 
-        public Game(int size, Color player1)
+        public Game(int size, Color player1,Boolean spectatorMode=false)
         {
             InitializeComponent();
             this.boardSize = size;
@@ -73,12 +75,17 @@ namespace ClientSide
             Player2Brush = new SolidBrush(player2Color);
 
             Client.OtherPlayerMoveEvent += OtherPlayerMoveHandler;
+            /*if (spectatorMode==true)
+            {
+                Client.spectatedMoveEvent += spectatedMoveHandler;
+            }*/
+            SpectatorMode = spectatorMode;
         }
 
         private void Form1_MouseClick(object sender, MouseEventArgs e)
         { 
             int colIndex = GetColClicked(e.Location);
-            if(turn == 1)
+            if(turn == 1 && SpectatorMode==false)
                 play(colIndex);
         }
 
@@ -290,18 +297,116 @@ namespace ClientSide
             }
             //Application.Restart();
             // TODO:  START PLAYAGAIN FORM
-        }
-        private void OtherPlayerMoveHandler(OtherPlayerMoveMessageContainer obj)
-        {
-            if (obj.IsWinningMove)
+            PlayAgianDialogForm playAgainForm = new PlayAgianDialogForm();
+            DialogResult playAgainResult;
+
+            playAgainResult = playAgainForm.ShowDialog();
+            if(playAgainResult == DialogResult.OK)
             {
-                otherSideMove(obj.ColNum);
-                // TODO: SHOW MESSAGEBOX THAT OTHER PLAYER WON
-                // TODO:  OPEN PALY AGAIN FORM
+                // 
+                Application.Restart();
             }
             else
             {
-                otherSideMove(obj.ColNum);
+                Application.Restart();
+            }
+            //DialogResult config_Result;
+            //config.Size = size;
+            //config.Colorr = color;
+
+            //config_Result = config.ShowDialog();
+            //if (config_Result == DialogResult.OK)
+            //{
+            //    //MessageBox.Show($"{config.Colorr}");
+            //    size = config.Size;
+            //    color = config.Colorr;
+
+            //    CreateRoomMessageContainer msg = new CreateRoomMessageContainer(Client._UserName, config.RoomName, new ServerSide.GameConfiguration(size, color));
+            //    Client.SendMsg(msg);
+
+            //    Invalidate();
+
+
+
+            //    //Game game = new Game(size, color);
+            //    //game.Show();
+            //}
+        }
+        private void OtherPlayerMoveHandler(OtherPlayerMoveMessageContainer obj)
+        {
+            
+        
+            if (SpectatorMode)
+            {
+                int colIndex = obj.ColNum;
+                if (colIndex != -1)
+                {
+                    int rowIndex = EmptyRow(colIndex); //index of the empty row in the column
+
+                    try
+                    {
+                        this.board[rowIndex, colIndex] = this.turn;
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Full Column");
+                    }
+
+                    if (rowIndex != -1) //entier collum not full yet
+                    {
+
+                        if (this.turn == 1)
+                        {
+                            Graphics g = this.CreateGraphics();
+                            //for (int i = 32; i<= 32 + 48 * rowIndex; i++)
+                            //{ 
+                            g.FillEllipse(Player1Brush, 32 + 48 * colIndex, 32 + 48 * rowIndex, 32, 32);
+                            //}
+                            checkedFullBoard(this.board);
+
+                            int winner = this.WinnerPlayer(this.board[rowIndex, colIndex]);
+                            if (winner != -1) //there if a winner player
+                            {
+                                MessageBox.Show($"congratulation player {winner}");
+                                Application.Restart();
+                            }
+
+                            this.turn = 2;
+                        }
+                        else if (this.turn == 2)
+                        {
+                            Graphics g = this.CreateGraphics();
+                            //for (int i = 32; i<= 32 + 48 * rowIndex; i++)
+                            //{
+                            g.FillEllipse(Player2Brush, 32 + 48 * colIndex, 32 + 48 * rowIndex, 32, 32);
+                            checkedFullBoard(this.board);
+
+                            //}
+                            int winner = this.WinnerPlayer(this.board[rowIndex, colIndex]);
+                            if (winner != -1) //there if a winner player
+                            {
+                                MessageBox.Show($"congratulation player {winner}");
+                                Application.Restart();
+                            }
+                            this.turn = 1;
+                        }
+
+                    }
+                }
+            }
+            else
+            {
+                if (obj.IsWinningMove)
+                {
+                    otherSideMove(obj.ColNum);
+                    // TODO: SHOW MESSAGEBOX THAT OTHER PLAYER WON
+                    // TODO:  OPEN PALY AGAIN FORM
+                }
+                else
+                {
+                    otherSideMove(obj.ColNum);
+                }
+                //otherSideMove(obj.ColNum);
             }
         }
 
@@ -324,7 +429,7 @@ namespace ClientSide
                 }
                 catch
                 {
-                    MessageBox.Show("empty column");
+                    MessageBox.Show("Full column");
                 }
 
                 if (rowIndex != -1) //entier collum not full yet
@@ -358,8 +463,6 @@ namespace ClientSide
                 }
 
             }
-
-
         }
     }
 

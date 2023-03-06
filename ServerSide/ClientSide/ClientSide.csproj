@@ -70,6 +70,12 @@
       <DependentUpon>HomePage.cs</DependentUpon>
     </Compile>
     <Compile Include="MessageHandlers.cs" />
+    <Compile Include="PlayAgianDialogForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PlayAgianDialogForm.Designer.cs">
+      <DependentUpon>PlayAgianDialogForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="RoomConfiguration.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,6 +101,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="HomePage.resx">
       <DependentUpon>HomePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PlayAgianDialogForm.resx">
+      <DependentUpon>PlayAgianDialogForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RoomConfiguration.resx">
       <DependentUpon>RoomConfiguration.cs</DependentUpon>

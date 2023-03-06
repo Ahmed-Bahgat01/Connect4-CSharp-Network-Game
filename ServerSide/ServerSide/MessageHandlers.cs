@@ -131,7 +131,7 @@ namespace ServerSide
                         _RoomCreatedEvent(newRoom);
                     }
                     
-                    CreateRoomV2MessageContainer msg = new CreateRoomV2MessageContainer(newRoom._ID, newRoom._name, newRoom._players[0]._id, newRoom._players[0]._userName);
+                    CreateRoomV2MessageContainer msg = new CreateRoomV2MessageContainer(newRoom._ID, newRoom._name, newRoom._players[0]._id, newRoom._players[0]._userName,newRoom._roomStatus.ToString());
                     p.SendMsg(msg);                                 //open the room form for the player
 
                     // TODO: resend all rooms to user
@@ -172,9 +172,31 @@ namespace ServerSide
 
                                     break;
                                 }
-                            }else if (room._roomStatus == RoomStatus.Running && !room._players.Contains(p) && !room._spectators.Contains(p))
+                            }
+                            else if (room._roomStatus == RoomStatus.Running && !room._players.Contains(p) && !room._spectators.Contains(p))
                             {
                                 //sendMsg()         //start spectating game
+                                //MessageBox.Show("spectat");
+                                StartGameContainer msg = new StartGameContainer(room._gameConfig._boardSize, room._gameConfig._boardColor, room._roomStatus.ToString());
+                                p.SendMsg(msg);
+                                room._spectators.Add(p);
+
+
+                                async Task MyDelayMethod()
+                                {
+                                    foreach (OtherPlayerMoveMessageContainer move in room._movesHistory)
+                                    {
+                                        OtherPlayerMoveMessageContainer msg2 = move.Clone();
+                                        p.SendMsg(msg2);
+                                        await Task.Delay(200);
+                                    }
+                                }
+
+                                MyDelayMethod();
+
+
+
+
                             }
                         }
                     }
@@ -249,7 +271,7 @@ namespace ServerSide
                     {
                         //send start game
                         //MessageBox.Show("start game");
-
+                        room._roomStatus = RoomStatus.Running;
                         Color creatorPlayerColor = room._gameConfig._boardColor;
                         Color joinedPlayerColor = room.GetSecondPlayerColor();
                         StartGameContainer msg = new StartGameContainer(room._gameConfig._boardSize, creatorPlayerColor);
@@ -336,11 +358,17 @@ namespace ServerSide
                 }
 
 
+                targetedRoom._movesHistory.Add(msg);
+
                 // send move to players and watchers(player in spectate status)
-                foreach (Player roomPlayer in targetedRoom._players)
+                foreach (Player player in targetedRoom._players)
                 {
-                    if(roomPlayer._userName != senderPlayer._userName)
-                        roomPlayer.SendMsg(msg);
+                    if(player._userName != senderPlayer._userName)
+                        player.SendMsg(msg);
+                }
+                foreach(var spectator in targetedRoom._spectators)
+                {
+                    spectator.SendMsg(msg);
                 }
             }
         }
@@ -359,12 +387,12 @@ namespace ServerSide
                     {
                         if(room._players.Count== 2)
                         {
-                            SendRoomToRoomListMessageContainer msg = new SendRoomToRoomListMessageContainer(room._ID, room._name, room._players[0]._userName, room._players[1]._userName);
+                            SendRoomToRoomListMessageContainer msg = new SendRoomToRoomListMessageContainer(room._ID, room._name, room._players[0]._userName,room._roomStatus.ToString(), room._players[1]._userName);
                             p.SendMsg(msg);
                         }
                         else if(room._players.Count== 1)
                         {
-                            SendRoomToRoomListMessageContainer msg = new SendRoomToRoomListMessageContainer(room._ID, room._name, room._players[0]._userName);
+                            SendRoomToRoomListMessageContainer msg = new SendRoomToRoomListMessageContainer(room._ID, room._name, room._players[0]._userName, room._roomStatus.ToString());
                             p.SendMsg(msg);
                         }
                         

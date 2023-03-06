@@ -52,7 +52,7 @@ namespace ClientSide
             Client.PlayerLeftRoomEvent += PlayerLeftRoomHandler;
             Client.CanJoinRoomEvent += CanJoinRoomEventHandler;
             Client.RefreshRoomListEvent += RefreshRoomListHandler;
-
+            Client.startgameEvent += StartSpectateHandler;
 
 
         }
@@ -64,7 +64,7 @@ namespace ClientSide
             //MessageBox.Show("asdasd");
 
             // LIST VIEW
-            string[] row = { updateObj.RoomId.ToString(),updateObj.RoomName, updateObj.Player1Name, updateObj.Player2Name };
+            string[] row = { updateObj.RoomId.ToString(),updateObj.RoomName, updateObj.Player1Name, updateObj.Player2Name, updateObj.RoomStatus };
             ListViewItem item = new ListViewItem(row);
             RoomsListView.Invoke(new Action( () => { RoomsListView.Items.Add(item); }));
 
@@ -182,7 +182,7 @@ namespace ClientSide
             Client.RoomListViewItemDic.Clear();
             RoomsListView.Items.Clear();
             // LIST VIEW
-            string[] row = { updateObj.RoomId.ToString(), updateObj.RoomName, updateObj.Player1Name, updateObj.Player2Name };
+            string[] row = { updateObj.RoomId.ToString(), updateObj.RoomName, updateObj.Player1Name, updateObj.Player2Name, updateObj.RoomStatus };
             ListViewItem item = new ListViewItem(row);
             RoomsListView.Invoke(new Action(() => { RoomsListView.Items.Add(item); }));
 
@@ -194,6 +194,23 @@ namespace ClientSide
         {
             
         }
+
+        public void StartSpectateHandler(StartGameContainer RecievedObj)
+        {
+
+
+            if(RecievedObj.RoomStatus== "Running") {
+                //MessageBox.Show("spectate");
+                int size = RecievedObj.size;
+                Color color = RecievedObj.color;
+
+                this.Invoke(new Action(() =>
+                {
+                    Game game = new Game(size, color,true);
+                    this.Hide();
+                    game.Show();
+                }));
+            }
+        }
     }
 }
-//ujhiuiuo
