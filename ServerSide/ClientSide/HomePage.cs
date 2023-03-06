@@ -169,6 +169,11 @@ namespace ClientSide
             }));
             
         }
+
+        private void HomePage_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            
+        }
     }
 }
 //ujhiuiuo

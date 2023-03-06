@@ -100,6 +100,7 @@ namespace ClientSide
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "HomePage";
             this.Text = "HomePage";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.HomePage_FormClosing);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.HomePage_Paint);
             this.Resize += new System.EventHandler(this.HomePage_Resize);
             this.ResumeLayout(false);
