@@ -50,8 +50,8 @@ namespace ClientSide
             Client.CreateRoomEvent += RoomCreationHandler;
             Client.PlayerJoinedRoomEvent += PlayerJoinedRoomHandler;
             Client.PlayerLeftRoomEvent += PlayerLeftRoomHandler;
-
-
+            Client.CanJoinRoomEvent += CanJoinRoomEventHandler;
+                
 
         }
 
@@ -72,8 +72,12 @@ namespace ClientSide
             //open room form
             if (Client._UserName == updateObj.Player1Name)
             {
-                RoomForm roomForm = new RoomForm(updateObj.RoomId, updateObj.RoomName, updateObj.Player1Name);
-                roomForm.ShowDialog();
+                this.Invoke(new Action(() =>
+                {
+                    RoomForm roomForm = new RoomForm(updateObj.RoomId, updateObj.RoomName, updateObj.Player1Name);
+                    roomForm.Show();
+                }));
+                
             }
         }
 
@@ -150,9 +154,20 @@ namespace ClientSide
                 ListViewItem item = RoomsListView.SelectedItems[0];
                 int roomId = int.Parse(item.SubItems[0].Text);
 
+               
                 JoinRoomMessageContainer msg = new JoinRoomMessageContainer(Client._UserName, roomId);
                 Client.SendMsg(msg);
             }
+        }
+
+        private void CanJoinRoomEventHandler(OpenRoomForJoinedPlayerMessageContainer RecievedObj)
+        {
+            this.Invoke(new Action(() =>
+            {
+                RoomForm roomForm = new RoomForm(RecievedObj.RoomId, RecievedObj.RoomName, RecievedObj.Player1Name, RecievedObj.Player2Name);
+                roomForm.Show();
+            }));
+            
         }
     }
 }

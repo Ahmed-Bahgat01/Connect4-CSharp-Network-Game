@@ -7,7 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using MessageLib;
+using Newtonsoft.Json;
 
 namespace ClientSide
 {
@@ -18,6 +20,7 @@ namespace ClientSide
         public RoomForm()
         {
             InitializeComponent();
+            Client.startgameEvent += StartGameHandler;
         }
 
         public RoomForm(int id,string roomName,string creatorName)
@@ -27,6 +30,7 @@ namespace ClientSide
             _roomName = roomName;
             this.Text= _roomName;
             PlayerslistBox.Items.Add(creatorName);
+            Client.startgameEvent += StartGameHandler;
         }
 
         public RoomForm(int id, string roomName, string creatorName, string joinnerName)
@@ -37,6 +41,7 @@ namespace ClientSide
             this.Text = _roomName;
             PlayerslistBox.Items.Add(creatorName);
             PlayerslistBox.Items.Add(joinnerName);
+            Client.startgameEvent += StartGameHandler;
         }
 
         private void ReadyBtn_Click(object sender, EventArgs e)
@@ -44,6 +49,25 @@ namespace ClientSide
             SendReadyContainer msg = new SendReadyContainer(_roomId);
             Client.SendMsg(msg);
             ReadyBtn.Enabled = false;
+        }
+
+        public void StartGameHandler(StartGameContainer RecievedObj)
+        {
+            
+            
+            //MessageBox.Show("other side");
+            int size = RecievedObj.size;
+            Color color = RecievedObj.color;
+            
+            this.Invoke(new Action(() =>
+            {
+                Game game = new Game(size, color);
+                this.Hide();
+                game.Show();
+            }));
+            
+            
+            
         }
     }
 }

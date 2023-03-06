@@ -120,21 +120,30 @@ namespace ClientSide
             OpenRoomForJoinedPlayerMessageContainer RecievedObj;
             RecievedObj = JsonConvert.DeserializeObject<OpenRoomForJoinedPlayerMessageContainer>(recievedMessage);
 
-            RoomForm roomForm = new RoomForm(RecievedObj.RoomId, RecievedObj.RoomName, RecievedObj.Player1Name, RecievedObj.Player2Name);
-            roomForm.ShowDialog();
+            if (CanJoinRoomEvent != null)
+            {
+                CanJoinRoomEvent(RecievedObj);
+            }
         }
 
         public static void StartGameHandler(string recievedMessage)
         {
+
+
             StartGameContainer RecievedObj;
             RecievedObj = JsonConvert.DeserializeObject<StartGameContainer>(recievedMessage);
 
+            if(startgameEvent!= null)
+            {
+                startgameEvent(RecievedObj);
+            }
+            /*roomForm.Close();
             MessageBox.Show("other side");
             int size = RecievedObj.size;
             Color color = RecievedObj.color;
             Game game = new Game(size, color);
             
-            game.Show();
+            game.Show();*/
         }
 
     }
