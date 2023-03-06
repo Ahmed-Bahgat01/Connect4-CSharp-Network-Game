@@ -46,7 +46,7 @@ namespace ClientSide
             { MessageTag.RoomStatusUpdate, CreateRoomHandler },
             { MessageTag.OpenRoomForJoinedPlayer, OpenRoomForJoinedPlayerHandler },
             { MessageTag.StartGame, StartGameHandler },
-            { MessageTag.SendRoomToRoomList ,SendRoomToRoomListHandler }
+            { MessageTag.SendRoomToRoomList ,SendRoomToRoomListHandler },
             
             { MessageTag.OtherPlayerMove, OtherPlayerMoveHandler },
 

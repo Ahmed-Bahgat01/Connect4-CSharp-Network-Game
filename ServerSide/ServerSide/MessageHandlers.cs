@@ -307,9 +307,9 @@ namespace ServerSide
                 }
             }
         }
-    }
-}
-        }
+    
+
+        
         public void RefreshRoomListHandler(object sender, string recievedMessage)
         {
             RefreshRoomListContainer RefreshObj;

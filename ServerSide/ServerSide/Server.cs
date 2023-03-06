@@ -47,7 +47,7 @@ namespace ServerSide
                 { MessageTag.SpectateRoom, SpectateRoomHandler },
                 { MessageTag.DisFromRoom, DisFromRoomHandler },
                 { MessageTag.SendReady, SendReadyHandler},
-                { MessageTag.RefreshRoomList, RefreshRoomListHandler }
+                { MessageTag.RefreshRoomList, RefreshRoomListHandler },
 
                 { MessageTag.OtherPlayerMove, PlayerMoveHandler }
 
